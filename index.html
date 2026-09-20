@@ -47,7 +47,7 @@
   </script>
 
   <!-- Özel Stiller ve Yazdırma Kuralları -->
-  <link rel="stylesheet" href="css/style.css?v=2.10">
+  <link rel="stylesheet" href="css/style.css?v=2.11">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen antialiased flex flex-col selection:bg-indigo-500 selection:text-white pb-16">
 
@@ -153,17 +153,18 @@
         </div>
 
         <!-- Hafta Değiştirici -->
-        <div class="flex items-center justify-between md:justify-end gap-2 text-xs">
-          <div class="flex items-center bg-white border border-slate-200/80 rounded-xl p-0.5 shadow-2xs">
+        <div class="flex items-center justify-end gap-1.5 sm:gap-2 text-xs">
+          <!-- Bu Haftaya Dön Butonu (Sadece İkon — İleri/Geri butonlarını asla kaydırmaz) -->
+          <button id="btnCurrentWeekNow" class="is-collapsed w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-200/90 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-900 shadow-2xs flex items-center justify-center transition-all overflow-hidden shrink-0 active:scale-90" title="İçinde bulunduğumuz haftaya dön" aria-label="İçinde bulunduğumuz haftaya dön" aria-hidden="true" tabindex="-1">
+            <i data-lucide="rotate-ccw" class="w-4 h-4 shrink-0"></i>
+          </button>
+
+          <!-- Hafta Seçici Kapsayıcı -->
+          <div class="flex items-center bg-white border border-slate-200/80 rounded-xl p-0.5 shadow-2xs shrink-0">
             <button id="btnPrevWeek" class="p-1 hover:bg-slate-100 active:scale-95 rounded-lg text-slate-600 transition-all" title="Önceki Hafta"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
             <span id="currentWeekRange" class="px-2.5 font-semibold text-slate-700 min-w-[155px] text-center select-none tabular-nums tracking-tight inline-block">Yükleniyor...</span>
             <button id="btnNextWeek" class="p-1 hover:bg-slate-100 active:scale-95 rounded-lg text-slate-600 transition-all" title="Sonraki Hafta"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
           </div>
-
-          <button id="btnCurrentWeekNow" class="is-collapsed inline-flex items-center gap-1.5 py-1 bg-indigo-50 border border-indigo-200 text-indigo-700 hover:bg-indigo-100 rounded-xl font-bold text-xs shadow-2xs whitespace-nowrap overflow-hidden" title="İçinde Bulunduğumuz Gerçek Haftaya Dön" aria-hidden="true" tabindex="-1">
-            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 shrink-0"></i>
-            <span class="shrink-0">Bu Hafta</span>
-          </button>
         </div>
 
       </div>
@@ -514,11 +515,11 @@
   </div>
 
   <!-- Modüler JavaScript Mimarisi (Cache-busted) -->
-  <script src="js/config.js?v=2.10" defer></script>
-  <script src="js/utils.js?v=2.10" defer></script>
-  <script src="js/state.js?v=2.10" defer></script>
-  <script src="js/data.js?v=2.10" defer></script>
-  <script src="js/render.js?v=2.10" defer></script>
-  <script src="js/app.js?v=2.10" defer></script>
+  <script src="js/config.js?v=2.11" defer></script>
+  <script src="js/utils.js?v=2.11" defer></script>
+  <script src="js/state.js?v=2.11" defer></script>
+  <script src="js/data.js?v=2.11" defer></script>
+  <script src="js/render.js?v=2.11" defer></script>
+  <script src="js/app.js?v=2.11" defer></script>
 </body>
 </html>

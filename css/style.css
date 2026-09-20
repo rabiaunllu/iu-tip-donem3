@@ -135,35 +135,37 @@ body {
 }
 
 #btnCurrentWeekNow {
-  transition: max-width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-              padding 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              margin 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              max-width 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.2s ease,
               background-color 0.15s ease;
-  will-change: max-width, opacity, transform;
+  will-change: width, max-width, opacity, transform;
 }
 
 #btnCurrentWeekNow.is-collapsed {
+  width: 0 !important;
   max-width: 0 !important;
   opacity: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-left: -0.5rem !important;
+  padding: 0 !important;
+  margin-right: -0.5rem !important;
+  margin-left: 0 !important;
   pointer-events: none !important;
-  transform: translateX(-6px) scale(0.95);
+  transform: scale(0.65);
   border-color: transparent !important;
 }
 
 #btnCurrentWeekNow.is-expanded {
-  max-width: 140px !important;
+  width: 2rem !important;
+  max-width: 2rem !important;
+  height: 2rem !important;
   opacity: 1 !important;
-  padding-left: 0.75rem !important;
-  padding-right: 0.75rem !important;
+  margin-right: 0 !important;
   margin-left: 0 !important;
   pointer-events: auto !important;
-  transform: translateX(0) scale(1);
+  transform: scale(1);
 }
 
 @keyframes weekFadeIn {
