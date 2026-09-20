@@ -52,51 +52,14 @@ function renderSchedule() {
     const iso = lec.date;
     if (iso < startISO || iso > endISO) continue;
 
-    const isFree = !lec.subject || lec.subject.toUpperCase() === 'SERBEST ÇALIŞMA';
+    const gun = lec.date_str ? lec.date_str.split(/\s+/).pop() : '';
+    const details = resolveLectureDetails(lec, gun, state.group, state.subgroup, rotations);
+
+    const isFree = details.cardType === 'free';
     if (isFree && !state.showFreeStudy && !searchLower) continue;
 
-    // Arama filtresi
-    if (searchLower) {
-      const fullSearchText = `${lec.subject} ${lec.department} ${lec.location_raw}`.toLowerCase();
-      if (!fullSearchText.includes(searchLower)) continue;
-    }
-
-    const gun = lec.date_str ? lec.date_str.split(/\s+/).pop() : '';
-    const yer = lec.location_raw || '';
-    const konu = lec.subject || '';
-
-    let cardType = 'theory';
-    let resolvedLocation = yer;
-    let note = '';
-
-    if (isFree) {
-      cardType = 'free';
-      resolvedLocation = 'Dinlenme / Bireysel Çalışma';
-    } else if (yer.toUpperCase().includes('UYGULAMA') || konu.toUpperCase().includes('UYGULAMA')) {
-      cardType = 'practice';
-      const dayRot = rotations[iso];
-      if (dayRot && state.subgroup !== 'all' && dayRot[state.subgroup]) {
-        const dept = dayRot[state.subgroup];
-        resolvedLocation = `🔬 ${dept} Anabilim Dalı`;
-        note = `Öğr. Üyesi Uygulaması: ${dept} (Grup ${state.subgroup})`;
-      } else {
-        resolvedLocation = '🔬 İlgili Klinik / Rotasyon Alanı';
-      }
-    } else if (yer.toUpperCase().includes('ANABİLİM DALLARI') || konu.includes('Hasta İzlem')) {
-      cardType = 'hospital';
-      resolvedLocation = '🏥 Klinik Servisler (Hasta İzlem)';
-    } else {
-      // Teorik dersler — Gün ve ders bazlı kesin doğrulanmış amfi eşleme
-      cardType = 'theory';
-      const amfiInfo = resolveLectureAmfi(lec, gun, state.group);
-      if (amfiInfo.isPortal) {
-        resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
-      } else {
-        resolvedLocation = `🏛️ ${amfiInfo.name}`;
-      }
-    }
-
     // Laboratuvar kontrolü (Tıbbi Patoloji & Mikrobiyoloji)
+    let note = details.note;
     const dayLabs = labs[iso];
     if (dayLabs && state.subgroup !== 'all') {
       for (const labItem of dayLabs) {
@@ -106,16 +69,23 @@ function renderSchedule() {
       }
     }
 
+    // Arama filtresi: konu, anabilim dalı, çözümlenmiş konum ve notlar içinde arama yapar
+    if (searchLower) {
+      const fullSearchText = `${lec.subject} ${lec.department} ${lec.location_raw} ${details.resolvedLocation} ${note}`.toLowerCase();
+      if (!fullSearchText.includes(searchLower)) continue;
+    }
+
     const targetDay = weekDays.find(d => d.isoDate === iso);
     if (targetDay) {
       targetDay.lectures.push({
         start: lec.start,
         end: lec.end,
-        subject: isFree ? 'Serbest Çalışma' : konu,
+        subject: isFree ? 'Serbest Çalışma' : (lec.subject || ''),
         department: lec.department,
-        yer: resolvedLocation,
+        yer: details.resolvedLocation,
         note,
-        cardType
+        cardType: details.cardType,
+        badge: details.badge
       });
     }
   }
@@ -169,21 +139,18 @@ function renderSchedule() {
 
 function getLectureCardHTML(lec) {
   let borderClass = 'border-l-4 border-indigo-500 bg-indigo-50/40 text-indigo-950';
-  let badge = 'Teorik';
-  let badgeClass = 'bg-indigo-100 text-indigo-700';
+  let badge = lec.badge || 'Teorik';
+  let badgeClass = 'bg-indigo-100 text-indigo-700 font-semibold';
 
   if (lec.cardType === 'practice') {
     borderClass = 'border-l-4 border-amber-500 bg-amber-50/40 text-amber-950';
-    badge = 'Uygulama';
     badgeClass = 'bg-amber-100 text-amber-800 font-bold';
   } else if (lec.cardType === 'hospital') {
     borderClass = 'border-l-4 border-emerald-500 bg-emerald-50/40 text-emerald-950';
-    badge = 'Hasta İzlem';
-    badgeClass = 'bg-emerald-100 text-emerald-800';
+    badgeClass = 'bg-emerald-100 text-emerald-800 font-bold';
   } else if (lec.cardType === 'free') {
     borderClass = 'border-l-4 border-slate-300 bg-slate-50 text-slate-500 opacity-70';
-    badge = 'Boş';
-    badgeClass = 'bg-slate-200 text-slate-600';
+    badgeClass = 'bg-slate-200 text-slate-600 font-normal';
   }
 
   return `
@@ -192,7 +159,7 @@ function getLectureCardHTML(lec) {
         <span class="text-[10px] font-mono font-bold text-slate-700 bg-white/90 px-1.5 py-0.5 rounded border border-slate-200/60 shadow-2xs">
           ${lec.start} - ${lec.end}
         </span>
-        <span class="text-[9px] font-semibold px-1.5 py-0.5 rounded ${badgeClass}">
+        <span class="text-[9px] px-1.5 py-0.5 rounded ${badgeClass}">
           ${badge}
         </span>
       </div>
@@ -263,7 +230,13 @@ function updateLiveUpcoming(weekDays) {
   if (lessonElem) lessonElem.innerText = currentOrNext.subject;
   
   const locElem = document.getElementById('liveUpcomingLocation');
-  if (locElem) locElem.innerText = currentOrNext.yer;
+  if (locElem) {
+    if (typeof currentOrNext.yer === 'string' && currentOrNext.yer.includes('<a ')) {
+      locElem.innerHTML = currentOrNext.yer;
+    } else {
+      locElem.innerText = currentOrNext.yer;
+    }
+  }
   
   if (window.lucide) lucide.createIcons();
 }

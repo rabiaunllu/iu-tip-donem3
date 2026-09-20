@@ -239,3 +239,186 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
     isPortal: true
   };
 }
+
+/**
+ * Hasta Başı Uygulama dersinin konu başlığındaki klinik kısaltmasını (İç H. / ÇSvH)
+ * öğrencinin bulunduğu gruba (3A / 3B) göre kesin olarak çözer.
+ */
+function parseHastaBasiDepartment(subject, groupName) {
+  if (!subject) return '🏥 Klinik Servisler (Hasta Başı Viziti)';
+  const s = subject.replace(/B\s*GrubuÇSvH/gi, 'B Grubu (ÇSvH)');
+  const groupLetter = (groupName === '3A') ? 'A' : 'B';
+
+  const pattern = new RegExp(`${groupLetter}\\s*Grubu\\s*\\(?\\s*([^()]+)\\)?`, 'i');
+  const match = s.match(pattern);
+  if (match && match[1]) {
+    const raw = match[1].trim().toUpperCase();
+    if (raw.includes('İÇ') || raw.includes('IC') || raw.includes('DAHİL') || raw.includes('DAHIL')) {
+      return '🏥 İç Hastalıkları (Dahiliye) Klinik Servisleri';
+    }
+    if (raw.includes('ÇSVH') || raw.includes('CSVH') || raw.includes('ÇOCUK') || raw.includes('COCUK')) {
+      return '🏥 Çocuk Sağlığı ve Hastalıkları (Pediatri) Klinik Servisleri';
+    }
+    return `🏥 ${match[1].trim()} Klinik Servisleri`;
+  }
+
+  // Kaynak verideki yazım hataları için fallback (örn. 'A' harfi unutulup 'Grubu (ÇSvH) B Grubu (İç H.)' yazılması)
+  if (groupLetter === 'A') {
+    const otherMatch = s.match(/B\s*Grubu\s*\(?\s*([^()]+)\)?/i);
+    if (otherMatch && otherMatch[1]) {
+      const otherRaw = otherMatch[1].toUpperCase();
+      if (otherRaw.includes('İÇ') || otherRaw.includes('IC') || otherRaw.includes('DAHİL')) {
+        return '🏥 Çocuk Sağlığı ve Hastalıkları (Pediatri) Klinik Servisleri';
+      }
+      if (otherRaw.includes('ÇSVH') || otherRaw.includes('CSVH') || otherRaw.includes('ÇOCUK')) {
+        return '🏥 İç Hastalıkları (Dahiliye) Klinik Servisleri';
+      }
+    }
+  } else if (groupLetter === 'B') {
+    const otherMatch = s.match(/A\s*Grubu\s*\(?\s*([^()]+)\)?/i);
+    if (otherMatch && otherMatch[1]) {
+      const otherRaw = otherMatch[1].toUpperCase();
+      if (otherRaw.includes('İÇ') || otherRaw.includes('IC') || otherRaw.includes('DAHİL')) {
+        return '🏥 Çocuk Sağlığı ve Hastalıkları (Pediatri) Klinik Servisleri';
+      }
+      if (otherRaw.includes('ÇSVH') || otherRaw.includes('CSVH') || otherRaw.includes('ÇOCUK')) {
+        return '🏥 İç Hastalıkları (Dahiliye) Klinik Servisleri';
+      }
+    }
+  }
+
+  return '🏥 Klinik Servisler (Hasta Başı Viziti)';
+}
+
+/**
+ * Dersin amfi, klinik servis, laboratuvar veya rotasyon konumunu
+ * alt grup, gün ve ders türüne göre kesin olarak çözümler.
+ */
+function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
+  const s = (lec.subject || '').trim();
+  const su = s.toUpperCase();
+  const rawLoc = (lec.location_raw || '').toUpperCase();
+  const iso = lec.date || '';
+
+  // 1. Serbest Çalışma / Dinlenme
+  const isFree = !s || su === 'SERBEST ÇALIŞMA';
+  if (isFree) {
+    return {
+      cardType: 'free',
+      badge: 'Boş',
+      resolvedLocation: 'Dinlenme / Bireysel Çalışma',
+      note: ''
+    };
+  }
+
+  // 2. Teorik Ders Yanılgı Koruması
+  // "Tıpta uygulamaları" veya "laboratuvar tanı yöntemleri" amfide işlenen teorik derslerdir; klinik pratik değildir.
+  const isTheoryFalsePositive =
+    su.includes('TIPTA UYGULAMALARI') ||
+    su.includes('TEMEL KURALLAR') ||
+    (su.includes('LABORATUVAR') && !su.includes('PATOLOJ') && !su.includes('MİKROBİYOLOJ') && !su.includes('MIKROBIYOLOJ')) ||
+    su.includes('LABORATUAR');
+
+  if (!isTheoryFalsePositive) {
+    // 3. Hasta Başı Uygulama (Dahiliye & Pediatri klinikleri)
+    if (su.includes('HASTA BAŞI') || su.includes('HASTABAŞI')) {
+      const loc = parseHastaBasiDepartment(s, group);
+      return {
+        cardType: 'hospital',
+        badge: 'Hasta Başı',
+        resolvedLocation: loc,
+        note: 'Klinik Servis Hasta Başı Viziti'
+      };
+    }
+
+    // 4. Bilimsel Araştırma Uygulamaları (1..16)
+    if (su.includes('BİLİMSEL ARAŞTIRMA') || su.includes('BILIMSEL ARASTIRMA')) {
+      return {
+        cardType: 'practice',
+        badge: 'Araştırma',
+        resolvedLocation: '📚 Biyoistatistik & Proje Danışmanı (Dönem Amfisi)',
+        note: 'Akademik Araştırma & Proje Çalışması'
+      };
+    }
+
+    // 5. Simüle Hasta Pratikleri
+    if (su.includes('SİMÜLE HASTA') || su.includes('SIMULE HASTA')) {
+      let simLoc = '🩺 Tıp Eğitimi AD — Simüle Hasta & Beceri Laboratuvarı';
+      if (rawLoc.includes('KÜTÜPHANE') || rawLoc.includes('KUTUPHANE')) {
+        simLoc = '🏛️ Hulusi Behçet Kütüphanesi (Simüle Hasta Eğitimi)';
+      }
+      return {
+        cardType: 'practice',
+        badge: 'Simüle Hasta',
+        resolvedLocation: simLoc,
+        note: 'Klinik Beceri ve Anamnez Simülasyonu'
+      };
+    }
+
+    // 6. Uygulama Sınavları
+    if (su.includes('UYGULAMA SINAVI') || su.includes('UYGULAMA BÜTÜNLEME')) {
+      return {
+        cardType: 'practice',
+        badge: 'Sınav',
+        resolvedLocation: '📝 İlgili Anabilim Dalları / Sınav Salonları',
+        note: 'Uygulama Sınavı'
+      };
+    }
+
+    // 7. Patoloji / Mikrobiyoloji Laboratuvar Pratiği
+    if (su.includes('PATOLOJ') && (su.includes('MİKROBİYOLOJ') || su.includes('MIKROBIYOLOJ'))) {
+      return {
+        cardType: 'practice',
+        badge: 'Laboratuvar',
+        resolvedLocation: '🧫 Temel Bilimler Öğrenci Laboratuvarı',
+        note: 'Tıbbi Patoloji & Tıbbi Mikrobiyoloji Pratiği'
+      };
+    }
+
+    // 8. Öğretim Üyesi Uygulama (11:10 - 12:10 Dilim Rotasyonları)
+    if (/Öğretim\s+üyesi\s+Uygulama/i.test(s)) {
+      const dayRot = rotations ? rotations[iso] : null;
+      if (subgroup !== 'all' && dayRot && dayRot[subgroup]) {
+        const dept = dayRot[subgroup];
+        return {
+          cardType: 'practice',
+          badge: 'Uygulama',
+          resolvedLocation: `🔬 ${dept} Anabilim Dalı`,
+          note: `Öğr. Üyesi Uygulaması: ${dept} (Grup ${subgroup})`
+        };
+      } else {
+        return {
+          cardType: 'practice',
+          badge: 'Uygulama',
+          resolvedLocation: '🔬 Klinik Dilim Rotasyonu (Detay İçin Alt Grubunuzu Seçiniz)',
+          note: 'Dilim Rotasyonları (8 Anabilim Dalı)'
+        };
+      }
+    }
+
+    // 9. Hasta İzlem / Klinik Servisler
+    if (su.includes('HASTA İZLEM') || su.includes('HASTA IZLEM') || rawLoc.includes('ANABİLİM DALLARI')) {
+      return {
+        cardType: 'hospital',
+        badge: 'Hasta İzlem',
+        resolvedLocation: '🏥 Klinik Servisler (Hasta İzlem)',
+        note: 'Klinik Hasta İzlem Viziti'
+      };
+    }
+  }
+
+  // 10. Teorik Ders — Gün ve ders amfisi eşleme
+  const amfiInfo = resolveLectureAmfi(lec, gun, group);
+  let resolvedLocation = `🏛️ ${amfiInfo.name}`;
+  if (amfiInfo.isPortal) {
+    resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
+  }
+
+  return {
+    cardType: 'theory',
+    badge: 'Teorik',
+    resolvedLocation,
+    note: ''
+  };
+}
+
