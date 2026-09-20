@@ -22,7 +22,18 @@ except ImportError:
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
+RAW_DOCS_DIR = os.path.join(BASE_DIR, 'docs', 'raw_schedules')
 os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(RAW_DOCS_DIR, exist_ok=True)
+
+def get_file_path(filename):
+    p1 = os.path.join(RAW_DOCS_DIR, filename)
+    if os.path.exists(p1):
+        return p1
+    p2 = os.path.join(BASE_DIR, filename)
+    if os.path.exists(p2):
+        return p2
+    return p1
 
 CONFIGS = {
     'amfi': {'id': '1uCfBw8_mRI47Am2SrijTiOYP71jl1ZWatu26sXrJLJw', 'gid': '917709856'},
@@ -112,7 +123,7 @@ def process_theoretical(group_name):
 # 2. ÖĞRETİM ÜYESİ UYGULAMA ROTASYONLARI - 3B (EXCEL)
 # ═════════════════════════════════════════════════════════════════
 def extract_rotations_3b():
-    xlsx_path = os.path.join(BASE_DIR, 'Dönem 3 ÖĞRETİM ÜYESİ B GRUBU UYGULAMA TABLOSU VE KONULARI 2026-2027 (2).xlsx')
+    xlsx_path = get_file_path('Dönem 3 ÖĞRETİM ÜYESİ B GRUBU UYGULAMA TABLOSU VE KONULARI 2026-2027 (2).xlsx')
     if not os.path.exists(xlsx_path):
         print("Uyari: 3B Excel dosyasi bulunamadi!")
         return {}
@@ -172,7 +183,7 @@ def extract_rotations_3b():
 # 3. ÖĞRETİM ÜYESİ UYGULAMA ROTASYONLARI - 3A (PDF)
 # ═════════════════════════════════════════════════════════════════
 def extract_rotations_3a():
-    pdf_path = os.path.join(BASE_DIR, 'Dönem 3 ÖĞRETİM ÜYESİ A GRUBU UYGULAMA TABLOSU VE KONULARI 2026-2027 (1) (1).pdf')
+    pdf_path = get_file_path('Dönem 3 ÖĞRETİM ÜYESİ A GRUBU UYGULAMA TABLOSU VE KONULARI 2026-2027 (1) (1).pdf')
     if not os.path.exists(pdf_path) or not pypdf:
         print("Uyari: 3A PDF dosyasi bulunamadi!")
         return {}
@@ -262,7 +273,7 @@ def extract_rotations_3a():
 # 4. TIBBİ PATOLOJİ & MİKROBİYOLOJİ LABORATUVAR PROGRAMI (DOCX)
 # ═════════════════════════════════════════════════════════════════
 def extract_pathology_microbiology():
-    docx_path = os.path.join(BASE_DIR, '2026-2027 Tıbbi Patoloji  Mikrobiyoloji Uygulama Ders Programı.docx')
+    docx_path = get_file_path('2026-2027 Tıbbi Patoloji  Mikrobiyoloji Uygulama Ders Programı.docx')
     if not os.path.exists(docx_path):
         return {}
 
