@@ -13,3 +13,8 @@ const TR_AYLAR = {
   'haziran': 6, 'temmuz': 7, 'ağustos': 8, 'agustos': 8, 'eylül': 9, 'eylul': 9,
   'ekim': 10, 'kasım': 11, 'kasim': 11, 'aralık': 12, 'aralik': 12
 };
+
+// Geri Bildirim & İstek Havuzu Google Apps Script Webhook URL'si
+// Kullanıcı Google E-Tablo kurup URL'sini Ayarlar modalından veya buradan değiştirebilir
+const DEFAULT_FEEDBACK_WEBHOOK_URL = '';
+

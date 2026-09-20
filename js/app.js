@@ -129,9 +129,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       const amfiInp = document.getElementById('settingAmfiUrl');
       const s3AInp = document.getElementById('setting3AUrl');
       const s3BInp = document.getElementById('setting3BUrl');
+      const fbInp = document.getElementById('settingFeedbackUrl');
       if (amfiInp) amfiInp.value = localStorage.getItem('iutip_url_amfi') || `https://docs.google.com/spreadsheets/d/${DEFAULT_CONFIGS.amfi.id}/edit#gid=${DEFAULT_CONFIGS.amfi.gid}`;
       if (s3AInp) s3AInp.value = localStorage.getItem('iutip_url_3A') || `https://docs.google.com/spreadsheets/d/${DEFAULT_CONFIGS['3A'].id}/edit#gid=${DEFAULT_CONFIGS['3A'].gid}`;
       if (s3BInp) s3BInp.value = localStorage.getItem('iutip_url_3B') || `https://docs.google.com/spreadsheets/d/${DEFAULT_CONFIGS['3B'].id}/edit#gid=${DEFAULT_CONFIGS['3B'].gid}`;
+      if (fbInp) fbInp.value = localStorage.getItem('iutip_feedback_webhook_url') || DEFAULT_FEEDBACK_WEBHOOK_URL;
       modalSettings.classList.remove('hidden');
     });
   }
@@ -147,6 +149,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       localStorage.removeItem('iutip_url_amfi');
       localStorage.removeItem('iutip_url_3A');
       localStorage.removeItem('iutip_url_3B');
+      localStorage.removeItem('iutip_feedback_webhook_url');
       localStorage.removeItem('iutip_disclaimer_dismissed');
       const bannerDisclaimer = document.getElementById('bannerDisclaimer');
       if (bannerDisclaimer) bannerDisclaimer.classList.remove('hidden');
@@ -162,12 +165,189 @@ document.addEventListener('DOMContentLoaded', async () => {
       const amfiInp = document.getElementById('settingAmfiUrl');
       const s3AInp = document.getElementById('setting3AUrl');
       const s3BInp = document.getElementById('setting3BUrl');
+      const fbInp = document.getElementById('settingFeedbackUrl');
       if (amfiInp) localStorage.setItem('iutip_url_amfi', amfiInp.value.trim());
       if (s3AInp) localStorage.setItem('iutip_url_3A', s3AInp.value.trim());
       if (s3BInp) localStorage.setItem('iutip_url_3B', s3BInp.value.trim());
+      if (fbInp) localStorage.setItem('iutip_feedback_webhook_url', fbInp.value.trim());
       modalSettings.classList.add('hidden');
       showToast('Yeni linkler kaydedildi!');
       loadDatabase().then(renderSchedule);
+    });
+  }
+
+  // 💬 Geri Bildirim Modalı & Google Sheets Entegrasyonu
+  const modalFeedback = document.getElementById('modalFeedback');
+  const btnOpenFeedback = document.getElementById('btnOpenFeedbackModal');
+  const btnCloseFeedback = document.getElementById('btnCloseFeedbackModal');
+  const btnCancelFeedback = document.getElementById('btnCancelFeedback');
+  const btnCloseFeedbackSuccess = document.getElementById('btnCloseFeedbackSuccess');
+  const formFeedback = document.getElementById('formFeedback');
+  const feedbackFormView = document.getElementById('feedbackFormView');
+  const feedbackSuccessView = document.getElementById('feedbackSuccessView');
+  const feedbackCategoryContainer = document.getElementById('feedbackCategoryContainer');
+  const feedbackMessage = document.getElementById('feedbackMessage');
+  const feedbackCharCount = document.getElementById('feedbackCharCount');
+  const feedbackContact = document.getElementById('feedbackContact');
+  const feedbackCurrentGroup = document.getElementById('feedbackCurrentGroup');
+  const feedbackHoneypot = document.getElementById('feedbackHoneypot');
+  const btnSubmitFeedback = document.getElementById('btnSubmitFeedback');
+
+  let selectedFeedbackCategory = '🚨 Amfi/Derslik Hatası';
+
+  function updateFeedbackGroupDisplay() {
+    if (!feedbackCurrentGroup) return;
+    const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
+    feedbackCurrentGroup.innerText = isAll ? `Dönem ${state.group} (Tüm Sınıf)` : `Dönem ${state.group} — Grup ${state.subgroup.toUpperCase()}`;
+  }
+
+  function resetFeedbackForm() {
+    if (feedbackFormView) feedbackFormView.classList.remove('hidden');
+    if (feedbackSuccessView) feedbackSuccessView.classList.add('hidden');
+    if (feedbackMessage) feedbackMessage.value = '';
+    if (feedbackContact) feedbackContact.value = '';
+    if (feedbackHoneypot) feedbackHoneypot.value = '';
+    if (feedbackCharCount) feedbackCharCount.innerText = '0 / 1000';
+    if (btnSubmitFeedback) {
+      btnSubmitFeedback.disabled = false;
+      btnSubmitFeedback.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Gönder</span>`;
+    }
+    selectedFeedbackCategory = '🚨 Amfi/Derslik Hatası';
+    if (feedbackCategoryContainer) {
+      feedbackCategoryContainer.querySelectorAll('.feedback-cat-btn').forEach(btn => {
+        if (btn.dataset.cat === selectedFeedbackCategory) {
+          btn.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-indigo-600 bg-indigo-50 text-indigo-900 shadow-2xs';
+        } else {
+          btn.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-slate-200 hover:border-slate-300 text-slate-600';
+        }
+      });
+    }
+    if (window.lucide) lucide.createIcons();
+  }
+
+  if (btnOpenFeedback && modalFeedback) {
+    btnOpenFeedback.addEventListener('click', () => {
+      updateFeedbackGroupDisplay();
+      resetFeedbackForm();
+      modalFeedback.classList.remove('hidden');
+    });
+  }
+
+  const closeFeedbackModal = () => {
+    if (modalFeedback) modalFeedback.classList.add('hidden');
+  };
+
+  if (btnCloseFeedbackModal) btnCloseFeedbackModal.addEventListener('click', closeFeedbackModal);
+  if (btnCancelFeedback) btnCancelFeedback.addEventListener('click', closeFeedbackModal);
+  if (btnCloseFeedbackSuccess) btnCloseFeedbackSuccess.addEventListener('click', closeFeedbackModal);
+
+  // Kategori Butonları Seçimi
+  if (feedbackCategoryContainer) {
+    feedbackCategoryContainer.querySelectorAll('.feedback-cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedFeedbackCategory = btn.dataset.cat || 'Diğer';
+        feedbackCategoryContainer.querySelectorAll('.feedback-cat-btn').forEach(b => {
+          b.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-slate-200 hover:border-slate-300 text-slate-600';
+        });
+        btn.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-indigo-600 bg-indigo-50 text-indigo-900 shadow-2xs';
+      });
+    });
+  }
+
+  // Karakter Sayacı
+  if (feedbackMessage && feedbackCharCount) {
+    feedbackMessage.addEventListener('input', () => {
+      const len = feedbackMessage.value.length;
+      feedbackCharCount.innerText = `${len} / 1000`;
+      if (len > 900) {
+        feedbackCharCount.className = 'text-[11px] text-amber-600 font-bold';
+      } else {
+        feedbackCharCount.className = 'text-[11px] text-slate-400';
+      }
+    });
+  }
+
+  // Form Gönderimi (Savunmacı Mühendislik: Rate-limit + Honeypot + Fetch)
+  async function submitFeedback() {
+    // 1. Bot Kapanı (Honeypot) Kontrolü
+    if (feedbackHoneypot && feedbackHoneypot.value.trim() !== '') {
+      resetFeedbackForm();
+      closeFeedbackModal();
+      return;
+    }
+
+    // 2. Karakter Doğrulaması
+    const msg = feedbackMessage ? feedbackMessage.value.trim() : '';
+    if (msg.length < 10) {
+      showToast('Lütfen en az 10 karakterlik bir açıklama yazınız.');
+      if (feedbackMessage) feedbackMessage.focus();
+      return;
+    }
+
+    // 3. İstemci Hız Sınırı (Rate-Limit: 5 dakika)
+    const lastSent = localStorage.getItem('iutip_feedback_last_sent');
+    const now = Date.now();
+    const cooldownMs = 5 * 60 * 1000;
+    if (lastSent && (now - parseInt(lastSent, 10) < cooldownMs)) {
+      const remainingMin = Math.ceil((cooldownMs - (now - parseInt(lastSent, 10))) / 60000);
+      showToast(`Yeni bir bildirim için lütfen ${remainingMin} dakika bekleyiniz.`);
+      return;
+    }
+
+    const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
+    const groupInfo = isAll ? `Dönem ${state.group} — Tüm Sınıf` : `Dönem ${state.group} — Grup ${state.subgroup.toUpperCase()}`;
+    const contact = feedbackContact ? feedbackContact.value.trim() : '';
+
+    const webhookUrl = localStorage.getItem('iutip_feedback_webhook_url') || DEFAULT_FEEDBACK_WEBHOOK_URL;
+
+    if (btnSubmitFeedback) {
+      btnSubmitFeedback.disabled = true;
+      btnSubmitFeedback.innerHTML = `<span class="inline-block animate-spin mr-1">⏳</span><span>Gönderiliyor...</span>`;
+    }
+
+    try {
+      if (webhookUrl && webhookUrl.startsWith('http')) {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            category: selectedFeedbackCategory,
+            groupInfo: groupInfo,
+            message: msg,
+            contact: contact || 'Belirtilmedi',
+            botCheck: ''
+          })
+        });
+      }
+      
+      localStorage.setItem('iutip_feedback_last_sent', now.toString());
+      if (feedbackFormView) feedbackFormView.classList.add('hidden');
+      if (feedbackSuccessView) feedbackSuccessView.classList.remove('hidden');
+      showToast('Geri bildiriminiz iletildi!');
+      if (window.lucide) lucide.createIcons();
+    } catch (err) {
+      console.error('Feedback submit error:', err);
+      showToast('Bildirim gönderilirken bir hata oluştu, lütfen tekrar deneyin.');
+      if (btnSubmitFeedback) {
+        btnSubmitFeedback.disabled = false;
+        btnSubmitFeedback.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Gönder</span>`;
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+  }
+
+  if (formFeedback) {
+    formFeedback.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitFeedback();
+    });
+  }
+
+  if (btnSubmitFeedback) {
+    btnSubmitFeedback.addEventListener('click', (e) => {
+      e.preventDefault();
+      submitFeedback();
     });
   }
 
