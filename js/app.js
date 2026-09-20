@@ -27,15 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  const btnQuick21 = document.getElementById('btnQuick21Eylul');
-  if (btnQuick21) {
-    btnQuick21.addEventListener('click', () => {
-      state.currentMonday = new Date(2026, 8, 21);
-      state.selectedMobileDay = 0;
-      renderSchedule();
-    });
-  }
-
   // Boş saatler toggle
   const toggleFree = document.getElementById('toggleFreeStudy');
   if (toggleFree) {
@@ -118,6 +109,28 @@ document.addEventListener('DOMContentLoaded', async () => {
       await loadDatabase();
       renderSchedule();
       showToast('Program güncellendi!');
+    });
+  }
+
+  // Daha Fazla Menüsü (Dropdown)
+  const btnMoreMenu = document.getElementById('btnMoreMenu');
+  const dropdownMoreMenu = document.getElementById('dropdownMoreMenu');
+  if (btnMoreMenu && dropdownMoreMenu) {
+    btnMoreMenu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMoreMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdownMoreMenu.contains(e.target) && !btnMoreMenu.contains(e.target)) {
+        dropdownMoreMenu.classList.add('hidden');
+      }
+    });
+
+    dropdownMoreMenu.querySelectorAll('button, a').forEach(el => {
+      el.addEventListener('click', () => {
+        dropdownMoreMenu.classList.add('hidden');
+      });
     });
   }
 
