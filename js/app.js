@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (btnCurrentWeek) {
     btnCurrentWeek.addEventListener('click', () => {
       state.currentMonday = getMondayOfDate(new Date());
+      state.selectedMobileDay = 'auto';
       renderSchedule();
     });
   }
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (btnQuick21) {
     btnQuick21.addEventListener('click', () => {
       state.currentMonday = new Date(2026, 8, 21);
+      state.selectedMobileDay = 0;
       renderSchedule();
     });
   }
@@ -271,7 +273,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <span class="w-2 h-2 rounded-full bg-amber-500"></span>
         Çevrimdışı (Kayıtlı Program)
       `;
-      showToast('İnternet bağlantısı yok. Çevrimdışı yerel veritabanı aktif.');
+      showToast('İnternet bağlantısı yok. Aktif ders programı çevrimdışı kullanımda.');
     }
   }
 

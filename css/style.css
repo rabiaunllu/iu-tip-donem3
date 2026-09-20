@@ -16,17 +16,26 @@ body {
   scrollbar-width: none;
 }
 
+/* Masaüstünde tüm gün kolonlarının görünmesini garanti altına al */
+@media (min-width: 768px) {
+  .day-column {
+    display: flex !important;
+  }
+}
+
 /* 🖨️ YAZDIRMA VE PDF İNDİRME ÖZEL A4 STİLİ */
 @media print {
   @page {
     size: A4 landscape;
-    margin: 8mm 6mm 8mm 6mm;
+    margin: 5mm 4mm 5mm 4mm;
   }
-  body {
+  html, body {
     background: #ffffff !important;
     color: #000000 !important;
     padding: 0 !important;
     margin: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
   }
   .no-print {
     display: none !important;
@@ -35,34 +44,77 @@ body {
     display: block !important;
   }
   #scheduleGrid {
-    display: grid !important;
-    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
-    gap: 6px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    gap: 3.5px !important;
     width: 100% !important;
   }
-  .lecture-card {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-    border: 1px solid #cbd5e1 !important;
-    padding: 5px !important;
-    margin-bottom: 4px !important;
-    background: #ffffff !important;
-    box-shadow: none !important;
-  }
-  .lecture-card h5 {
-    font-size: 9px !important;
-    line-height: 1.15 !important;
-  }
-  .lecture-card span, .lecture-card div {
-    font-size: 8px !important;
-  }
   .day-column {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
     border: 1px solid #94a3b8 !important;
-    border-radius: 6px !important;
+    border-radius: 4px !important;
+    background: #ffffff !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
   .day-header {
     background: #f1f5f9 !important;
-    padding: 4px 6px !important;
+    padding: 2px 4px !important;
     border-bottom: 1px solid #cbd5e1 !important;
+  }
+  .day-header h4 {
+    font-size: 8.5px !important;
+    margin: 0 !important;
+    line-height: 1.1 !important;
+  }
+  .day-header p {
+    font-size: 7px !important;
+    margin: 0 !important;
+    line-height: 1.1 !important;
+  }
+  .day-header span {
+    font-size: 7px !important;
+    padding: 1px 3px !important;
+  }
+  .day-column > div:last-child {
+    padding: 2px !important;
+    gap: 2px !important;
+  }
+  .lecture-card {
+    display: block !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    break-inside: avoid-page !important;
+    border: 1px solid #cbd5e1 !important;
+    border-left-width: 3px !important;
+    padding: 2.5px 3.5px !important;
+    margin-bottom: 2px !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border-radius: 4px !important;
+  }
+  .lecture-card * {
+    margin-top: 1px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .lecture-card h5 {
+    font-size: 7.5px !important;
+    line-height: 1.15 !important;
+    font-weight: 700 !important;
+  }
+  .lecture-card span, 
+  .lecture-card div,
+  .lecture-card p {
+    font-size: 6.8px !important;
+    line-height: 1.1 !important;
+  }
+  .lecture-card [data-lucide] {
+    width: 8px !important;
+    height: 8px !important;
   }
 }

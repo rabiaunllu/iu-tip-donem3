@@ -97,20 +97,23 @@ function renderSchedule() {
   const totalLectures = weekDays.reduce((acc, d) => acc + d.lectures.length, 0);
   const grid = document.getElementById('scheduleGrid');
   const emptyState = document.getElementById('emptyState');
+  const mobileDayTabs = document.getElementById('mobileDayTabs');
 
   if (totalLectures === 0) {
     if (grid) grid.classList.add('hidden');
     if (emptyState) emptyState.classList.remove('hidden');
+    if (mobileDayTabs) mobileDayTabs.classList.add('hidden');
     updateLiveUpcoming(null);
     return;
   }
 
   if (grid) grid.classList.remove('hidden');
   if (emptyState) emptyState.classList.add('hidden');
+  if (mobileDayTabs) mobileDayTabs.classList.remove('hidden');
 
   if (grid) {
-    grid.innerHTML = weekDays.map(day => `
-      <div class="day-column bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col">
+    grid.innerHTML = weekDays.map((day, idx) => `
+      <div data-day-index="${idx}" class="day-column bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col">
         <div class="day-header px-3.5 py-2.5 bg-slate-50/90 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h4 class="font-bold text-slate-900 text-xs sm:text-sm capitalize">${day.dayName}</h4>
@@ -133,8 +136,87 @@ function renderSchedule() {
     `).join('');
   }
 
+  renderMobileDayTabs(weekDays);
+
   if (window.lucide) lucide.createIcons();
   updateLiveUpcoming(weekDays);
+}
+
+function renderMobileDayTabs(weekDays) {
+  const container = document.getElementById('mobileDayTabs');
+  if (!container) return;
+
+  // Aktif günü belirle (Otomatik ise bugünü bul, yoksa Pazartesi'ye geç)
+  let activeIndex = state.selectedMobileDay;
+  if (activeIndex === 'auto') {
+    const now = new Date();
+    const todayISO = formatDate(now);
+    const foundIdx = weekDays.findIndex(d => d.isoDate === todayISO);
+    activeIndex = foundIdx !== -1 ? foundIdx : 0;
+    state.selectedMobileDay = activeIndex;
+  }
+
+  const shortNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'];
+  let html = `<div class="grid grid-cols-6 gap-1 p-1 bg-slate-200/80 rounded-xl shadow-2xs">`;
+
+  weekDays.forEach((day, idx) => {
+    const isSelected = (activeIndex === idx);
+    const dayNum = day.dateFormatted ? day.dateFormatted.split(' ')[0] : (idx + 1);
+    const activeClasses = isSelected
+      ? 'bg-indigo-600 text-white shadow-xs font-bold ring-1 ring-indigo-600'
+      : 'bg-white/80 text-slate-700 hover:bg-white hover:text-indigo-900 font-semibold';
+
+    html += `
+      <button type="button" data-day-index="${idx}" class="btn-mobile-day flex flex-col items-center justify-center py-1.5 px-0.5 rounded-lg transition-all ${activeClasses}">
+        <span class="text-[11px] leading-tight">${shortNames[idx] || day.dayName.substring(0, 3)}</span>
+        <span class="text-[9.5px] opacity-80 leading-tight mt-0.5">${dayNum}</span>
+      </button>
+    `;
+  });
+
+  const isAllSelected = (activeIndex === 'all');
+  const allActiveClasses = isAllSelected
+    ? 'bg-indigo-600 text-white shadow-xs font-bold ring-1 ring-indigo-600'
+    : 'bg-white/80 text-slate-700 hover:bg-white hover:text-indigo-900 font-semibold';
+
+  html += `
+    <button type="button" data-day-index="all" class="btn-mobile-day flex flex-col items-center justify-center py-1.5 px-0.5 rounded-lg transition-all ${allActiveClasses}">
+      <span class="text-[11px] leading-tight">Tüm</span>
+      <span class="text-[9.5px] opacity-80 leading-tight mt-0.5">Hafta</span>
+    </button>
+  </div>`;
+
+  container.innerHTML = html;
+
+  container.querySelectorAll('.btn-mobile-day').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.dayIndex;
+      state.selectedMobileDay = (val === 'all') ? 'all' : parseInt(val, 10);
+      renderMobileDayTabs(weekDays);
+      updateDayColumnsVisibility();
+    });
+  });
+
+  updateDayColumnsVisibility();
+}
+
+function updateDayColumnsVisibility() {
+  const grid = document.getElementById('scheduleGrid');
+  if (!grid) return;
+
+  const activeIndex = state.selectedMobileDay;
+  const cols = grid.querySelectorAll('.day-column');
+
+  cols.forEach((col, idx) => {
+    if (activeIndex === 'all' || activeIndex === idx) {
+      col.classList.remove('hidden');
+      col.classList.add('flex');
+    } else {
+      col.classList.add('hidden');
+      col.classList.remove('flex');
+      col.classList.add('md:flex');
+    }
+  });
 }
 
 function getLectureCardHTML(lec) {

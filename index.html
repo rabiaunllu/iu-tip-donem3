@@ -47,7 +47,7 @@
   </script>
 
   <!-- Özel Stiller ve Yazdırma Kuralları -->
-  <link rel="stylesheet" href="css/style.css?v=2.3">
+  <link rel="stylesheet" href="css/style.css?v=2.4">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen antialiased flex flex-col selection:bg-indigo-500 selection:text-white pb-16">
 
@@ -70,16 +70,16 @@
     <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
       
       <!-- Logo ve Başlık -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-200">
-          <i data-lucide="stethoscope" class="w-5 h-5"></i>
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-violet-600 flex items-center justify-center text-white shadow-md shadow-indigo-200 shrink-0">
+          <i data-lucide="stethoscope" class="w-4 h-4 sm:w-5 sm:h-5"></i>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <h1 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">İÜ Tıp Fakültesi</h1>
-            <span class="text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 border border-indigo-200">ÇAPA</span>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 flex-nowrap">
+            <h1 class="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight whitespace-nowrap">İÜ Tıp Fakültesi</h1>
+            <span class="text-[9px] sm:text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 border border-indigo-200 shrink-0">ÇAPA</span>
           </div>
-          <p class="text-xs font-semibold text-indigo-600">3. Sınıf Akıllı Ders Programı</p>
+          <p class="text-[11px] sm:text-xs font-semibold text-indigo-600 truncate">3. Sınıf Akıllı Ders Programı</p>
         </div>
       </div>
 
@@ -248,6 +248,11 @@
       <p id="errorMessageText">Veriler alınamadı.</p>
     </div>
 
+    <!-- MOBİL GÜN SEÇİCİ (YALNIZCA MOBİLDE GÖRÜNÜR, MD:HIDDEN) -->
+    <div id="mobileDayTabs" class="no-print md:hidden mb-3.5">
+      <!-- JS ile doldurulur: [Pzt 21] [Sal 22] [Çar 23] [Per 24] [Cum 25] [Tüm Hafta] -->
+    </div>
+
     <!-- DERS PROGRAMI GÖSTERİM ALANI (5 GÜNLÜK KOLONLAR) -->
     <div id="scheduleGrid" class="hidden grid grid-cols-1 md:grid-cols-5 gap-3.5 items-start">
       <!-- Pazartesi'den Cuma'ya 5 Gün Kartı JS ile Buraya Basılır -->
@@ -274,13 +279,13 @@
         <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center mx-auto mb-3 shadow-md shadow-indigo-200">
           <i data-lucide="stethoscope" class="w-6 h-6"></i>
         </div>
-        <h3 class="text-lg font-bold text-slate-900">İÜ Tıp 3. Sınıf — Hoş Geldin!</h3>
-        <p class="text-xs text-slate-500 mt-1">Her sabah amfini ve staj grubunu anında görebilmek için grubunu seç. Şifre gerekmez, telefonun hatırlar.</p>
+        <h3 class="text-lg font-bold text-slate-900">Hoş Geldin! 👋</h3>
+        <p class="text-xs text-slate-500 mt-1">Derslik ve klinik staj programını sana özel listelemek için grubunu seç:</p>
       </div>
 
       <div class="space-y-4 text-xs">
         <div>
-          <label class="font-bold text-slate-700 block mb-1.5">1. Ana Grubun:</label>
+          <label class="font-bold text-slate-700 block mb-1.5">1. Şuben:</label>
           <div class="grid grid-cols-2 gap-2">
             <button type="button" id="btnProfile3A" class="p-3 rounded-xl border-2 font-bold text-center transition-all border-indigo-600 bg-indigo-50/50 text-indigo-900">Dönem 3A</button>
             <button type="button" id="btnProfile3B" class="p-3 rounded-xl border-2 font-bold text-center transition-all border-slate-200 hover:border-slate-300 text-slate-700">Dönem 3B</button>
@@ -288,16 +293,16 @@
         </div>
 
         <div>
-          <label class="font-bold text-slate-700 block mb-1.5">2. Alt Grubun (Uygulama & Masa Başı Rotasyonu):</label>
+          <label class="font-bold text-slate-700 block mb-1.5">2. Pratik / Staj Grubun:</label>
           <div class="grid grid-cols-4 gap-1.5" id="profileSubgroupGrid">
             <!-- JS doldurur: A1..A8 veya B1..B8 + Tüm Sınıf -->
           </div>
         </div>
 
         <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-          <span class="text-[11px] text-slate-400">Üst menüden her an değiştirebilirsin.</span>
+          <span class="text-[11px] text-slate-400">💡 Dilediğin zaman menüden değiştirebilirsin.</span>
           <button id="btnSaveProfile" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md shadow-indigo-200 transition-transform active:scale-95">
-            Kaydet & Başla
+            Programı Gör
           </button>
         </div>
       </div>
@@ -399,11 +404,11 @@
   </div>
 
   <!-- Modüler JavaScript Mimarisi (Cache-busted) -->
-  <script src="js/config.js?v=2.3" defer></script>
-  <script src="js/utils.js?v=2.3" defer></script>
-  <script src="js/state.js?v=2.3" defer></script>
-  <script src="js/data.js?v=2.3" defer></script>
-  <script src="js/render.js?v=2.3" defer></script>
-  <script src="js/app.js?v=2.3" defer></script>
+  <script src="js/config.js?v=2.4" defer></script>
+  <script src="js/utils.js?v=2.4" defer></script>
+  <script src="js/state.js?v=2.4" defer></script>
+  <script src="js/data.js?v=2.4" defer></script>
+  <script src="js/render.js?v=2.4" defer></script>
+  <script src="js/app.js?v=2.4" defer></script>
 </body>
 </html>

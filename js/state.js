@@ -8,6 +8,7 @@ let state = {
   currentMonday: getMondayOfDate(new Date(2026, 8, 21)), // 21 Eylül 2026 haftası varsayılan
   showFreeStudy: false,
   searchQuery: '',
+  selectedMobileDay: 'auto', // 'auto', 0..4 (Pzt..Cum), or 'all'
   db: null, // schedule_2026_2027.json
   cacheData: {
     amfi: null,
