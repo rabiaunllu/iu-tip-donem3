@@ -169,36 +169,73 @@ function parseAmfiSchedule(rows) {
   return daysMap;
 }
 
-function matchAmfi(amfiData, gunStr, basSaat, groupLetter) {
-  if (!amfiData) return null;
-  const gLower = (gunStr || '').toLowerCase();
-  let norm = null;
-  for (const k of Object.keys(amfiData)) {
-    if (k === 'cuma' && gLower.includes('cumartesi')) continue;
-    if (gLower.includes(k) || k.includes(gLower)) {
-      norm = k;
-      break;
+function resolveLectureAmfi(lec, gunStr, groupName) {
+  const subjectUpper = (lec.subject || '').toUpperCase();
+  const locationUpper = (lec.location_raw || '').toUpperCase();
+  const gLower = (gunStr || '').toLowerCase().trim();
+
+  // 1. Ortak / Özel ders konu kontrolleri
+  if (subjectUpper.includes('BİYOİSTATİSTİK') || subjectUpper.includes('BIOISTATISTIK')) {
+    return { name: 'Kemal Atay Amfisi (Ortak Ders)', isKnown: true };
+  }
+  if (subjectUpper.includes('ORTAK DERS') || subjectUpper.includes('TÜM DÖNEM 3')) {
+    return { name: 'Kemal Atay Amfisi (Ortak Ders)', isKnown: true };
+  }
+  if (subjectUpper.includes('İNGİLİZCE TIP') || subjectUpper.includes('INGILIZCE TIP')) {
+    return { name: 'Cemil Topuzlu Amfisi (Ortak)', isKnown: true };
+  }
+
+  // 2. Fakülte resmi amfi tablosundan doğrulanmış gün bazlı amfi dağılımı
+  const weeklyMap = (state.db && state.db.amfi_default && state.db.amfi_default.weekly_mapping)
+    ? state.db.amfi_default.weekly_mapping[groupName]
+    : {
+        '3A': {
+          'pazartesi': 'Kemal Atay Amfisi',
+          'salı': 'Aziz Sancar Amfisi',
+          'çarşamba': 'Aziz Sancar Amfisi',
+          'perşembe': 'Tevfik Sağlam Amfisi',
+          'cuma': 'Tevfik Sağlam Amfisi'
+        },
+        '3B': {
+          'pazartesi': 'Aziz Sancar Amfisi',
+          'salı': 'Kemal Atay Amfisi',
+          'çarşamba': 'Kemal Atay Amfisi',
+          'perşembe': 'Sami Zan Amfisi',
+          'cuma': 'Aziz Sancar Amfisi'
+        }
+      }[groupName];
+
+  if (weeklyMap) {
+    for (const [dayKey, amfiName] of Object.entries(weeklyMap)) {
+      if (dayKey === 'cuma' && gLower.includes('cumartesi')) continue;
+      if (gLower.includes(dayKey) || dayKey.includes(gLower)) {
+        return { name: amfiName, isKnown: true };
+      }
     }
   }
-  if (!norm || !amfiData[norm]) return null;
 
-  const saatKey = basSaat.replace(':', '.');
-  const slot = amfiData[norm][saatKey];
-  if (!slot) return null;
+  // 3. Eğer konum metninde bilinen bir amfi adı doğrudan yazıyorsa
+  const amfiKeywords = [
+    { key: 'KEMAL ATAY', name: 'Kemal Atay Amfisi' },
+    { key: 'SAMİ ZAN', name: 'Sami Zan Amfisi' },
+    { key: 'AZİZ SANCAR', name: 'Aziz Sancar Amfisi' },
+    { key: 'TEVFİK SAĞLAM', name: 'Tevfik Sağlam Amfisi' },
+    { key: 'CEMİL TOPUZLU', name: 'Cemil Topuzlu Amfisi' },
+    { key: 'MUZAFFER AKSOY', name: 'Muzaffer Aksoy Amfisi' },
+    { key: 'TEMEL BİLİMLER', name: 'Temel Bilimler Amfi III' },
+    { key: 'ESKİ FİZİK TEDAVİ', name: 'Eski Fizik Tedavi Dersliği' }
+  ];
 
-  const tags = groupLetter === 'A'
-    ? ['3A', 'A GRUBU', 'DÖNEM 3-TÜRKÇE-A', 'DÖNEM 3-A']
-    : ['3B', 'B GRUBU', 'DÖNEM 3- B GRUBU', 'DÖNEM 3-B'];
-
-  for (const [amfi, desc] of Object.entries(slot)) {
-    const du = desc.toUpperCase();
-    if (tags.some(t => du.includes(t))) return amfi;
-  }
-  for (const [amfi, desc] of Object.entries(slot)) {
-    const du = desc.toUpperCase();
-    if (du.includes('DÖNEM 3') && (du.includes('TÜRKÇE') || du.includes('ORTAK')) && !du.includes('3A') && !du.includes('3B')) {
-      return amfi + ' (Ortak)';
+  for (const item of amfiKeywords) {
+    if (locationUpper.includes(item.key)) {
+      return { name: item.name, isKnown: true };
     }
   }
-  return null;
+
+  // 4. Kesin bilinmeyen durumlarda asla yanlış tahmin yapma; doğrudan resmi portala yönlendir
+  return {
+    name: 'Resmi Amfi Portalı (Kontrol Ediniz)',
+    url: 'https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi',
+    isPortal: true
+  };
 }

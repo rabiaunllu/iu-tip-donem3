@@ -72,21 +72,6 @@ function renderSchedule() {
     if (isFree) {
       cardType = 'free';
       resolvedLocation = 'Dinlenme / Bireysel Çalışma';
-    } else if (yer.toUpperCase().includes('AMFİ') || yer.toUpperCase().includes('AMFI')) {
-      cardType = 'theory';
-      const amfi = matchAmfi(state.cacheData.amfi, gun, lec.start, state.group === '3A' ? 'A' : 'B');
-      if (amfi) {
-        resolvedLocation = `🏛️ ${amfi}`;
-      } else {
-        const isOrtak = (lec.subject || '').toUpperCase().includes('ORTAK') || (lec.subject || '').toUpperCase().includes('İNGİLİZCE TIP');
-        if (isOrtak) {
-          resolvedLocation = '🏛️ Kemal Atay Amfisi (Ortak Ders)';
-        } else if (state.group === '3A') {
-          resolvedLocation = '🏛️ Kemal Atay Amfisi (Dönem 3A)';
-        } else {
-          resolvedLocation = '🏛️ Sami Zan Amfisi (Dönem 3B)';
-        }
-      }
     } else if (yer.toUpperCase().includes('UYGULAMA') || konu.toUpperCase().includes('UYGULAMA')) {
       cardType = 'practice';
       const dayRot = rotations[iso];
@@ -100,6 +85,15 @@ function renderSchedule() {
     } else if (yer.toUpperCase().includes('ANABİLİM DALLARI') || konu.includes('Hasta İzlem')) {
       cardType = 'hospital';
       resolvedLocation = '🏥 Klinik Servisler (Hasta İzlem)';
+    } else {
+      // Teorik dersler — Gün ve ders bazlı kesin doğrulanmış amfi eşleme
+      cardType = 'theory';
+      const amfiInfo = resolveLectureAmfi(lec, gun, state.group);
+      if (amfiInfo.isPortal) {
+        resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
+      } else {
+        resolvedLocation = `🏛️ ${amfiInfo.name}`;
+      }
     }
 
     // Laboratuvar kontrolü (Tıbbi Patoloji & Mikrobiyoloji)

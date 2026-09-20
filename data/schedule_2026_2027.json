@@ -1,6 +1,6 @@
 {
   "version": "2026-2027-v1",
-  "generated_at": "2026-09-20T21:10:29.596966",
+  "generated_at": "2026-09-20T23:14:34.640239",
   "semester_start": "2026-09-01",
   "semester_end": "2027-07-09",
   "lectures_3A": [
@@ -24237,18 +24237,36 @@
     ]
   },
   "amfi_default": {
-    "cumartesi": {},
-    "pazar": {
-      "08.30": {},
-      "09.20": {},
-      "10.10": {},
-      "11.00": {},
-      "11.50": {},
-      "12.30": {},
-      "14.00": {},
-      "14.50": {},
-      "15.40": {},
-      "16.30": {}
-    }
+    "portal_url": "https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi",
+    "weekly_mapping": {
+      "3A": {
+        "pazartesi": "Kemal Atay Amfisi",
+        "salı": "Aziz Sancar Amfisi",
+        "çarşamba": "Aziz Sancar Amfisi",
+        "perşembe": "Tevfik Sağlam Amfisi",
+        "cuma": "Tevfik Sağlam Amfisi"
+      },
+      "3B": {
+        "pazartesi": "Aziz Sancar Amfisi",
+        "salı": "Kemal Atay Amfisi",
+        "çarşamba": "Kemal Atay Amfisi",
+        "perşembe": "Sami Zan Amfisi",
+        "cuma": "Aziz Sancar Amfisi"
+      }
+    },
+    "overrides": [
+      {
+        "pattern": "BİYOİSTATİSTİK",
+        "amfi": "Kemal Atay Amfisi (Ortak Ders)"
+      },
+      {
+        "pattern": "ORTAK DERS",
+        "amfi": "Kemal Atay Amfisi (Ortak Ders)"
+      },
+      {
+        "pattern": "İNGİLİZCE TIP",
+        "amfi": "Cemil Topuzlu Amfisi (Ortak)"
+      }
+    ]
   }
 }
