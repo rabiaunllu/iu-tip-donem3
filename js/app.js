@@ -202,22 +202,59 @@ document.addEventListener('DOMContentLoaded', async () => {
   const feedbackMessage = document.getElementById('feedbackMessage');
   const feedbackCharCount = document.getElementById('feedbackCharCount');
   const feedbackContact = document.getElementById('feedbackContact');
-  const feedbackCurrentGroup = document.getElementById('feedbackCurrentGroup');
+  const feedbackRelatedGroup = document.getElementById('feedbackRelatedGroup');
   const feedbackHoneypot = document.getElementById('feedbackHoneypot');
   const btnSubmitFeedback = document.getElementById('btnSubmitFeedback');
 
-  let selectedFeedbackCategory = '🚨 Amfi/Derslik Hatası';
+  const CATEGORY_PLACEHOLDERS = {
+    '📅 Ders Programı Hatası': "Örn: Salı günü 13:30'da Kardiyoloji teorik dersi görünmüyor / yerine serbest çalışma vardı...",
+    '🩺 Staj / Rotasyon Hatası': "Örn: A4 grubunun bu haftaki Çocuk Cerrahisi rotasyon saati çakışıyor / yer bilgisi uyuşmuyor...",
+    '💡 Öneri & Yeni Fikir': "Örn: Boş saatler filtresi seçildiğinde kütüphane çalışma alanları da eklense harika olurdu...",
+    '💬 Diğer / Genel': "Görüş, soru veya iletmek istediğiniz detayları buraya yazabilirsiniz..."
+  };
 
-  function updateFeedbackGroupDisplay() {
-    if (!feedbackCurrentGroup) return;
-    const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
-    feedbackCurrentGroup.innerText = isAll ? `Dönem ${state.group} (Tüm Sınıf)` : `Dönem ${state.group} — Grup ${state.subgroup.toUpperCase()}`;
+  let selectedFeedbackCategory = '📅 Ders Programı Hatası';
+
+  function populateFeedbackGroupOptions() {
+    if (!feedbackRelatedGroup) return;
+    const currentSub = (!state.subgroup || state.subgroup.toLowerCase() === 'all') ? 'ALL' : state.subgroup.toUpperCase();
+    const currentKey = `${state.group}-${currentSub}`;
+
+    const groups = [
+      { key: '3A-ALL', label: 'Dönem 3A — Tüm Sınıf (Genel)' },
+      { key: '3A-A1', label: 'Dönem 3A — Grup A1' },
+      { key: '3A-A2', label: 'Dönem 3A — Grup A2' },
+      { key: '3A-A3', label: 'Dönem 3A — Grup A3' },
+      { key: '3A-A4', label: 'Dönem 3A — Grup A4' },
+      { key: '3A-A5', label: 'Dönem 3A — Grup A5' },
+      { key: '3A-A6', label: 'Dönem 3A — Grup A6' },
+      { key: '3A-A7', label: 'Dönem 3A — Grup A7' },
+      { key: '3A-A8', label: 'Dönem 3A — Grup A8' },
+      { key: '3B-ALL', label: 'Dönem 3B — Tüm Sınıf (Genel)' },
+      { key: '3B-B1', label: 'Dönem 3B — Grup B1' },
+      { key: '3B-B2', label: 'Dönem 3B — Grup B2' },
+      { key: '3B-B3', label: 'Dönem 3B — Grup B3' },
+      { key: '3B-B4', label: 'Dönem 3B — Grup B4' },
+      { key: '3B-B5', label: 'Dönem 3B — Grup B5' },
+      { key: '3B-B6', label: 'Dönem 3B — Grup B6' },
+      { key: '3B-B7', label: 'Dönem 3B — Grup B7' },
+      { key: '3B-B8', label: 'Dönem 3B — Grup B8' },
+      { key: 'ALL-GENEL', label: 'Genel / Tüm Dönem 3 (3A & 3B)' }
+    ];
+
+    feedbackRelatedGroup.innerHTML = groups.map(g => {
+      const isSelected = g.key === currentKey;
+      return `<option value="${g.label}" ${isSelected ? 'selected' : ''}>${g.label} ${isSelected ? '★ (Seçili Profilin)' : ''}</option>`;
+    }).join('');
   }
 
   function resetFeedbackForm() {
     if (feedbackFormView) feedbackFormView.classList.remove('hidden');
     if (feedbackSuccessView) feedbackSuccessView.classList.add('hidden');
-    if (feedbackMessage) feedbackMessage.value = '';
+    if (feedbackMessage) {
+      feedbackMessage.value = '';
+      feedbackMessage.placeholder = CATEGORY_PLACEHOLDERS['📅 Ders Programı Hatası'];
+    }
     if (feedbackContact) feedbackContact.value = '';
     if (feedbackHoneypot) feedbackHoneypot.value = '';
     if (feedbackCharCount) feedbackCharCount.innerText = '0 / 1000';
@@ -225,13 +262,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       btnSubmitFeedback.disabled = false;
       btnSubmitFeedback.innerHTML = `<i data-lucide="send" class="w-3.5 h-3.5"></i><span>Gönder</span>`;
     }
-    selectedFeedbackCategory = '🚨 Amfi/Derslik Hatası';
+    selectedFeedbackCategory = '📅 Ders Programı Hatası';
     if (feedbackCategoryContainer) {
       feedbackCategoryContainer.querySelectorAll('.feedback-cat-btn').forEach(btn => {
         if (btn.dataset.cat === selectedFeedbackCategory) {
-          btn.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-indigo-600 bg-indigo-50 text-indigo-900 shadow-2xs';
+          btn.className = 'feedback-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left font-semibold transition-all border-indigo-600 bg-indigo-50/80 text-indigo-900 shadow-2xs ring-1 ring-indigo-500/20';
         } else {
-          btn.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-slate-200 hover:border-slate-300 text-slate-600';
+          btn.className = 'feedback-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left font-semibold transition-all border-slate-200 hover:border-slate-300 text-slate-700 bg-white';
         }
       });
     }
@@ -240,7 +277,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (btnOpenFeedback && modalFeedback) {
     btnOpenFeedback.addEventListener('click', () => {
-      updateFeedbackGroupDisplay();
+      populateFeedbackGroupOptions();
       resetFeedbackForm();
       modalFeedback.classList.remove('hidden');
     });
@@ -258,11 +295,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (feedbackCategoryContainer) {
     feedbackCategoryContainer.querySelectorAll('.feedback-cat-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        selectedFeedbackCategory = btn.dataset.cat || 'Diğer';
+        selectedFeedbackCategory = btn.dataset.cat || '💬 Diğer / Genel';
         feedbackCategoryContainer.querySelectorAll('.feedback-cat-btn').forEach(b => {
-          b.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-slate-200 hover:border-slate-300 text-slate-600';
+          b.className = 'feedback-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left font-semibold transition-all border-slate-200 hover:border-slate-300 text-slate-700 bg-white';
         });
-        btn.className = 'feedback-cat-btn px-2.5 py-2 rounded-xl border text-center font-semibold transition-all border-indigo-600 bg-indigo-50 text-indigo-900 shadow-2xs';
+        btn.className = 'feedback-cat-btn flex items-center gap-2 p-2.5 rounded-xl border text-left font-semibold transition-all border-indigo-600 bg-indigo-50/80 text-indigo-900 shadow-2xs ring-1 ring-indigo-500/20';
+
+        if (feedbackMessage) {
+          feedbackMessage.placeholder = CATEGORY_PLACEHOLDERS[selectedFeedbackCategory] || 'Mesajınızı buraya yazabilirsiniz...';
+        }
       });
     });
   }
@@ -308,7 +349,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
-    const groupInfo = isAll ? `Dönem ${state.group} — Tüm Sınıf` : `Dönem ${state.group} — Grup ${state.subgroup.toUpperCase()}`;
+    const groupInfo = feedbackRelatedGroup && feedbackRelatedGroup.value
+      ? feedbackRelatedGroup.value
+      : (isAll ? `Dönem ${state.group} — Tüm Sınıf` : `Dönem ${state.group} — Grup ${state.subgroup.toUpperCase()}`);
     const contact = feedbackContact ? feedbackContact.value.trim() : '';
 
     const webhookUrl = localStorage.getItem('iutip_feedback_webhook_url') || DEFAULT_FEEDBACK_WEBHOOK_URL;
