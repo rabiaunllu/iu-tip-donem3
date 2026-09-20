@@ -165,6 +165,78 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // PWA Yükleme & Kurulum Modalı
+  const modalPwa = document.getElementById('modalPwaInstall');
+  const btnPwa = document.getElementById('btnPwaInstall');
+  const btnClosePwa = document.getElementById('btnClosePwaModal');
+  const btnDismissPwa = document.getElementById('btnDismissPwaModal');
+  const btnNative = document.getElementById('btnNativeInstall');
+
+  let deferredInstallPrompt = null;
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredInstallPrompt = e;
+  });
+
+  if (btnPwa && modalPwa) {
+    btnPwa.addEventListener('click', () => {
+      modalPwa.classList.remove('hidden');
+    });
+  }
+
+  if (btnClosePwa && modalPwa) {
+    btnClosePwa.addEventListener('click', () => modalPwa.classList.add('hidden'));
+  }
+  if (btnDismissPwa && modalPwa) {
+    btnDismissPwa.addEventListener('click', () => modalPwa.classList.add('hidden'));
+  }
+
+  if (btnNative) {
+    btnNative.addEventListener('click', async () => {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const { outcome } = await deferredInstallPrompt.userChoice;
+        if (outcome === 'accepted') {
+          showToast('Uygulama başarıyla kuruldu!');
+          if (modalPwa) modalPwa.classList.add('hidden');
+        }
+        deferredInstallPrompt = null;
+      } else {
+        showToast('Tarayıcı menüsünden "Ana Ekrana Ekle"yi seçebilirsiniz.');
+      }
+    });
+  }
+
+  // Canlı Ağ Durumu Dinleyicileri (Online / Offline)
+  function updateNetworkStatus() {
+    const statusElem = document.getElementById('liveStatusText');
+    if (!statusElem) return;
+    if (navigator.onLine) {
+      statusElem.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Doğrulanmış Fakülte Veritabanı
+      `;
+    } else {
+      statusElem.innerHTML = `
+        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+        Çevrimdışı Mod (İnternetsiz)
+      `;
+      showToast('İnternet bağlantısı yok. Çevrimdışı yerel veritabanı aktif.');
+    }
+  }
+
+  window.addEventListener('online', () => {
+    updateNetworkStatus();
+    showToast('İnternet bağlantısı sağlandı.');
+  });
+  window.addEventListener('offline', () => {
+    updateNetworkStatus();
+  });
+
+  if (!navigator.onLine) {
+    updateNetworkStatus();
+  }
+
   // Başlatma Sırası
   renderSubgroupButtons();
   updateSelectionBadge();
