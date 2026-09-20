@@ -27,6 +27,20 @@ function renderSchedule() {
   const printDateRangeElem = document.getElementById('printDateRange');
   if (printDateRangeElem) printDateRangeElem.innerText = `${d1} – ${d2}`;
 
+  // 'Bu Hafta' Butonu: Sadece diğer haftalarda gezinirken aktif ve görünür olsun
+  const btnCurrentWeek = document.getElementById('btnCurrentWeekNow');
+  if (btnCurrentWeek) {
+    const todayMonday = getMondayOfDate(new Date());
+    const isCurrentWeek = formatDate(monday) === formatDate(todayMonday);
+    if (isCurrentWeek) {
+      btnCurrentWeek.classList.add('hidden');
+      btnCurrentWeek.classList.remove('inline-flex');
+    } else {
+      btnCurrentWeek.classList.remove('hidden');
+      btnCurrentWeek.classList.add('inline-flex');
+    }
+  }
+
   // 5 Günlük Kolon Hazırla
   const weekDays = [];
   for (let i = 0; i < 5; i++) {
