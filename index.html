@@ -47,7 +47,7 @@
   </script>
 
   <!-- Özel Stiller ve Yazdırma Kuralları -->
-  <link rel="stylesheet" href="css/style.css?v=2.11">
+  <link rel="stylesheet" href="css/style.css?v=2.12">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen antialiased flex flex-col selection:bg-indigo-500 selection:text-white pb-16">
 
@@ -94,10 +94,10 @@
       <!-- Hızlı Aksiyonlar (Sadeleştirilmiş & Bilişsel Yükü Sıfırlayan Tasarım) -->
       <div class="flex items-center gap-2">
         <!-- Profil & Aktif Grup Seçici (Tek ve Net Rozet) -->
-        <button id="btnOpenProfileModal" title="Kayıtlı Grubunu Değiştir" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200/80 text-indigo-900 font-bold text-xs transition-all shadow-2xs">
-          <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-indigo-600"></i>
+        <button id="btnOpenProfileModal" title="Kayıtlı Grubunu Değiştir" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-indigo-50/90 hover:bg-indigo-100 border border-indigo-200/80 text-indigo-900 font-bold text-xs transition-all shadow-2xs shrink-0 whitespace-nowrap">
+          <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
           <span id="headerProfileName">3A · Tüm Sınıf</span>
-          <i data-lucide="chevron-down" class="w-3 h-3 text-indigo-400"></i>
+          <i data-lucide="chevron-down" class="w-3 h-3 text-indigo-400 shrink-0"></i>
         </button>
 
         <!-- Geri Bildirim Butonu -->
@@ -135,35 +135,34 @@
     </div>
 
     <!-- KONTROL PANELİ: GRUP, ALT GRUP, HAFTA SEÇİMİ (NO-PRINT) -->
-    <div class="border-t border-slate-100 bg-slate-50/80 px-4 py-2">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-2.5">
+    <div class="border-t border-slate-100 bg-slate-50/80 px-3 sm:px-4 py-2">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-2.5">
         
-        <!-- 3A / 3B ve Alt Gruplar (Yumuşak Segmented Tasarım) -->
-        <div class="flex flex-wrap items-center gap-2">
-          <!-- Ana Şube -->
-          <div class="inline-flex p-0.5 bg-slate-200/80 rounded-xl">
-            <button id="tab3A" class="px-3 py-1 text-xs font-bold rounded-lg transition-all shadow-xs bg-white text-indigo-700">Dönem 3A</button>
-            <button id="tab3B" class="px-3 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 hover:text-slate-900">Dönem 3B</button>
-          </div>
-
-          <!-- Alt Grup Seçimi (A1..A8 veya B1..B8) -->
-          <div class="inline-flex items-center gap-0.5 p-0.5 bg-slate-200/70 rounded-xl overflow-x-auto scrollbar-none" id="subgroupContainer">
-            <!-- JS ile dinamik doldurulur -->
-          </div>
+        <!-- 1. Ana Şube (Dönem 3A / 3B) -->
+        <div class="inline-flex p-0.5 bg-slate-200/80 rounded-xl shrink-0 order-1">
+          <button id="tab3A" class="px-2.5 sm:px-3 py-1 text-xs font-bold rounded-lg transition-all shadow-xs bg-white text-indigo-700">Dönem 3A</button>
+          <button id="tab3B" class="px-2.5 sm:px-3 py-1 text-xs font-bold rounded-lg transition-all text-slate-600 hover:text-slate-900">Dönem 3B</button>
         </div>
 
-        <!-- Hafta Değiştirici -->
-        <div class="flex items-center justify-end gap-1.5 sm:gap-2 text-xs">
+        <!-- 2. Hafta Değiştirici -->
+        <div class="flex items-center justify-end gap-1.5 text-xs shrink-0 order-2 md:order-3">
           <!-- Bu Haftaya Dön Butonu (Sadece İkon — İleri/Geri butonlarını asla kaydırmaz) -->
-          <button id="btnCurrentWeekNow" class="is-collapsed w-8 h-8 rounded-xl bg-indigo-50 border border-indigo-200/90 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-900 shadow-2xs flex items-center justify-center transition-all overflow-hidden shrink-0 active:scale-90" title="İçinde bulunduğumuz haftaya dön" aria-label="İçinde bulunduğumuz haftaya dön" aria-hidden="true" tabindex="-1">
-            <i data-lucide="rotate-ccw" class="w-4 h-4 shrink-0"></i>
+          <button id="btnCurrentWeekNow" class="is-collapsed w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-indigo-50 border border-indigo-200/90 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-900 shadow-2xs flex items-center justify-center transition-all overflow-hidden shrink-0 active:scale-90" title="İçinde bulunduğumuz haftaya dön" aria-label="İçinde bulunduğumuz haftaya dön" aria-hidden="true" tabindex="-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
           </button>
 
           <!-- Hafta Seçici Kapsayıcı -->
           <div class="flex items-center bg-white border border-slate-200/80 rounded-xl p-0.5 shadow-2xs shrink-0">
-            <button id="btnPrevWeek" class="p-1 hover:bg-slate-100 active:scale-95 rounded-lg text-slate-600 transition-all" title="Önceki Hafta"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
-            <span id="currentWeekRange" class="px-2.5 font-semibold text-slate-700 min-w-[155px] text-center select-none tabular-nums tracking-tight inline-block">Yükleniyor...</span>
-            <button id="btnNextWeek" class="p-1 hover:bg-slate-100 active:scale-95 rounded-lg text-slate-600 transition-all" title="Sonraki Hafta"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+            <button id="btnPrevWeek" class="p-1 hover:bg-slate-100 active:scale-95 rounded-lg text-slate-600 transition-all" title="Önceki Hafta"><i data-lucide="chevron-left" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i></button>
+            <span id="currentWeekRange" class="px-2 sm:px-2.5 font-semibold text-slate-700 min-w-[130px] sm:min-w-[155px] text-center select-none tabular-nums tracking-tight text-[11px] sm:text-xs inline-block">Yükleniyor...</span>
+            <button id="btnNextWeek" class="p-1 hover:bg-slate-100 active:scale-95 rounded-lg text-slate-600 transition-all" title="Sonraki Hafta"><i data-lucide="chevron-right" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i></button>
+          </div>
+        </div>
+
+        <!-- 3. Alt Grup Seçimi (A1..A8 veya B1..B8) -->
+        <div class="w-full md:w-auto overflow-x-auto scrollbar-none order-3 md:order-2 flex-1 min-w-0" id="subgroupWrapper">
+          <div class="inline-flex items-center gap-0.5 p-0.5 bg-slate-200/70 rounded-xl" id="subgroupContainer">
+            <!-- JS ile dinamik doldurulur -->
           </div>
         </div>
 
@@ -515,11 +514,11 @@
   </div>
 
   <!-- Modüler JavaScript Mimarisi (Cache-busted) -->
-  <script src="js/config.js?v=2.11" defer></script>
-  <script src="js/utils.js?v=2.11" defer></script>
-  <script src="js/state.js?v=2.11" defer></script>
-  <script src="js/data.js?v=2.11" defer></script>
-  <script src="js/render.js?v=2.11" defer></script>
-  <script src="js/app.js?v=2.11" defer></script>
+  <script src="js/config.js?v=2.12" defer></script>
+  <script src="js/utils.js?v=2.12" defer></script>
+  <script src="js/state.js?v=2.12" defer></script>
+  <script src="js/data.js?v=2.12" defer></script>
+  <script src="js/render.js?v=2.12" defer></script>
+  <script src="js/app.js?v=2.12" defer></script>
 </body>
 </html>

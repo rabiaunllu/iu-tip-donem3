@@ -1,6 +1,6 @@
 # 📋 Google E-Tablo & Apps Script Kurulum Rehberi (5 Dakika)
 
-Bu rehber, **İÜ Tıp Fakültesi Dönem 3 Akıllı Ders Programı** geri bildirim kutusunu kendi Google Drive hesabınıza bağlamanız için adım adım hazırlanmıştır. Tamamen **ücretsizdir** ve kredi kartı gerektirmez.
+Bu rehber, **İÜ Tıp Fakültesi Dönem 3 Akıllı Ders Programı** geri bildirim kutusunu kendi Google Drive hesabınıza bağlamanız için adım adım hazırlanmıştır. 
 
 ---
 
