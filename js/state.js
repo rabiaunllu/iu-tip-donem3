@@ -24,17 +24,20 @@ let profileModalSelection = {
 };
 
 function saveUserProfile(group, subgroup) {
-  localStorage.setItem('iutip_user_profile', JSON.stringify({ group, subgroup }));
+  const cleanSub = (!subgroup || subgroup.toLowerCase() === 'all') ? 'all' : subgroup.toUpperCase();
+  localStorage.setItem('iutip_user_profile', JSON.stringify({ group, subgroup: cleanSub }));
 }
 
 function loadUserProfile() {
-  // 1. URL Hash kontrolü: #3A-A3 gibi
-  const hash = window.location.hash.replace('#', '').trim().toUpperCase();
-  if (hash) {
-    const parts = hash.split('-');
-    if (parts.length >= 1 && (parts[0] === '3A' || parts[0] === '3B')) {
-      state.group = parts[0];
-      state.subgroup = parts[1] || 'all';
+  // 1. URL Hash kontrolü: #3A veya #3A-A3 gibi
+  const rawHash = window.location.hash.replace('#', '').trim();
+  if (rawHash) {
+    const parts = rawHash.split('-');
+    const grp = parts[0] ? parts[0].toUpperCase() : '';
+    if (grp === '3A' || grp === '3B') {
+      state.group = grp;
+      const rawSub = parts[1] ? parts[1].trim().toLowerCase() : 'all';
+      state.subgroup = (rawSub === 'all' || !parts[1]) ? 'all' : parts[1].trim().toUpperCase();
       return true;
     }
   }
@@ -44,8 +47,11 @@ function loadUserProfile() {
   if (saved) {
     try {
       const prof = JSON.parse(saved);
-      if (prof.group) state.group = prof.group;
-      if (prof.subgroup) state.subgroup = prof.subgroup;
+      if (prof.group) state.group = prof.group.toUpperCase();
+      if (prof.subgroup) {
+        const rawSub = prof.subgroup.trim().toLowerCase();
+        state.subgroup = (rawSub === 'all') ? 'all' : prof.subgroup.trim().toUpperCase();
+      }
       return true;
     } catch (e) {}
   }

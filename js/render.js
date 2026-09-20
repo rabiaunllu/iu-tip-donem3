@@ -330,16 +330,17 @@ function renderSubgroupButtons() {
   const container = document.getElementById('subgroupContainer');
   if (!container) return;
   const prefix = state.group === '3A' ? 'A' : 'B';
+  const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
   
   let html = `
-    <button data-sub="all" class="subgroup-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${state.subgroup === 'all' ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+    <button data-sub="all" class="subgroup-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${isAll ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
       Tüm Sınıf
     </button>
   `;
 
   for (let i = 1; i <= 8; i++) {
     const sg = `${prefix}${i}`;
-    const isActive = state.subgroup === sg;
+    const isActive = !isAll && state.subgroup.toUpperCase() === sg;
     html += `
       <button data-sub="${sg}" class="subgroup-btn px-2 py-1 text-xs font-bold rounded-lg transition-all ${isActive ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
         ${sg}
@@ -361,7 +362,8 @@ function renderSubgroupButtons() {
 }
 
 function updateSelectionBadge() {
-  const subLabel = state.subgroup === 'all' ? 'Tüm Sınıf' : `Grup ${state.subgroup}`;
+  const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
+  const subLabel = isAll ? 'Tüm Sınıf' : `Grup ${state.subgroup.toUpperCase()}`;
   const fullLabel = `Dönem ${state.group} — ${subLabel}`;
   
   const badgeCurrent = document.getElementById('badgeCurrentSelection');
@@ -376,10 +378,10 @@ function updateSelectionBadge() {
   if (printBadge) printBadge.innerText = fullLabel;
   
   const headerProf = document.getElementById('headerProfileName');
-  if (headerProf) headerProf.innerText = state.subgroup === 'all' ? state.group : state.subgroup;
+  if (headerProf) headerProf.innerText = isAll ? state.group : state.subgroup.toUpperCase();
   
-  // URL Hash güncelle
-  window.location.hash = `${state.group}-${state.subgroup}`;
+  // URL Hash güncelle (Tüm sınıf ise sadece #3A, alt grup ise #3A-A1)
+  window.location.hash = isAll ? state.group : `${state.group}-${state.subgroup.toUpperCase()}`;
   if (window.lucide) lucide.createIcons();
 }
 
@@ -438,15 +440,17 @@ function updateProfileModalUI() {
   if (!grid) return;
   const prefix = profileModalSelection.group === '3A' ? 'A' : 'B';
 
+  const isProfAll = !profileModalSelection.subgroup || profileModalSelection.subgroup.toLowerCase() === 'all';
+
   let html = `
-    <button type="button" data-sg="all" class="prof-sg-btn p-2 rounded-lg border text-center font-bold text-xs col-span-4 transition-all ${profileModalSelection.subgroup === 'all' ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-200 hover:bg-slate-50 text-slate-700'}">
+    <button type="button" data-sg="all" class="prof-sg-btn p-2 rounded-lg border text-center font-bold text-xs col-span-4 transition-all ${isProfAll ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-200 hover:bg-slate-50 text-slate-700'}">
       Tüm Sınıf (${profileModalSelection.group})
     </button>
   `;
 
   for (let i = 1; i <= 8; i++) {
     const sg = `${prefix}${i}`;
-    const isActive = profileModalSelection.subgroup === sg;
+    const isActive = !isProfAll && profileModalSelection.subgroup.toUpperCase() === sg;
     html += `
       <button type="button" data-sg="${sg}" class="prof-sg-btn p-2 rounded-lg border text-center font-bold text-xs transition-all ${isActive ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-200 hover:bg-slate-50 text-slate-700'}">
         ${sg}
