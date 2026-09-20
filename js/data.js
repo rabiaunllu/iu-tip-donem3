@@ -170,36 +170,55 @@ function parseAmfiSchedule(rows) {
 }
 
 function resolveLectureAmfi(lec, gunStr, groupName) {
-  const subjectUpper = (lec.subject || '').toUpperCase();
-  const locationUpper = (lec.location_raw || '').toUpperCase();
-  const gLower = (gunStr || '').toLowerCase().trim();
+  const s = (lec.subject || '').trim();
+  const rawLoc = (lec.location_raw || '').trim();
+  const g = (gunStr || '').trim();
+  const gLower = g.toLowerCase();
+  const startHour = (lec.start || '').trim();
+  const isAfternoon = startHour >= '13:00';
 
   // 1. Ortak / Özel ders konu kontrolleri
-  if (subjectUpper.includes('BİYOİSTATİSTİK') || subjectUpper.includes('BIOISTATISTIK')) {
+  if (/b[iİı]yo[iİı]stat[iİı]st[iİı]k/i.test(s) || /ortak\s*ders|tüm\s*dönem\s*3/i.test(s)) {
     return { name: 'Kemal Atay Amfisi (Ortak Ders)', isKnown: true };
   }
-  if (subjectUpper.includes('ORTAK DERS') || subjectUpper.includes('TÜM DÖNEM 3')) {
-    return { name: 'Kemal Atay Amfisi (Ortak Ders)', isKnown: true };
-  }
-  if (subjectUpper.includes('İNGİLİZCE TIP') || subjectUpper.includes('INGILIZCE TIP')) {
+  if (/ingilizce\s*tıp|i̇ngilizce\s*tıp/i.test(s)) {
     return { name: 'Cemil Topuzlu Amfisi (Ortak)', isKnown: true };
   }
 
-  // 2. Fakülte resmi amfi tablosundan doğrulanmış gün bazlı amfi dağılımı
+  // 2. Seçmeli Dersler (Çarşamba Öğleden Sonraları)
+  if (/(seçmeli|secmeli)\s*ders/i.test(s) || /(seçmeli|secmeli)\s*ders/i.test(rawLoc)) {
+    return {
+      name: 'Seçmeli Derslikleri (Öğrenci Portalı)',
+      url: 'https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi',
+      isPortal: true,
+      isSecmeli: true
+    };
+  }
+
+  // 3. Çarşamba Günü Amfi Değişimi (Öğleden Önce / Sonra Ayrımı - Tüm Yıl İçin Genel Kural)
+  if (/çarşamba|carsamba/i.test(g)) {
+    if (groupName === '3A') {
+      const name = isAfternoon ? 'Kemal Atay Amfisi' : 'Aziz Sancar Amfisi';
+      return { name, isKnown: true };
+    } else if (groupName === '3B') {
+      const name = isAfternoon ? 'Sami Zan Amfisi' : 'Kemal Atay Amfisi';
+      return { name, isKnown: true };
+    }
+  }
+
+  // 4. Fakülte resmi amfi tablosundan doğrulanmış gün bazlı amfi dağılımı (Pazartesi, Salı, Perşembe, Cuma)
   const weeklyMap = (state.db && state.db.amfi_default && state.db.amfi_default.weekly_mapping)
     ? state.db.amfi_default.weekly_mapping[groupName]
     : {
         '3A': {
           'pazartesi': 'Kemal Atay Amfisi',
           'salı': 'Aziz Sancar Amfisi',
-          'çarşamba': 'Aziz Sancar Amfisi',
           'perşembe': 'Tevfik Sağlam Amfisi',
           'cuma': 'Tevfik Sağlam Amfisi'
         },
         '3B': {
           'pazartesi': 'Aziz Sancar Amfisi',
           'salı': 'Kemal Atay Amfisi',
-          'çarşamba': 'Kemal Atay Amfisi',
           'perşembe': 'Sami Zan Amfisi',
           'cuma': 'Aziz Sancar Amfisi'
         }
@@ -214,7 +233,7 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
     }
   }
 
-  // 3. Eğer konum metninde bilinen bir amfi adı doğrudan yazıyorsa
+  // 5. Eğer konum metninde bilinen bir amfi adı doğrudan yazıyorsa
   const amfiKeywords = [
     { key: 'KEMAL ATAY', name: 'Kemal Atay Amfisi' },
     { key: 'SAMİ ZAN', name: 'Sami Zan Amfisi' },
@@ -232,7 +251,7 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
     }
   }
 
-  // 4. Kesin bilinmeyen durumlarda asla yanlış tahmin yapma; doğrudan resmi portala yönlendir
+  // 6. Kesin bilinmeyen durumlarda asla yanlış tahmin yapma; doğrudan resmi portala yönlendir
   return {
     name: 'Resmi Amfi Portalı (Kontrol Ediniz)',
     url: 'https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi',
@@ -414,11 +433,14 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
     resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
   }
 
+  const badge = amfiInfo.isSecmeli ? 'Seçmeli' : 'Teorik';
+  const note = amfiInfo.isSecmeli ? 'Farklı amfilerde seçtiğiniz derse göre dağılım yapılır' : '';
+
   return {
     cardType: 'theory',
-    badge: 'Teorik',
+    badge,
     resolvedLocation,
-    note: ''
+    note
   };
 }
 

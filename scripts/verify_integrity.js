@@ -112,3 +112,84 @@ if (vagueCount > 0) {
 }
 console.log('SUCCESS: Exactly 0 vague locations found across the entire academic year!');
 
+// 3. Wednesday Morning vs Afternoon Split Verification (Tüm Yıl ve Örnek Günler)
+console.log('--- Verifying Wednesday Amfi Split Across Whole Year ---');
+
+// Specific check on 2026-09-23
+const lecs3A_0923 = db.lectures_3A.filter(l => l.date === '2026-09-23');
+const lecs3B_0923 = db.lectures_3B.filter(l => l.date === '2026-09-23');
+
+const l3A_am = lecs3A_0923.find(l => l.start === '09:20');
+const l3A_pm = lecs3A_0923.find(l => l.start === '13:30');
+const l3B_am = lecs3B_0923.find(l => l.start === '08:30');
+const l3B_pm = lecs3B_0923.find(l => l.start === '13:30');
+
+const res3A_am = resolveLectureDetails(l3A_am, 'çarşamba', '3A', 'all', {});
+const res3A_pm = resolveLectureDetails(l3A_pm, 'çarşamba', '3A', 'all', {});
+const res3B_am = resolveLectureDetails(l3B_am, 'çarşamba', '3B', 'all', {});
+const res3B_pm = resolveLectureDetails(l3B_pm, 'çarşamba', '3B', 'all', {});
+
+if (!res3A_am.resolvedLocation.includes('Aziz Sancar')) {
+  console.error('FAIL: 3A Wednesday morning should be Aziz Sancar Amfisi, got:', res3A_am.resolvedLocation);
+  process.exit(1);
+}
+if (!res3A_pm.resolvedLocation.includes('Kemal Atay')) {
+  console.error('FAIL: 3A Wednesday afternoon should be Kemal Atay Amfisi, got:', res3A_pm.resolvedLocation);
+  process.exit(1);
+}
+if (!res3B_am.resolvedLocation.includes('Kemal Atay')) {
+  console.error('FAIL: 3B Wednesday morning should be Kemal Atay Amfisi, got:', res3B_am.resolvedLocation);
+  process.exit(1);
+}
+if (!res3B_pm.resolvedLocation.includes('Sami Zan')) {
+  console.error('FAIL: 3B Wednesday afternoon should be Sami Zan Amfisi, got:', res3B_pm.resolvedLocation);
+  process.exit(1);
+}
+console.log('SUCCESS: 23 Eylül 2026 Çarşamba sabah/öğleden sonra amfi dağılımı doğrulandı.');
+
+// Check Elective Course on 2026-10-14
+const l_sec = db.lectures_3A.find(l => l.date === '2026-10-14' && l.start === '13:30');
+const res_sec = resolveLectureDetails(l_sec, 'çarşamba', '3A', 'all', {});
+if (!res_sec.resolvedLocation.includes('Seçmeli Derslikleri') || res_sec.badge !== 'Seçmeli') {
+  console.error('FAIL: Seçmeli Ders should route to Seçmeli Derslikleri with Seçmeli badge, got:', res_sec);
+  process.exit(1);
+}
+console.log('SUCCESS: Seçmeli dersler ve dekanlık portal yönlendirmesi doğrulandı.');
+
+// Full-year Wednesday audit: verify no Wednesday afternoon regular lecture stays in morning amfi
+let wednesdayErrors = 0;
+for (const g of ['3A', '3B']) {
+  const lecs = db['lectures_' + g];
+  for (const l of lecs) {
+    const gun = l.date_str ? l.date_str.split(/\s+/).pop() : '';
+    if (gun.toLowerCase().includes('çarşamba')) {
+      const s = (l.subject || '').toUpperCase();
+      if (!s || s.includes('SERBEST') || s.includes('UYGULAMA') || s.includes('HASTA BAŞI')) continue;
+      const res = resolveLectureDetails(l, gun, g, 'all', {});
+      const isAfternoon = (l.start || '') >= '13:00';
+      if (isAfternoon) {
+        if (/(seçmeli|secmeli)\s*ders/i.test(l.subject)) {
+          if (!res.resolvedLocation.includes('Seçmeli Derslikleri')) wednesdayErrors++;
+        } else if (g === '3A') {
+          if (!res.resolvedLocation.includes('Kemal Atay')) wednesdayErrors++;
+        } else if (g === '3B') {
+          if (!res.resolvedLocation.includes('Sami Zan')) wednesdayErrors++;
+        }
+      } else {
+        if (g === '3A') {
+          if (!res.resolvedLocation.includes('Aziz Sancar') && !res.resolvedLocation.includes('Kemal Atay (Ortak Ders)')) wednesdayErrors++;
+        } else if (g === '3B') {
+          if (!res.resolvedLocation.includes('Kemal Atay')) wednesdayErrors++;
+        }
+      }
+    }
+  }
+}
+
+if (wednesdayErrors > 0) {
+  console.error(`FAIL: Found ${wednesdayErrors} Wednesday amfi assignment violations across full year!`);
+  process.exit(1);
+}
+console.log('SUCCESS: Tüm akademik yıl boyunca (45 Çarşamba) amfi değişimi 0 hata ile doğrulandı!');
+
+

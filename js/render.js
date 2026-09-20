@@ -142,7 +142,10 @@ function getLectureCardHTML(lec) {
   let badge = lec.badge || 'Teorik';
   let badgeClass = 'bg-indigo-100 text-indigo-700 font-semibold';
 
-  if (lec.cardType === 'practice') {
+  if (badge === 'Seçmeli') {
+    borderClass = 'border-l-4 border-purple-500 bg-purple-50/40 text-purple-950';
+    badgeClass = 'bg-purple-100 text-purple-800 font-bold';
+  } else if (lec.cardType === 'practice') {
     borderClass = 'border-l-4 border-amber-500 bg-amber-50/40 text-amber-950';
     badgeClass = 'bg-amber-100 text-amber-800 font-bold';
   } else if (lec.cardType === 'hospital') {
