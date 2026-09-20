@@ -201,7 +201,7 @@ function getLectureCardHTML(lec) {
 
       <div class="mt-2 text-[10.5px] flex items-center gap-1.5 font-bold text-slate-800 bg-slate-100/90 px-2 py-1 rounded-lg border border-slate-200/80 shadow-2xs">
         <i data-lucide="map-pin" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
-        <span class="truncate">${lec.yer}</span>
+        <div class="truncate flex-1">${lec.yer}</div>
       </div>
 
       ${lec.note ? `
