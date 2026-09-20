@@ -355,13 +355,13 @@ function renderSubgroupButtons() {
       state.subgroup = btn.dataset.sub;
       saveUserProfile(state.group, state.subgroup);
       renderSubgroupButtons();
-      updateSelectionBadge();
+      updateSelectionBadge(true);
       renderSchedule();
     });
   });
 }
 
-function updateSelectionBadge() {
+function updateSelectionBadge(updateHash = false) {
   const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
   const subLabel = isAll ? 'Tüm Sınıf' : `Grup ${state.subgroup.toUpperCase()}`;
   const fullLabel = `Dönem ${state.group} — ${subLabel}`;
@@ -380,8 +380,18 @@ function updateSelectionBadge() {
   const headerProf = document.getElementById('headerProfileName');
   if (headerProf) headerProf.innerText = isAll ? state.group : state.subgroup.toUpperCase();
   
-  // URL Hash güncelle (Tüm sınıf ise sadece #3A, alt grup ise #3A-A1)
-  window.location.hash = isAll ? state.group : `${state.group}-${state.subgroup.toUpperCase()}`;
+  // URL Hash güncelle (Sadece kullanıcı seçtiğinde veya kaydettiğinde history.replaceState ile sessizce güncelle)
+  if (updateHash) {
+    const targetHash = isAll ? state.group : `${state.group}-${state.subgroup.toUpperCase()}`;
+    const currentHash = window.location.hash.replace('#', '').trim();
+    if (currentHash !== targetHash) {
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#' + targetHash);
+      } else {
+        window.location.hash = targetHash;
+      }
+    }
+  }
   if (window.lucide) lucide.createIcons();
 }
 
@@ -403,7 +413,7 @@ function setGroup(grp) {
 
   saveUserProfile(state.group, state.subgroup);
   renderSubgroupButtons();
-  updateSelectionBadge();
+  updateSelectionBadge(true);
   renderSchedule();
 }
 

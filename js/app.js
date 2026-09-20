@@ -97,9 +97,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       const modal = document.getElementById('modalProfile');
       if (modal) modal.classList.add('hidden');
       renderSubgroupButtons();
-      updateSelectionBadge();
+      updateSelectionBadge(true);
       renderSchedule();
       showToast('Grubun kaydedildi!');
+    });
+  }
+
+  const btnCloseProf = document.getElementById('btnCloseProfileModal');
+  if (btnCloseProf) {
+    btnCloseProf.addEventListener('click', () => {
+      const modal = document.getElementById('modalProfile');
+      if (modal) modal.classList.add('hidden');
     });
   }
 
@@ -181,6 +189,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // PWA Service Worker Kaydı & Otomatik Yenileme (Cache-Busting)
   if ('serviceWorker' in navigator) {
+    const hadExistingController = Boolean(navigator.serviceWorker.controller);
+
     navigator.serviceWorker.register('./sw.js').then((reg) => {
       // Sekme odaklandığında arka planda güncelleme kontrolü
       document.addEventListener('visibilitychange', () => {
@@ -189,16 +199,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
 
-      // Yeni bir service worker yüklendiğinde kullanıcıyı bilgilendir
+      // Yeni bir service worker yüklendiğinde
       reg.addEventListener('updatefound', () => {
         const newWorker = reg.installing;
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              showToast('Uygulama güncellendi! Yenileniyor...');
-              setTimeout(() => {
-                window.location.reload();
-              }, 1200);
+            if (newWorker.state === 'installed' && hadExistingController) {
+              console.log('Yeni Service Worker versiyonu hazır.');
             }
           });
         }
@@ -210,6 +217,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Yeni SW kontrolü devraldığında temiz yenileme
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
+      // İlk ziyarette veya kullanıcı henüz grup seçerken sayfayı yenileyip modalı kapatma!
+      const modalProf = document.getElementById('modalProfile');
+      const isModalOpen = modalProf && !modalProf.classList.contains('hidden');
+      if (!hadExistingController || isModalOpen) {
+        return;
+      }
       if (!refreshing) {
         refreshing = true;
         window.location.reload();
@@ -291,7 +304,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Başlatma Sırası
   renderSubgroupButtons();
-  updateSelectionBadge();
+  updateSelectionBadge(false);
 
   await loadDatabase();
   renderSchedule();
