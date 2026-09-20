@@ -1,16 +1,23 @@
-const CACHE_NAME = 'iutip-cache-v2';
+const CACHE_NAME = 'iutip-cache-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './icon.svg',
   './css/style.css',
+  './css/style.css?v=2.3',
   './js/config.js',
+  './js/config.js?v=2.3',
   './js/utils.js',
+  './js/utils.js?v=2.3',
   './js/state.js',
+  './js/state.js?v=2.3',
   './js/data.js',
+  './js/data.js?v=2.3',
   './js/render.js',
+  './js/render.js?v=2.3',
   './js/app.js',
+  './js/app.js?v=2.3',
   './data/schedule_2026_2027.json'
 ];
 
@@ -36,7 +43,29 @@ self.addEventListener('fetch', (e) => {
   // Only cache GET requests
   if (e.request.method !== 'GET') return;
 
-  // Stale-while-revalidate strategy for internal assets
+  const url = new URL(e.request.url);
+
+  // 1. Navigation istekleri (HTML / Sayfa Yükleme): Network-First
+  // Kullanıcı online olduğunda her zaman GitHub Actions'ın son dağıttığı güncel index.html yüklenir.
+  // Çevrimdışıyken (offline) önbellekteki index.html devreye girer.
+  if (e.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.endsWith('/')) {
+    e.respondWith(
+      fetch(e.request).then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseToCache = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(e.request, responseToCache);
+          });
+        }
+        return networkResponse;
+      }).catch(() => {
+        return caches.match(e.request).then((cached) => cached || caches.match('./index.html') || caches.match('./'));
+      })
+    );
+    return;
+  }
+
+  // 2. Statik dosyalar ve JSON verileri: Stale-While-Revalidate
   e.respondWith(
     caches.match(e.request).then((cachedResponse) => {
       const fetchPromise = fetch(e.request).then((networkResponse) => {
