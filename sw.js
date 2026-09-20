@@ -1,9 +1,16 @@
-const CACHE_NAME = 'iutip-cache-v1';
+const CACHE_NAME = 'iutip-cache-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './icon.svg',
+  './css/style.css',
+  './js/config.js',
+  './js/utils.js',
+  './js/state.js',
+  './js/data.js',
+  './js/render.js',
+  './js/app.js',
   './data/schedule_2026_2027.json'
 ];
 
