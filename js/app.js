@@ -137,7 +137,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       localStorage.removeItem('iutip_url_amfi');
       localStorage.removeItem('iutip_url_3A');
       localStorage.removeItem('iutip_url_3B');
-      showToast('Varsayılan linkler geri yüklendi.');
+      localStorage.removeItem('iutip_disclaimer_dismissed');
+      const bannerDisclaimer = document.getElementById('bannerDisclaimer');
+      if (bannerDisclaimer) bannerDisclaimer.classList.remove('hidden');
+      showToast('Varsayılan ayarlar ve linkler geri yüklendi.');
       modalSettings.classList.add('hidden');
       loadDatabase().then(renderSchedule);
     });
@@ -158,10 +161,57 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // PWA Service Worker Kaydı
+  // Doktor Bilgilendirme Notu (Şeffaf / Kapatılabilir)
+  const bannerDisclaimer = document.getElementById('bannerDisclaimer');
+  const btnDismissDisclaimer = document.getElementById('btnDismissDisclaimer');
+  if (bannerDisclaimer) {
+    const isDismissed = localStorage.getItem('iutip_disclaimer_dismissed');
+    if (!isDismissed) {
+      bannerDisclaimer.classList.remove('hidden');
+    }
+    if (btnDismissDisclaimer) {
+      btnDismissDisclaimer.addEventListener('click', () => {
+        bannerDisclaimer.classList.add('hidden');
+        localStorage.setItem('iutip_disclaimer_dismissed', 'true');
+      });
+    }
+  }
+
+  // PWA Service Worker Kaydı & Otomatik Yenileme (Cache-Busting)
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(err => {
+    navigator.serviceWorker.register('./sw.js').then((reg) => {
+      // Sekme odaklandığında arka planda güncelleme kontrolü
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          reg.update();
+        }
+      });
+
+      // Yeni bir service worker yüklendiğinde kullanıcıyı bilgilendir
+      reg.addEventListener('updatefound', () => {
+        const newWorker = reg.installing;
+        if (newWorker) {
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              showToast('Uygulama güncellendi! Yenileniyor...');
+              setTimeout(() => {
+                window.location.reload();
+              }, 1200);
+            }
+          });
+        }
+      });
+    }).catch(err => {
       console.log('SW kaydı başarısız:', err);
+    });
+
+    // Yeni SW kontrolü devraldığında temiz yenileme
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        refreshing = true;
+        window.location.reload();
+      }
     });
   }
 
@@ -214,12 +264,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (navigator.onLine) {
       statusElem.innerHTML = `
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        Doğrulanmış Fakülte Veritabanı
+        Güncel Program
       `;
     } else {
       statusElem.innerHTML = `
         <span class="w-2 h-2 rounded-full bg-amber-500"></span>
-        Çevrimdışı Mod (İnternetsiz)
+        Çevrimdışı (Kayıtlı Program)
       `;
       showToast('İnternet bağlantısı yok. Çevrimdışı yerel veritabanı aktif.');
     }

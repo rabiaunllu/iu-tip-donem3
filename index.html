@@ -47,7 +47,7 @@
   </script>
 
   <!-- Özel Stiller ve Yazdırma Kuralları -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2.3">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen antialiased flex flex-col selection:bg-indigo-500 selection:text-white pb-16">
 
@@ -165,6 +165,19 @@
   <!-- ANA İÇERİK -->
   <main class="max-w-7xl mx-auto px-4 py-4 flex-1 w-full">
     
+    <!-- DOKTOR BİLGİLENDİRME & ŞEFFAF NOT (NO-PRINT) -->
+    <div id="bannerDisclaimer" class="no-print hidden mb-3 px-3.5 py-2.5 bg-indigo-50/80 border border-indigo-100/90 rounded-xl text-slate-700 text-xs flex items-start sm:items-center justify-between gap-3 shadow-2xs">
+      <div class="flex items-start sm:items-center gap-2.5">
+        <span class="text-base leading-none select-none">🩺</span>
+        <p class="leading-relaxed text-slate-600">
+          <strong class="font-semibold text-slate-800">Bilgilendirme:</strong> Bu ders programı fakültenin resmi duyurularından derlenmiştir. Olası anlık mazeretler ve son dakika amfi/derslik değişiklikleri için fakülte resmi duyuru panolarını da takip etmeyi unutmayınız.
+        </p>
+      </div>
+      <button id="btnDismissDisclaimer" class="shrink-0 text-slate-400 hover:text-slate-600 p-1 rounded-md transition-colors" title="Bildirimi Kapat">
+        <i data-lucide="x" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+
     <!-- BUGÜN NE VAR & CANLI BİLGİ KARTI (NO-PRINT) -->
     <div id="todayLiveBanner" class="no-print hidden mb-4 p-3.5 bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 rounded-2xl text-white shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -194,7 +207,7 @@
         </span>
         <span id="liveStatusText" class="text-xs text-slate-500 flex items-center gap-1">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Doğrulanmış Fakülte Veritabanı
+          Güncel Program
         </span>
       </div>
 
@@ -223,7 +236,7 @@
     <div id="loadingState" class="py-20 flex flex-col items-center justify-center gap-3 text-slate-500">
       <div class="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
       <p class="text-sm font-medium animate-pulse">Ders Programı ve Rotasyonlar Hazırlanıyor...</p>
-      <span class="text-xs text-slate-400">Dahili doğrulanmış veritabanı yükleniyor</span>
+      <span class="text-xs text-slate-400">Ders programı hazırlanıyor...</span>
     </div>
 
     <!-- HATA KUTUSU -->
@@ -385,12 +398,12 @@
     <span id="toastMessage">Kopyalandı!</span>
   </div>
 
-  <!-- Modüler JavaScript Mimarisi -->
-  <script src="js/config.js" defer></script>
-  <script src="js/utils.js" defer></script>
-  <script src="js/state.js" defer></script>
-  <script src="js/data.js" defer></script>
-  <script src="js/render.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <!-- Modüler JavaScript Mimarisi (Cache-busted) -->
+  <script src="js/config.js?v=2.3" defer></script>
+  <script src="js/utils.js?v=2.3" defer></script>
+  <script src="js/state.js?v=2.3" defer></script>
+  <script src="js/data.js?v=2.3" defer></script>
+  <script src="js/render.js?v=2.3" defer></script>
+  <script src="js/app.js?v=2.3" defer></script>
 </body>
 </html>
