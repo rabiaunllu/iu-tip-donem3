@@ -1,0 +1,18 @@
+{
+  "name": "İÜ Tıp Fakültesi — Dönem 3 Akıllı Ders Programı",
+  "short_name": "İÜ Tıp Dönem 3",
+  "description": "İstanbul Üniversitesi Çapa Tıp Fakültesi 3. Sınıf amfi, öğretim üyesi rotasyonları ve laboratuvar programı.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
