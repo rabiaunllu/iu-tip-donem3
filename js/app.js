@@ -430,10 +430,30 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnDismissPwa = document.getElementById('btnDismissPwaModal');
   const btnNative = document.getElementById('btnNativeInstall');
 
+  // Uygulama telefonda zaten yüklüyse (iOS/Android Standalone mod) "Telefona Yükle" butonunu gizle
+  function checkAndHideInstalledPwa() {
+    const isStandalone = window.navigator.standalone === true ||
+                         window.matchMedia('(display-mode: standalone)').matches ||
+                         window.matchMedia('(display-mode: fullscreen)').matches ||
+                         localStorage.getItem('iutip_pwa_installed') === 'true';
+
+    if (isStandalone && btnPwa) {
+      btnPwa.classList.add('hidden');
+      localStorage.setItem('iutip_pwa_installed', 'true');
+    }
+  }
+  checkAndHideInstalledPwa();
+
   let deferredInstallPrompt = null;
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredInstallPrompt = e;
+  });
+
+  window.addEventListener('appinstalled', () => {
+    if (btnPwa) btnPwa.classList.add('hidden');
+    localStorage.setItem('iutip_pwa_installed', 'true');
+    showToast('Uygulama başarıyla kuruldu!');
   });
 
   if (btnPwa && modalPwa) {
