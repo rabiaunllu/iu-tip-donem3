@@ -114,7 +114,6 @@ git push -u origin feat/yeni-ozellik
 # GitHub üzerinden Pull Request (PR) açın
 ```
 
-Ayrıntılı bilgi için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına göz atabilirsiniz.
 
 ---
 
