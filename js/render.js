@@ -333,7 +333,11 @@ function renderSubgroupButtons() {
   const isAll = !state.subgroup || state.subgroup.toLowerCase() === 'all';
   
   let html = `
-    <button data-sub="all" class="subgroup-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${isAll ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+    <button data-sub="all" class="subgroup-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${
+      isAll 
+        ? 'bg-white text-indigo-700 shadow-xs' 
+        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-300/40'
+    }">
       Tüm Sınıf
     </button>
   `;
@@ -342,7 +346,11 @@ function renderSubgroupButtons() {
     const sg = `${prefix}${i}`;
     const isActive = !isAll && state.subgroup.toUpperCase() === sg;
     html += `
-      <button data-sub="${sg}" class="subgroup-btn px-2 py-1 text-xs font-bold rounded-lg transition-all ${isActive ? 'bg-indigo-600 text-white shadow-xs' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}">
+      <button data-sub="${sg}" class="subgroup-btn px-2.5 py-1 text-xs font-bold rounded-lg transition-all ${
+        isActive 
+          ? 'bg-white text-indigo-700 shadow-xs' 
+          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-300/40'
+      }">
         ${sg}
       </button>
     `;
@@ -378,7 +386,7 @@ function updateSelectionBadge(updateHash = false) {
   if (printBadge) printBadge.innerText = fullLabel;
   
   const headerProf = document.getElementById('headerProfileName');
-  if (headerProf) headerProf.innerText = isAll ? state.group : state.subgroup.toUpperCase();
+  if (headerProf) headerProf.innerText = isAll ? `${state.group} · Tüm Sınıf` : `${state.group} · ${state.subgroup.toUpperCase()}`;
   
   // URL Hash güncelle (Sadece kullanıcı seçtiğinde veya kaydettiğinde history.replaceState ile sessizce güncelle)
   if (updateHash) {
