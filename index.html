@@ -47,7 +47,7 @@
   </script>
 
   <!-- Özel Stiller ve Yazdırma Kuralları -->
-  <link rel="stylesheet" href="css/style.css?v=2.5">
+  <link rel="stylesheet" href="css/style.css?v=2.6">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen antialiased flex flex-col selection:bg-indigo-500 selection:text-white pb-16">
 
@@ -274,7 +274,10 @@
 
   <!-- 🎯 İLK GİRİŞ & PROFİL SEÇİM MODALI (ONBOARDING) -->
   <div id="modalProfile" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">
+    <div class="relative bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 animate-in fade-in zoom-in-95 duration-200">
+      <button id="btnCloseProfileModal" class="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors" title="Kapat">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
       <div class="text-center mb-5">
         <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white flex items-center justify-center mx-auto mb-3 shadow-md shadow-indigo-200">
           <i data-lucide="stethoscope" class="w-6 h-6"></i>
@@ -404,11 +407,11 @@
   </div>
 
   <!-- Modüler JavaScript Mimarisi (Cache-busted) -->
-  <script src="js/config.js?v=2.5" defer></script>
-  <script src="js/utils.js?v=2.5" defer></script>
-  <script src="js/state.js?v=2.5" defer></script>
-  <script src="js/data.js?v=2.5" defer></script>
-  <script src="js/render.js?v=2.5" defer></script>
-  <script src="js/app.js?v=2.5" defer></script>
+  <script src="js/config.js?v=2.6" defer></script>
+  <script src="js/utils.js?v=2.6" defer></script>
+  <script src="js/state.js?v=2.6" defer></script>
+  <script src="js/data.js?v=2.6" defer></script>
+  <script src="js/render.js?v=2.6" defer></script>
+  <script src="js/app.js?v=2.6" defer></script>
 </body>
 </html>

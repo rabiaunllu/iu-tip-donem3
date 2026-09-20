@@ -29,32 +29,38 @@ function saveUserProfile(group, subgroup) {
 }
 
 function loadUserProfile() {
-  // 1. URL Hash kontrolü: #3A veya #3A-A3 gibi
+  // 1. Önce localStorage'dan kayıtlı profili kontrol et
+  const saved = localStorage.getItem('iutip_user_profile');
+  let hasSavedProfile = false;
+  if (saved) {
+    try {
+      const prof = JSON.parse(saved);
+      if (prof.group && (prof.group === '3A' || prof.group === '3B')) {
+        state.group = prof.group;
+        const rawSub = (prof.subgroup || 'all').trim().toLowerCase();
+        state.subgroup = (rawSub === 'all') ? 'all' : prof.subgroup.trim().toUpperCase();
+        hasSavedProfile = true;
+      }
+    } catch (e) {}
+  }
+
+  // 2. URL Hash kontrolü: Doğrudan paylaşılan linkle gelinmişse (örn: #3A-A4 veya #3B-B2)
   const rawHash = window.location.hash.replace('#', '').trim();
   if (rawHash) {
     const parts = rawHash.split('-');
     const grp = parts[0] ? parts[0].toUpperCase() : '';
     if (grp === '3A' || grp === '3B') {
       state.group = grp;
-      const rawSub = parts[1] ? parts[1].trim().toLowerCase() : 'all';
-      state.subgroup = (rawSub === 'all' || !parts[1]) ? 'all' : parts[1].trim().toUpperCase();
-      return true;
+      if (parts[1]) {
+        const rawSub = parts[1].trim().toLowerCase();
+        state.subgroup = (rawSub === 'all') ? 'all' : parts[1].trim().toUpperCase();
+        return true; // Belirli bir alt grup linkiyle gelindiğinde onboarding'i atla
+      }
+      if (!hasSavedProfile) {
+        state.subgroup = 'all';
+      }
     }
   }
 
-  // 2. localStorage kontrolü
-  const saved = localStorage.getItem('iutip_user_profile');
-  if (saved) {
-    try {
-      const prof = JSON.parse(saved);
-      if (prof.group) state.group = prof.group.toUpperCase();
-      if (prof.subgroup) {
-        const rawSub = prof.subgroup.trim().toLowerCase();
-        state.subgroup = (rawSub === 'all') ? 'all' : prof.subgroup.trim().toUpperCase();
-      }
-      return true;
-    } catch (e) {}
-  }
-
-  return false; // Hiç profil yoksa modal açılacak
+  return hasSavedProfile;
 }
