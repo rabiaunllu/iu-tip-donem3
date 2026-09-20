@@ -22,22 +22,42 @@ function renderSchedule() {
   const d2 = friday.toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' });
   
   const weekRangeElem = document.getElementById('currentWeekRange');
-  if (weekRangeElem) weekRangeElem.innerText = `${d1} – ${d2}`;
+  if (weekRangeElem) {
+    const formattedRange = `${d1} – ${d2}`;
+    if (weekRangeElem._fadeTimeout) {
+      clearTimeout(weekRangeElem._fadeTimeout);
+    }
+    if (weekRangeElem.innerText !== formattedRange && weekRangeElem.innerText !== 'Yükleniyor...') {
+      weekRangeElem.classList.add('is-updating');
+      weekRangeElem._fadeTimeout = setTimeout(() => {
+        weekRangeElem.innerText = formattedRange;
+        weekRangeElem.classList.remove('is-updating');
+        weekRangeElem._fadeTimeout = null;
+      }, 90);
+    } else {
+      weekRangeElem.innerText = formattedRange;
+      weekRangeElem.classList.remove('is-updating');
+    }
+  }
   
   const printDateRangeElem = document.getElementById('printDateRange');
   if (printDateRangeElem) printDateRangeElem.innerText = `${d1} – ${d2}`;
 
-  // 'Bu Hafta' Butonu: Sadece diğer haftalarda gezinirken aktif ve görünür olsun
+  // 'Bu Hafta' Butonu: Sadece diğer haftalarda gezinirken akıcı animasyonla açılsın
   const btnCurrentWeek = document.getElementById('btnCurrentWeekNow');
   if (btnCurrentWeek) {
     const todayMonday = getMondayOfDate(new Date());
     const isCurrentWeek = formatDate(monday) === formatDate(todayMonday);
     if (isCurrentWeek) {
-      btnCurrentWeek.classList.add('hidden');
-      btnCurrentWeek.classList.remove('inline-flex');
+      btnCurrentWeek.classList.remove('is-expanded');
+      btnCurrentWeek.classList.add('is-collapsed');
+      btnCurrentWeek.setAttribute('aria-hidden', 'true');
+      btnCurrentWeek.setAttribute('tabindex', '-1');
     } else {
-      btnCurrentWeek.classList.remove('hidden');
-      btnCurrentWeek.classList.add('inline-flex');
+      btnCurrentWeek.classList.remove('is-collapsed');
+      btnCurrentWeek.classList.add('is-expanded');
+      btnCurrentWeek.removeAttribute('aria-hidden');
+      btnCurrentWeek.removeAttribute('tabindex');
     }
   }
 
@@ -127,7 +147,7 @@ function renderSchedule() {
 
   if (grid) {
     grid.innerHTML = weekDays.map((day, idx) => `
-      <div data-day-index="${idx}" class="day-column bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col">
+      <div data-day-index="${idx}" class="day-column bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col animate-week-fade">
         <div class="day-header px-3.5 py-2.5 bg-slate-50/90 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h4 class="font-bold text-slate-900 text-xs sm:text-sm capitalize">${day.dayName}</h4>

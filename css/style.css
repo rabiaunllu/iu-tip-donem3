@@ -118,3 +118,65 @@ body {
     height: 8px !important;
   }
 }
+
+/* ==========================================================================
+   ✨ AKICI MİKRO-ETKİLEŞİMLER: HAFTA GEZİNTİSİ & "BU HAFTA" BUTONU
+   ========================================================================== */
+
+#currentWeekRange {
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+#currentWeekRange.is-updating {
+  opacity: 0.25;
+  transform: scale(0.97);
+}
+
+#btnCurrentWeekNow {
+  transition: max-width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              margin 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              background-color 0.15s ease;
+  will-change: max-width, opacity, transform;
+}
+
+#btnCurrentWeekNow.is-collapsed {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: -0.5rem !important;
+  pointer-events: none !important;
+  transform: translateX(-6px) scale(0.95);
+  border-color: transparent !important;
+}
+
+#btnCurrentWeekNow.is-expanded {
+  max-width: 140px !important;
+  opacity: 1 !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  margin-left: 0 !important;
+  pointer-events: auto !important;
+  transform: translateX(0) scale(1);
+}
+
+@keyframes weekFadeIn {
+  from {
+    opacity: 0.82;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-week-fade {
+  animation: weekFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
