@@ -1,23 +1,23 @@
-const CACHE_NAME = 'iutip-cache-v3';
+const CACHE_NAME = 'iutip-cache-v4';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './icon.svg',
   './css/style.css',
-  './css/style.css?v=2.3',
+  './css/style.css?v=2.4',
   './js/config.js',
-  './js/config.js?v=2.3',
+  './js/config.js?v=2.4',
   './js/utils.js',
-  './js/utils.js?v=2.3',
+  './js/utils.js?v=2.4',
   './js/state.js',
-  './js/state.js?v=2.3',
+  './js/state.js?v=2.4',
   './js/data.js',
-  './js/data.js?v=2.3',
+  './js/data.js?v=2.4',
   './js/render.js',
-  './js/render.js?v=2.3',
+  './js/render.js?v=2.4',
   './js/app.js',
-  './js/app.js?v=2.3',
+  './js/app.js?v=2.4',
   './data/schedule_2026_2027.json'
 ];
 
