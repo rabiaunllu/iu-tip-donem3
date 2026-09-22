@@ -51,7 +51,7 @@ sequenceDiagram
     participant AI as Google Gemini 1.5 Flash (Free API)
     participant GS as Google Sheets (Veritabanı)
     participant N8N as n8n Otomasyon Motoru (Bulut/Lokal)
-    actor R as Rabiya (Proje Yöneticisi - Telegram)
+    actor R as Rabia (Proje Yöneticisi)
 
     Note over S,UI: 1. AŞAMA: ANLIK TOPLAMA & HAFİF AI (0ms - 2s)
     S->>UI: Bildirimi yazar & Gönder'e tıklar

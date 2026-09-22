@@ -27,7 +27,7 @@ sequenceDiagram
     participant U as Web Uygulaması (index.html)
     participant S as Google Apps Script (Web App)
     participant G as Google Sheets (İstek Havuzu)
-    actor Y as Proje Sahibi (Rabiya)
+    actor Y as Proje Sahibi (Rabia)
 
     O->>U: "💬 Geri Bildirim" butonuna tıklar
     U->>O: Şık modal açılır (Tür seçimi, mesaj alanı, oto grup)

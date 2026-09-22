@@ -17,7 +17,7 @@ graph TD
     end
 
     subgraph CI/CD Layer
-        E[GitHub Actions Cron/Push] -->|Her Pazar / Push| B
+        E[GitHub Actions CI/CD] -->|Push ile Otomatik Tetikleme| B
         B -->|Otomatik Dağıtım| F[GitHub Pages CDN]
     end
 
@@ -61,25 +61,31 @@ graph TD
 ```
 .
 ├── .github/
-│   ├── workflows/
-│   │   └── deploy.yml            # CI/CD: Otomatik derleme ve GitHub Pages dağıtımı
-│   └── pull_request_template.md  # PR standart şablonu
-├── automation/
-│   └── n8n/
-│       ├── build_workflow.py     # n8n otomasyon kurucusu (Telegram bot entegrasyonu)
-│       └── iu_tip_n8n_workflow.json
+│   └── workflows/
+│       └── deploy.yml            # CI/CD: Otomatik derleme ve GitHub Pages dağıtımı
+├── css/
+│   └── style.css                 # Özel stiller ve @media print A4 landscape optimizasyonu
+├── js/
+│   ├── app.js                    # Ana uygulama başlatıcı ve event listener'lar
+│   ├── config.js                 # Global sabitler ve yapılandırma
+│   ├── data.js                   # Veri yükleme, normalizasyon ve filtreleme motoru
+│   ├── render.js                 # Kartlar, tablolar ve modal UI render motoru
+│   ├── state.js                  # LocalStorage ve URL hash tabanlı durum yönetimi
+│   └── utils.js                  # Tarih, saat ve metin biçimlendirme yardımcıları
 ├── data/
 │   └── schedule_2026_2027.json   # 2.500+ ders, 64 rotasyon ve lab içeren birleşik veritabanı
 ├── docs/
-│   ├── architecture.md           # Sistem mimarisi ve tasarım kararları
+│   ├── architecture.md           # Sistem mimarisi ve teknik tasarım kararları
+│   ├── feedback_system.md        # Geri bildirim altyapısı dokümantasyonu
+│   ├── google_sheets_setup_guide.md # Google Apps Script kurulum rehberi
 │   └── raw_schedules/            # Fakülteden alınan resmi PDF ve Excel belgeleri
 ├── scripts/
-│   └── build_data.py             # ETL veri derleme ve normalizasyon motoru
+│   ├── build_data.py             # ETL veri derleme ve normalizasyon motoru
+│   └── verify_integrity.js       # CI/CD otomatik veri bütünlüğü doğrulama paketi
 ├── index.html                    # PWA uyumlu, Tailwind CSS tabanlı reaktif tek sayfa arayüz
 ├── manifest.json                 # PWA Web App Manifest
 ├── sw.js                         # Service Worker önbellekleme mekanizması
 ├── icon.svg                      # Vektörel tıbbi uygulama simgesi
-├── CONTRIBUTING.md               # Branch stratejisi ve katkı rehberi
 ├── LICENSE                       # MIT Açık Kaynak Lisansı
 └── README.md                     # Vitrin ve dokümantasyon ana sayfası
 ```
