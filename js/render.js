@@ -145,7 +145,7 @@ function renderSchedule() {
       targetDay.lectures.push({
         start: normalizeTime(lec.start),
         end: normalizeTime(lec.end),
-        subject: isFree ? 'Serbest Çalışma' : (lec.subject || ''),
+        subject: isFree ? (details.badge === 'Öğle Arası' ? 'Öğle Tatili' : 'Serbest Çalışma') : (lec.subject || ''),
         department: lec.department,
         yer: details.resolvedLocation,
         note,
@@ -163,10 +163,10 @@ function renderSchedule() {
 
     for (let i = 0; i < d.lectures.length - 1; i++) {
       const cur = d.lectures[i];
-      if (cur.cardType === 'free') continue;
+      if (cur.cardType === 'free' || cur.cardType === 'holiday') continue;
       for (let j = i + 1; j < d.lectures.length; j++) {
         const next = d.lectures[j];
-        if (next.cardType === 'free') continue;
+        if (next.cardType === 'free' || next.cardType === 'holiday') continue;
         if (next.start && cur.end && next.start < cur.end) {
           cur.hasConflict = true;
           next.hasConflict = true;
@@ -195,15 +195,32 @@ function renderSchedule() {
   if (mobileDayTabs) mobileDayTabs.classList.remove('hidden');
 
   if (grid) {
-    grid.innerHTML = weekDays.map((day, idx) => `
+    grid.innerHTML = weekDays.map((day, idx) => {
+      const activeLectures = day.lectures.filter(l => l.cardType !== 'free' && l.cardType !== 'holiday');
+      const hasHoliday = day.lectures.some(l => l.cardType === 'holiday');
+
+      let headerBadgeText = `${activeLectures.length} Ders`;
+      let headerBadgeClass = activeLectures.length > 0 ? 'bg-indigo-50 text-indigo-700 border border-indigo-100' : 'bg-slate-100 text-slate-400';
+
+      if (hasHoliday) {
+        if (activeLectures.length === 0) {
+          headerBadgeText = 'Resmi Tatil';
+          headerBadgeClass = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
+        } else {
+          headerBadgeText = `${activeLectures.length} Ders + Tatil`;
+          headerBadgeClass = 'bg-teal-50 text-teal-700 border border-teal-200';
+        }
+      }
+
+      return `
       <div data-day-index="${idx}" class="day-column bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden flex flex-col animate-week-fade">
         <div class="day-header px-3.5 py-2.5 bg-slate-50/90 border-b border-slate-100 flex items-center justify-between">
           <div>
             <h4 class="font-bold text-slate-900 text-xs sm:text-sm capitalize">${day.dayName}</h4>
             <p class="text-[10px] sm:text-[11px] text-slate-500 font-medium">${day.dateFormatted}</p>
           </div>
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${day.lectures.length > 0 ? 'bg-indigo-50 text-indigo-700 border border-indigo-100' : 'bg-slate-100 text-slate-400'}">
-            ${day.lectures.length} Ders
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${headerBadgeClass}">
+            ${headerBadgeText}
           </span>
         </div>
 
@@ -216,7 +233,8 @@ function renderSchedule() {
           ` : day.lectures.map(lec => getLectureCardHTML(lec)).join('')}
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   renderMobileDayTabs(weekDays);
@@ -322,10 +340,20 @@ function getLectureCardHTML(lec) {
   } else if (lec.cardType === 'hospital') {
     borderClass = 'border-l-4 border-emerald-500 bg-emerald-50/40 text-emerald-950';
     badgeClass = 'bg-emerald-100 text-emerald-800 font-bold';
+  } else if (lec.cardType === 'holiday') {
+    borderClass = 'border-l-4 border-emerald-500 bg-emerald-50/60 text-emerald-950 shadow-xs';
+    badgeClass = 'bg-emerald-100 text-emerald-800 font-extrabold border border-emerald-300';
   } else if (lec.cardType === 'free') {
     borderClass = 'border-l-4 border-slate-300 bg-slate-50 text-slate-500 opacity-70';
     badgeClass = 'bg-slate-200 text-slate-600 font-normal';
   }
+
+  const isHoliday = lec.cardType === 'holiday';
+  const locBoxClass = isHoliday
+    ? 'text-emerald-900 bg-emerald-100/80 border border-emerald-200'
+    : 'text-slate-800 bg-slate-100/90 border border-slate-200/80';
+  const locIcon = isHoliday ? 'sun' : 'map-pin';
+  const locIconColor = isHoliday ? 'text-emerald-600' : 'text-indigo-600';
 
   return `
     <div class="lecture-card p-2.5 rounded-xl border border-slate-100 shadow-2xs ${borderClass} transition-all hover:shadow-sm">
@@ -347,8 +375,8 @@ function getLectureCardHTML(lec) {
 
       <h5 class="text-[11px] font-bold leading-tight mt-1 text-slate-900">${escapeHTML(lec.subject)}</h5>
 
-      <div class="mt-2 text-[10.5px] flex items-center gap-1.5 font-bold text-slate-800 bg-slate-100/90 px-2 py-1 rounded-lg border border-slate-200/80 shadow-2xs">
-        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
+      <div class="mt-2 text-[10.5px] flex items-center gap-1.5 font-bold ${locBoxClass} px-2 py-1 rounded-lg shadow-2xs">
+        <i data-lucide="${locIcon}" class="w-3.5 h-3.5 ${locIconColor} shrink-0"></i>
         <div class="truncate flex-1">${lec.yer}</div>
       </div>
 
@@ -391,16 +419,20 @@ function updateLiveUpcoming(weekDays) {
 
   let currentOrNext = null;
   for (const l of todayDay.lectures) {
+    if (l.cardType === 'free' && l.badge !== 'Öğle Arası') continue;
     const [h1, m1] = (l.start || '00:00').split(':').map(Number);
     const [h2, m2] = (l.end || '00:00').split(':').map(Number);
     const startMin = h1 * 60 + m1;
     const endMin = h2 * 60 + m2;
 
+    const isHol = l.cardType === 'holiday';
+    const isLunch = l.badge === 'Öğle Arası';
+
     if (currentMinutes >= startMin && currentMinutes <= endMin) {
-      currentOrNext = { ...l, status: 'Şu anki Ders' };
+      currentOrNext = { ...l, status: isHol ? 'Resmi Tatil' : (isLunch ? 'Öğle Arası' : 'Şu anki Ders') };
       break;
     } else if (startMin > currentMinutes) {
-      currentOrNext = { ...l, status: 'Sıradaki Ders' };
+      currentOrNext = { ...l, status: isHol ? 'Resmi Tatil' : (isLunch ? 'Öğle Arası' : 'Sıradaki Ders') };
       break;
     }
   }

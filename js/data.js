@@ -421,6 +421,29 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
     };
   }
 
+  // 1.1 Öğle Arası / Tatili
+  const isLunch = /ÖĞLE\s*TAT[İI]L[İI]|OGLE\s*TATIL|YEMEK\s*ARASI/i.test(s);
+  if (isLunch) {
+    return {
+      cardType: 'free',
+      badge: 'Öğle Arası',
+      resolvedLocation: '🍽️ Öğle Arası / Serbest Zaman',
+      note: ''
+    };
+  }
+
+  // 1.2 Resmi Tatiller / Bayramlar (Soyadı BAYRAM olan akademisyenler hariç)
+  const hasAcademicTitle = /Prof\.?\s*Dr|Doç\.?\s*Dr|Doc\.?\s*Dr|Dr\.?\s*Öğr|Dr\.?\s*Ogr|Uzm\.?\s*Dr|Doktor|\bDr\b/i.test(s);
+  const isHoliday = !hasAcademicTitle && (/BAYRAM|AR[İI]FE|YARIYIL\s*TAT[İI]L[İI]|YILBA[ŞS]I|RESM[İI]\s*TAT[İI]L/i.test(s) || /29\s*EK[İI]M|23\s*N[İI]SAN|19\s*MAYIS|15\s*TEMMUZ|1\s*MAYIS/i.test(s));
+  if (isHoliday) {
+    return {
+      cardType: 'holiday',
+      badge: 'Resmi Tatil',
+      resolvedLocation: '🏖️ Resmi Tatil (Ders Yapılmayacaktır)',
+      note: ''
+    };
+  }
+
   // 2. Teorik Ders Yanılgı Koruması
   // "Tıpta uygulamaları" veya "laboratuvar tanı yöntemleri" amfide işlenen teorik derslerdir; klinik pratik değildir.
   const isTheoryFalsePositive =

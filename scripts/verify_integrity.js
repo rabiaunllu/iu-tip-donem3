@@ -192,6 +192,7 @@ for (const g of ['3A', '3B']) {
       const s = (l.subject || '').toUpperCase();
       if (!s || s.includes('SERBEST') || s.includes('UYGULAMA') || s.includes('HASTA BAŞI')) continue;
       const res = resolveLectureDetails(l, gun, g, 'all', {});
+      if (res.cardType === 'holiday' || res.cardType === 'free') continue;
       const isAfternoon = normalizeTime(l.start) >= '13:00';
       if (isAfternoon) {
         if (/(seçmeli|secmeli)\s*ders/i.test(l.subject)) {
@@ -231,6 +232,7 @@ for (const g of ['3A', '3B']) {
     if (!s || s.includes('SERBEST') || s.includes('HASTA BAŞI') || s.includes('HASTABAŞI')) continue;
     const gun = l.date_str ? l.date_str.split(/\s+/).pop() : '';
     const res = resolveLectureDetails(l, gun, g, 'all', {});
+    if (res.cardType === 'holiday' || res.cardType === 'free') continue;
     if (res.cardType === 'theory' && res.resolvedLocation.includes('Kontrol Ediniz')) {
       missingAmfiCount++;
       if (missingAmfiCount <= 5) {
@@ -334,5 +336,71 @@ if (missingEndCount > 0) {
   process.exit(1);
 }
 console.log('SUCCESS: Tüm derslerin başlangıç ve bitiş saatleri tam!');
+
+// ═══════════════════════════════════════════════════════════════
+// FIX-20: RESMİ TATİL VE ÖĞLE ARASI AMFİ ATAMA DENETİMİ
+// ═══════════════════════════════════════════════════════════════
+console.log('--- FIX-20: Resmi Tatil ve Öğle Arası Denetimi ---');
+let holidayCount = 0;
+let holidayAmfiErrors = 0;
+let lunchCount = 0;
+let lunchAmfiErrors = 0;
+let bayramAcademicCount = 0;
+let bayramAcademicErrors = 0;
+
+for (const g of ['3A', '3B']) {
+  for (const l of db['lectures_' + g]) {
+    const s = (l.subject || '').trim();
+    const gun = l.date_str ? l.date_str.split(/\s+/).pop() : '';
+    const res = resolveLectureDetails(l, gun, g, 'all', {});
+
+    const hasAcademicTitle = /Prof\.?\s*Dr|Doç\.?\s*Dr|Doc\.?\s*Dr|Dr\.?\s*Öğr|Dr\.?\s*Ogr|Uzm\.?\s*Dr|Doktor|\bDr\b/i.test(s);
+    const isHolidaySubject = !hasAcademicTitle && (/BAYRAM|AR[İI]FE|YARIYIL\s*TAT[İI]L[İI]|YILBA[ŞS]I|RESM[İI]\s*TAT[İI]L/i.test(s) || /29\s*EK[İI]M|23\s*N[İI]SAN|19\s*MAYIS|15\s*TEMMUZ|1\s*MAYIS/i.test(s));
+    const isLunchSubject = /ÖĞLE\s*TAT[İI]L[İI]|OGLE\s*TATIL|YEMEK\s*ARASI/i.test(s);
+    const isBayramAcademic = hasAcademicTitle && /BAYRAM/i.test(s);
+
+    if (isHolidaySubject) {
+      holidayCount++;
+      if (res.cardType !== 'holiday' || res.badge !== 'Resmi Tatil' || !res.resolvedLocation.includes('Resmi Tatil') || res.resolvedLocation.includes('Amfisi')) {
+        holidayAmfiErrors++;
+        console.error(`FAIL: Holiday incorrectly assigned amfi: [${g}] ${l.date} "${s}" -> ${res.resolvedLocation}`);
+      }
+    }
+
+    if (isLunchSubject) {
+      lunchCount++;
+      if (res.cardType !== 'free' || res.badge !== 'Öğle Arası' || res.resolvedLocation.includes('Amfisi')) {
+        lunchAmfiErrors++;
+        console.error(`FAIL: Lunch break assigned amfi: [${g}] ${l.date} "${s}" -> ${res.resolvedLocation}`);
+      }
+    }
+
+    if (isBayramAcademic) {
+      bayramAcademicCount++;
+      if (res.cardType === 'holiday' || !res.resolvedLocation.includes('Amfisi')) {
+        bayramAcademicErrors++;
+        console.error(`FAIL: Academic lecturer with BAYRAM surname treated as holiday: [${g}] ${l.date} "${s}"`);
+      }
+    }
+  }
+}
+
+if (holidayAmfiErrors > 0) {
+  console.error(`FAIL: ${holidayAmfiErrors} tatil gününe amfi ataması yapıldı!`);
+  process.exit(1);
+}
+if (lunchAmfiErrors > 0) {
+  console.error(`FAIL: ${lunchAmfiErrors} öğle arasına amfi ataması yapıldı!`);
+  process.exit(1);
+}
+if (bayramAcademicErrors > 0) {
+  console.error(`FAIL: ${bayramAcademicErrors} akademisyen dersi yanlışlıkla tatil sayıldı!`);
+  process.exit(1);
+}
+
+console.log(`Doğrulanan resmi tatil sayısı: ${holidayCount} (0 amfi hatası)`);
+console.log(`Doğrulanan öğle tatili sayısı: ${lunchCount} (0 amfi hatası)`);
+console.log(`Doğrulanan akademisyen ("Bayram") ders sayısı: ${bayramAcademicCount} (0 tatil yanılgısı)`);
+console.log('SUCCESS: Tatil günleri ve öğle aralarında amfi atama hatası %100 giderildi!');
 
 console.log('\n=== TÜM DOĞRULAMA KONTROLLERI TAMAMLANDI (SIFIR HATA) ===');
