@@ -34,14 +34,24 @@ jobs:
         with:
           python-version: '3.11'
 
+      # FIX-12: Node.js kurulumu — verify_integrity.js için gerekli
+      - name: Node.js Kur
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Bağımlılıkları Yükle
         run: |
           python -m pip install --upgrade pip
           pip install pypdf
 
+      # FIX-11: Hata yutma (|| echo) kaldırıldı — build hatası artık pipeline'ı durduracak
       - name: Canlı E-Tablo ve Rotasyon Veritabanını Derle
-        run: |
-          python scripts/build_data.py || echo "Canlı çekilemedi, yereldeki derlenmiş veritabanı kullanılacak."
+        run: python scripts/build_data.py
+
+      # FIX-12: Doğrulama scripti artık CI/CD'de çalışıyor
+      - name: Veri Bütünlüğünü Doğrula
+        run: node scripts/verify_integrity.js
 
       - name: Web Sitesi Yayın Paketini Hazırla (_site)
         run: |
@@ -66,3 +76,4 @@ jobs:
       - name: GitHub Pages'e Dağıt
         id: deployment
         uses: actions/deploy-pages@v4
+

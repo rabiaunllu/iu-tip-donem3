@@ -116,9 +116,12 @@
               <i data-lucide="smartphone" class="w-4 h-4 text-indigo-600"></i>
               <span>Telefona Yükle</span>
             </button>
-            <button id="btnRefresh" class="w-full px-3.5 py-2 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2.5 transition-colors">
+            <button id="btnRefresh" class="w-full px-3.5 py-2 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2.5 transition-colors" title="Google Sheets'ten son dakika değişikliklerini kontrol eder">
               <i data-lucide="refresh-cw" class="w-4 h-4 text-indigo-600"></i>
-              <span>Programı Yenile</span>
+              <div class="flex flex-col">
+                <span class="font-semibold">Canlı Güncelle</span>
+                <span class="text-[10px] text-slate-400 font-normal">Son dakika amfi değişikliklerini çek</span>
+              </div>
             </button>
             <a href="https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi" target="_blank" rel="noopener noreferrer" class="w-full px-3.5 py-2 text-left text-xs font-medium text-slate-700 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-2.5 transition-colors">
               <i data-lucide="external-link" class="w-4 h-4 text-indigo-600"></i>
@@ -213,10 +216,16 @@
           <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
           Dönem 3A — Tüm Sınıf
         </span>
-        <span id="liveStatusText" class="text-xs text-slate-500 flex items-center gap-1">
+        <span id="liveStatusText" class="text-xs text-slate-500 flex items-center gap-1 cursor-pointer hover:text-indigo-600 transition-colors" title="Tıkla → Google Sheets'ten canlı güncelle" role="button" tabindex="0">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           Güncel Program
         </span>
+      </div>
+
+      <!-- Arka plan canlı güncelleme bildirimi (JS tarafından gösterilir/gizlenir) -->
+      <div id="liveUpdateBanner" class="hidden w-full px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-semibold flex items-center gap-2 animate-in fade-in slide-in-from-top-1 duration-300">
+        <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-600 shrink-0"></i>
+        <span id="liveUpdateBannerText">Program canlı kaynaktan güncellendi</span>
       </div>
 
       <div class="flex flex-wrap items-center gap-2">

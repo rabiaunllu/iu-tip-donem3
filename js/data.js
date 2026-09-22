@@ -2,6 +2,9 @@
  * İÜ Tıp Fakültesi Dönem 3 — Veri Yükleme ve Senkronizasyon (Offline First + Google Sheets)
  */
 
+// Son canlı güncelleme zamanını takip et
+let _lastLiveUpdate = null;
+
 async function loadDatabase() {
   showLoading(true);
   hideError();
@@ -16,13 +19,21 @@ async function loadDatabase() {
       state.cacheData['3B'] = db.lectures_3B || [];
       state.cacheData.amfi = db.amfi_default || {};
       
-      const statusElem = document.getElementById('liveStatusText');
-      if (statusElem) {
-        statusElem.innerHTML = `
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Güncel Program
-        `;
-      }
+      _updateStatusText('Güncel Program', 'emerald');
+
+      // ★ CANLI KONTROL: JSON yüklendikten sonra arka planda Google Sheets'i kontrol et
+      // Son dakika amfi değişiklikleri (hoca 5dk önce değiştirse bile) böylece yakalanır
+      setTimeout(() => {
+        fetchLiveSheets().then(() => {
+          if (typeof renderSchedule === 'function') renderSchedule();
+          _updateStatusText(`Canlı Kontrol (${_formatTime()})`, 'emerald');
+          _showLiveUpdateBanner('✓ Program canlı kaynaktan kontrol edildi');
+        }).catch(() => {
+          // Offline ise sessizce geç — JSON verisi zaten yüklü
+          _updateStatusText('Çevrimdışı — Kayıtlı Program', 'amber');
+        });
+      }, 500); // Sayfa render'ını bloklamadan 500ms sonra başla
+
       return;
     }
   } catch (err) {
@@ -31,6 +42,62 @@ async function loadDatabase() {
 
   // 2. Canlı Google Sheet JSONP bağlantısı
   await fetchLiveSheets();
+}
+
+/**
+ * ★ Yenile butonu için — doğrudan canlı Google Sheets'ten çeker.
+ * loadDatabase()'den farklı olarak JSON'a bakmaz, her zaman Sheets'e gider.
+ */
+async function refreshFromLiveSheets() {
+  showLoading(true);
+  hideError();
+  try {
+    await fetchLiveSheets();
+    _lastLiveUpdate = new Date();
+    _updateStatusText(`Canlı Güncellendi (${_formatTime()})`, 'emerald');
+    if (typeof renderSchedule === 'function') renderSchedule();
+    showLoading(false);
+    return true;
+  } catch (e) {
+    showLoading(false);
+    showError('Canlı veri çekilemedi: ' + e.message);
+    return false;
+  }
+}
+
+function _formatTime() {
+  return new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+}
+
+function _updateStatusText(text, color) {
+  const statusElem = document.getElementById('liveStatusText');
+  if (statusElem) {
+    const dotColor = color === 'emerald' ? 'bg-emerald-500' : color === 'amber' ? 'bg-amber-500' : 'bg-slate-400';
+    statusElem.innerHTML = `
+      <span class="w-2 h-2 rounded-full ${dotColor} animate-pulse"></span>
+      ${text}
+    `;
+  }
+}
+
+/**
+ * Arka plan canlı güncelleme tamamlandığında kısa süre bildirim banner'ı gösterir.
+ * 4 saniye sonra otomatik gizlenir.
+ */
+function _showLiveUpdateBanner(message) {
+  const banner = document.getElementById('liveUpdateBanner');
+  const bannerText = document.getElementById('liveUpdateBannerText');
+  if (!banner) return;
+  if (bannerText) bannerText.textContent = message;
+  banner.classList.remove('hidden');
+  // Lucide ikonlarını güncelle (yeni eklenen ikon için)
+  if (typeof lucide !== 'undefined' && lucide.createIcons) {
+    lucide.createIcons({ nodes: [banner] });
+  }
+  // 4 saniye sonra gizle
+  setTimeout(() => {
+    banner.classList.add('hidden');
+  }, 4000);
 }
 
 function fetchSheetJSONP(conf) {
@@ -91,17 +158,13 @@ async function fetchLiveSheets() {
 
     state.cacheData.amfi = parseAmfiSchedule(amfiRows);
     state.cacheData[state.group] = normalizeRawSheetRows(rawGroupRows);
+    _lastLiveUpdate = new Date();
 
-    const statusElem = document.getElementById('liveStatusText');
-    if (statusElem) {
-      statusElem.innerHTML = `
-        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        Canlı E-Tablo Bağlantısı (${new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })})
-      `;
-    }
+    _updateStatusText(`Canlı E-Tablo (${_formatTime()})`, 'emerald');
   } catch (e) {
     console.error(e);
     showError('Tablo verileri çekilemedi: ' + e.message);
+    throw e; // refreshFromLiveSheets'in catch'ine düşsün
   }
 }
 
@@ -174,7 +237,7 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
   const rawLoc = (lec.location_raw || '').trim();
   const g = (gunStr || '').trim();
   const gLower = g.toLowerCase();
-  const startHour = (lec.start || '').trim();
+  const startHour = normalizeTime(lec.start);
   const isAfternoon = startHour >= '13:00';
 
   // 1. Ortak / Özel ders konu kontrolleri
@@ -234,6 +297,8 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
   }
 
   // 5. Eğer konum metninde bilinen bir amfi adı doğrudan yazıyorsa
+  // FIX-3: locationUpper değişkeni rawLoc'tan türetilmelidir (önceki kod tanımsızdı → ReferenceError)
+  const locationUpper = rawLoc.toUpperCase();
   const amfiKeywords = [
     { key: 'KEMAL ATAY', name: 'Kemal Atay Amfisi' },
     { key: 'SAMİ ZAN', name: 'Sami Zan Amfisi' },

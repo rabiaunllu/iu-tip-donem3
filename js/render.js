@@ -93,12 +93,19 @@ function renderSchedule() {
     if (isFree && !state.showFreeStudy && !searchLower) continue;
 
     // Laboratuvar kontrolü (Tıbbi Patoloji & Mikrobiyoloji)
+    // FIX-5: Lab notunu sadece lab saati kartına (14:30 civarı) veya lab türü kartlara ekle
+    // Önceki kod tüm günlük derslere lab notu ekliyordu (08:30 Kardiyoloji kartında bile lab notu çıkıyordu)
     let note = details.note;
     const dayLabs = labs[iso];
     if (dayLabs && state.subgroup !== 'all') {
-      for (const labItem of dayLabs) {
-        if (labItem.groups && labItem.groups.includes(state.subgroup)) {
-          note += (note ? ' | ' : '') + `🧫 ${labItem.type} Pratiği (${labItem.time})`;
+      const lecStartNorm = normalizeTime(lec.start);
+      const isLabTimeSlot = lecStartNorm >= '14:00' && lecStartNorm <= '16:30';
+      const isLabCard = details.cardType === 'practice' && details.badge === 'Laboratuvar';
+      if (isLabTimeSlot || isLabCard) {
+        for (const labItem of dayLabs) {
+          if (labItem.groups && labItem.groups.includes(state.subgroup)) {
+            note += (note ? ' | ' : '') + `🧫 ${labItem.type} Pratiği (${labItem.time})`;
+          }
         }
       }
     }
@@ -112,8 +119,8 @@ function renderSchedule() {
     const targetDay = weekDays.find(d => d.isoDate === iso);
     if (targetDay) {
       targetDay.lectures.push({
-        start: lec.start,
-        end: lec.end,
+        start: normalizeTime(lec.start),
+        end: normalizeTime(lec.end),
         subject: isFree ? 'Serbest Çalışma' : (lec.subject || ''),
         department: lec.department,
         yer: details.resolvedLocation,
@@ -124,6 +131,8 @@ function renderSchedule() {
     }
   }
 
+  // FIX-4: normalizeTime ile saatler "08:30", "09:20" formatına dönüştürüldüğü için
+  // localeCompare artık doğru sıralama üretir (önceki hata: "10:10" < "8:30")
   weekDays.forEach(d => {
     d.lectures.sort((a, b) => (a.start || '').localeCompare(b.start || ''));
   });
@@ -254,6 +263,12 @@ function updateDayColumnsVisibility() {
 }
 
 function getLectureCardHTML(lec) {
+  // FIX-18: XSS sanitization — Google Sheet'ten gelen verileri HTML escape et
+  const escapeHTML = (s) => {
+    if (!s) return '';
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  };
+
   let borderClass = 'border-l-4 border-indigo-500 bg-indigo-50/40 text-indigo-950';
   let badge = lec.badge || 'Teorik';
   let badgeClass = 'bg-indigo-100 text-indigo-700 font-semibold';
@@ -283,7 +298,7 @@ function getLectureCardHTML(lec) {
         </span>
       </div>
 
-      <h5 class="text-[11px] font-bold leading-tight mt-1 text-slate-900">${lec.subject}</h5>
+      <h5 class="text-[11px] font-bold leading-tight mt-1 text-slate-900">${escapeHTML(lec.subject)}</h5>
 
       <div class="mt-2 text-[10.5px] flex items-center gap-1.5 font-bold text-slate-800 bg-slate-100/90 px-2 py-1 rounded-lg border border-slate-200/80 shadow-2xs">
         <i data-lucide="map-pin" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
@@ -293,7 +308,7 @@ function getLectureCardHTML(lec) {
       ${lec.note ? `
         <div class="mt-1.5 pt-1 border-t border-amber-200/70 text-[9px] text-amber-900 font-bold flex items-center gap-1">
           <i data-lucide="sparkles" class="w-2.5 h-2.5 text-amber-600 shrink-0"></i>
-          <span class="leading-tight">${lec.note}</span>
+          <span class="leading-tight">${escapeHTML(lec.note)}</span>
         </div>
       ` : ''}
     </div>

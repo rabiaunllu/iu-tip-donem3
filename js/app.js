@@ -102,13 +102,34 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Yenile Butonu
+  // Yenile Butonu — Doğrudan canlı Google Sheets'ten güncel veri çeker
+  // ★ ÖNCEKİ HATA: loadDatabase() JSON'u bulunca return ediyordu, Sheets'e hiç bakmıyordu
   const btnRefresh = document.getElementById('btnRefresh');
   if (btnRefresh) {
     btnRefresh.addEventListener('click', async () => {
-      await loadDatabase();
-      renderSchedule();
-      showToast('Program güncellendi!');
+      btnRefresh.disabled = true;
+      btnRefresh.classList.add('opacity-50');
+      const ok = await refreshFromLiveSheets();
+      btnRefresh.disabled = false;
+      btnRefresh.classList.remove('opacity-50');
+      if (ok) {
+        showToast('🔄 Program canlı kaynaktan güncellendi!');
+      } else {
+        showToast('⚠️ Canlı veri çekilemedi. İnternet bağlantınızı kontrol edin.');
+      }
+    });
+  }
+
+  // Status text'e tıklayınca da canlı güncelle (keşfedilebilirlik)
+  const statusText = document.getElementById('liveStatusText');
+  if (statusText) {
+    statusText.addEventListener('click', async () => {
+      const ok = await refreshFromLiveSheets();
+      if (ok) {
+        showToast('🔄 Canlı kontrol tamamlandı!');
+      } else {
+        showToast('⚠️ Canlı bağlantı kurulamadı.');
+      }
     });
   }
 
@@ -158,7 +179,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const btnResetSettings = document.getElementById('btnResetSettings');
   if (btnResetSettings && modalSettings) {
-    btnResetSettings.addEventListener('click', () => {
+    btnResetSettings.addEventListener('click', async () => {
+      btnResetSettings.disabled = true;
       localStorage.removeItem('iutip_url_amfi');
       localStorage.removeItem('iutip_url_3A');
       localStorage.removeItem('iutip_url_3B');
@@ -166,26 +188,94 @@ document.addEventListener('DOMContentLoaded', async () => {
       localStorage.removeItem('iutip_disclaimer_dismissed');
       const bannerDisclaimer = document.getElementById('bannerDisclaimer');
       if (bannerDisclaimer) bannerDisclaimer.classList.remove('hidden');
-      showToast('Varsayılan ayarlar ve linkler geri yüklendi.');
+
+      // Modal input alanlarını da varsayılan değerlerle güncelle (BUG-2)
+      const amfiInp = document.getElementById('settingAmfiUrl');
+      const s3AInp = document.getElementById('setting3AUrl');
+      const s3BInp = document.getElementById('setting3BUrl');
+      const fbInp = document.getElementById('settingFeedbackUrl');
+      if (amfiInp) amfiInp.value = `https://docs.google.com/spreadsheets/d/${DEFAULT_CONFIGS.amfi.id}/edit#gid=${DEFAULT_CONFIGS.amfi.gid}`;
+      if (s3AInp) s3AInp.value = `https://docs.google.com/spreadsheets/d/${DEFAULT_CONFIGS['3A'].id}/edit#gid=${DEFAULT_CONFIGS['3A'].gid}`;
+      if (s3BInp) s3BInp.value = `https://docs.google.com/spreadsheets/d/${DEFAULT_CONFIGS['3B'].id}/edit#gid=${DEFAULT_CONFIGS['3B'].gid}`;
+      if (fbInp) fbInp.value = DEFAULT_FEEDBACK_WEBHOOK_URL;
+
       modalSettings.classList.add('hidden');
-      loadDatabase().then(renderSchedule);
+      showToast('Varsayılan ayarlar ve linkler geri yüklendi.');
+
+      const ok = await refreshFromLiveSheets();
+      if (!ok) {
+        await loadDatabase();
+        renderSchedule();
+      }
+      btnResetSettings.disabled = false;
     });
   }
 
   const btnSaveSettings = document.getElementById('btnSaveSettings');
   if (btnSaveSettings && modalSettings) {
-    btnSaveSettings.addEventListener('click', () => {
+    btnSaveSettings.addEventListener('click', async () => {
       const amfiInp = document.getElementById('settingAmfiUrl');
       const s3AInp = document.getElementById('setting3AUrl');
       const s3BInp = document.getElementById('setting3BUrl');
       const fbInp = document.getElementById('settingFeedbackUrl');
-      if (amfiInp) localStorage.setItem('iutip_url_amfi', amfiInp.value.trim());
-      if (s3AInp) localStorage.setItem('iutip_url_3A', s3AInp.value.trim());
-      if (s3BInp) localStorage.setItem('iutip_url_3B', s3BInp.value.trim());
-      if (fbInp) localStorage.setItem('iutip_feedback_webhook_url', fbInp.value.trim());
+
+      const amfiVal = amfiInp ? amfiInp.value.trim() : '';
+      const s3AVal = s3AInp ? s3AInp.value.trim() : '';
+      const s3BVal = s3BInp ? s3BInp.value.trim() : '';
+      const fbVal = fbInp ? fbInp.value.trim() : '';
+
+      // BUG-4: Format Doğrulaması (Validation)
+      if (amfiVal && !isValidSheetUrl(amfiVal)) {
+        showToast('⚠️ Geçersiz Amfi linki! Google E-Tablo linki "spreadsheets/d/..." içermelidir.');
+        if (amfiInp) amfiInp.focus();
+        return;
+      }
+      if (s3AVal && !isValidSheetUrl(s3AVal)) {
+        showToast('⚠️ Geçersiz 3A linki! Google E-Tablo linki "spreadsheets/d/..." içermelidir.');
+        if (s3AInp) s3AInp.focus();
+        return;
+      }
+      if (s3BVal && !isValidSheetUrl(s3BVal)) {
+        showToast('⚠️ Geçersiz 3B linki! Google E-Tablo linki "spreadsheets/d/..." içermelidir.');
+        if (s3BInp) s3BInp.focus();
+        return;
+      }
+      if (fbVal && !isValidWebhookUrl(fbVal)) {
+        showToast('⚠️ Geçersiz Geri Bildirim webhook linki!');
+        if (fbInp) fbInp.focus();
+        return;
+      }
+
+      // BUG-3: Boş veya silinmişse localStorage'dan kaldır (varsayılana dönsün), doluysa kaydet
+      if (amfiVal) localStorage.setItem('iutip_url_amfi', amfiVal);
+      else localStorage.removeItem('iutip_url_amfi');
+
+      if (s3AVal) localStorage.setItem('iutip_url_3A', s3AVal);
+      else localStorage.removeItem('iutip_url_3A');
+
+      if (s3BVal) localStorage.setItem('iutip_url_3B', s3BVal);
+      else localStorage.removeItem('iutip_url_3B');
+
+      if (fbVal) localStorage.setItem('iutip_feedback_webhook_url', fbVal);
+      else localStorage.removeItem('iutip_feedback_webhook_url');
+
       modalSettings.classList.add('hidden');
-      showToast('Yeni linkler kaydedildi!');
-      loadDatabase().then(renderSchedule);
+      showToast('🔄 Yeni linkler kaydedildi, canlı veriler çekiliyor...');
+
+      btnSaveSettings.disabled = true;
+      btnSaveSettings.classList.add('opacity-50');
+
+      // BUG-1: loadDatabase() yerine doğrudan canlı sheets'ten çek!
+      const ok = await refreshFromLiveSheets();
+
+      btnSaveSettings.disabled = false;
+      btnSaveSettings.classList.remove('opacity-50');
+
+      if (ok) {
+        showToast('✅ Yeni bağlantılardan program başarıyla güncellendi!');
+      } else {
+        showToast('⚠️ Yeni linklerden canlı veri çekilemedi. Link izinlerini ("Bağlantıya sahip herkes") kontrol edin.');
+      }
     });
   }
 
@@ -243,7 +333,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     feedbackRelatedGroup.innerHTML = groups.map(g => {
       const isSelected = g.key === currentKey;
-      return `<option value="${g.label}" ${isSelected ? 'selected' : ''}>${g.label} ${isSelected ? '★ (Seçili Profilin)' : ''}</option>`;
+      return `<option value="${g.label}" ${isSelected ? 'selected' : ''}>${g.label} ${isSelected ? ' ★' : ''}</option>`;
     }).join('');
   }
 

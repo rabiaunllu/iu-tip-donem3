@@ -14,6 +14,8 @@ import csv
 import io
 import zipfile
 import xml.etree.ElementTree as ET
+import unicodedata
+import time as _time
 
 try:
     import pypdf
@@ -48,6 +50,21 @@ TR_MONTHS = {
     'kasim': 11, 'aralık': 12, 'aralik': 12
 }
 
+def _normalize_turkish_lower(s):
+    """
+    FIX-6: Türkçe İ/i casing hatasını düzeltir.
+    Python 3'te 'EKİM'.lower() → 'eki̇m' (U+0307 combining dot above) üretir,
+    bu 'ekim' ile eşleşmez. NFC normalizasyonu + casefold() ile düzeltilir.
+    Ayrıca İ → i ve I → ı dönüşümü explicit yapılır.
+    """
+    # Önce Türkçe spesifik dönüşümler (Python'un default lower() Türkçe-duyarsızdır)
+    result = s.replace('İ', 'i').replace('I', 'ı')
+    # Geri kalanını lowercase yap
+    result = result.lower()
+    # NFC normalizasyonu: combining characters'ı birleştir
+    result = unicodedata.normalize('NFC', result)
+    return result
+
 def to_iso_date(str_val):
     if not str_val:
         return None
@@ -55,13 +72,14 @@ def to_iso_date(str_val):
     m = re.search(r'(\d{1,2})\s+([a-zA-ZçğıöşüÇĞİÖŞÜ]+)\s+(\d{4})', s)
     if m:
         d = int(m.group(1))
-        mon = TR_MONTHS.get(m.group(2).lower())
+        # FIX-6: Türkçe-duyarlı lowercase dönüşüm
+        mon = TR_MONTHS.get(_normalize_turkish_lower(m.group(2)))
         y = int(m.group(3))
         if mon:
             return f"{y:04d}-{mon:02d}-{d:02d}"
     m2 = re.search(r'([a-zA-ZçğıöşüÇĞİÖŞÜ]+)\s+(\d{1,2}),\s+(\d{4})', s)
     if m2:
-        mon = TR_MONTHS.get(m2.group(1).lower())
+        mon = TR_MONTHS.get(_normalize_turkish_lower(m2.group(1)))
         d = int(m2.group(2))
         y = int(m2.group(3))
         if mon:
@@ -76,11 +94,25 @@ def excel_serial_to_iso(serial_str):
     except Exception:
         return None
 
-def fetch_csv(url):
-    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
-    with urllib.request.urlopen(req, timeout=15) as resp:
-        text = resp.read().decode('utf-8', errors='ignore')
-        return list(csv.reader(io.StringIO(text)))
+def fetch_csv(url, max_retries=3):
+    """FIX-10: Google Sheets çekme için retry mantığı (3 deneme, exponential backoff)"""
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'})
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                raw = resp.read()
+                # BOM (Byte Order Mark) varsa temizle
+                if raw[:3] == b'\xef\xbb\xbf':
+                    raw = raw[3:]
+                text = raw.decode('utf-8', errors='ignore')
+                return list(csv.reader(io.StringIO(text)))
+        except Exception as e:
+            last_err = e
+            wait_sec = 2 ** attempt  # 1s, 2s, 4s
+            print(f"  [Uyari] Deneme {attempt + 1}/{max_retries} basarisiz: {e}. {wait_sec}s sonra tekrar denenecek...")
+            _time.sleep(wait_sec)
+    raise last_err
 
 # ═════════════════════════════════════════════════════════════════
 # 1. TEORİK DERSLERİ ÇEK & TEMİZLE (3A & 3B)
@@ -138,15 +170,41 @@ def extract_rotations_3b():
         ns = '{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
         rows = []
         for row in sheet1.findall(f'.//{ns}row'):
-            r_vals = []
+            # FIX-7: OpenXML boş hücre kayması düzeltmesi
+            # OpenXML boş hücreler için <c> elementi yazmaz. Hücre koordinatını
+            # (r="A1", r="B3") okuyarak gerçek sütun pozisyonunu belirle.
+            cells_by_col = {}
+            max_col = 0
             for c in row.findall(f'{ns}c'):
-                v = c.find(f'{ns}v')
-                t = c.attrib.get('t')
-                if v is not None and v.text:
-                    val = sst[int(v.text)] if t == 's' else v.text
-                    r_vals.append(val.strip())
+                # Hücre referansından sütun harfini çıkar (ör: "B3" → "B" → 1)
+                ref = c.attrib.get('r', '')
+                col_letters = re.match(r'^([A-Z]+)', ref)
+                if col_letters:
+                    col_str = col_letters.group(1)
+                    col_idx = 0
+                    for ch in col_str:
+                        col_idx = col_idx * 26 + (ord(ch) - ord('A'))
+                    # Hücre değerini al
+                    v = c.find(f'{ns}v')
+                    t = c.attrib.get('t')
+                    if v is not None and v.text:
+                        val = sst[int(v.text)] if t == 's' else v.text
+                        cells_by_col[col_idx] = val.strip()
+                    else:
+                        cells_by_col[col_idx] = ''
+                    if col_idx > max_col:
+                        max_col = col_idx
                 else:
-                    r_vals.append('')
+                    # Fallback: koordinat okunamadıysa sıralı ekle
+                    v = c.find(f'{ns}v')
+                    t = c.attrib.get('t')
+                    if v is not None and v.text:
+                        val = sst[int(v.text)] if t == 's' else v.text
+                        cells_by_col[len(cells_by_col)] = val.strip()
+                    else:
+                        cells_by_col[len(cells_by_col)] = ''
+            # Sütun pozisyonlarına göre sıralı liste oluştur (boşlukları doldur)
+            r_vals = [cells_by_col.get(i, '') for i in range(max_col + 1)] if cells_by_col else []
             rows.append(r_vals)
 
     rotation_map = {}
@@ -234,9 +292,31 @@ def extract_rotations_3a():
             if g and not any(k in l.upper() for k in ['DÖNEM', 'UYGULAMA', 'TARİH', 'DİLİM']):
                 right_tokens_list.append(l.strip().split())
 
-    # Map the first 7 blocks (56 dates)
+    # FIX-8: Blok sınırlarını tarih aralıklarına göre belirle (önceki idx//8 sabit bölümü
+    # tatil günlerinde kayma yaratıyordu — 29 Ekim, 23 Nisan, dini bayramlar vb.)
+    # Her bloğun başlangıç ve bitiş tarihleri tanımlı; bir tarih hangi aralığa düşerse o bloğa atanır.
+    block_date_ranges = [
+        ('2026-09-21', '2026-10-14'),  # 1. Hareket 2
+        ('2026-10-19', '2026-11-11'),  # 2. Kan-Lenfoid 2
+        ('2026-11-18', '2026-12-11'),  # 3. Dolaşım 2
+        ('2026-12-14', '2027-01-04'),  # 4. Solunum 2
+        ('2027-02-01', '2027-02-24'),  # 5. Endokrin-Metabolizma 2
+        ('2027-03-01', '2027-03-24'),  # 6. Sindirim 2
+        ('2027-04-05', '2027-04-28'),  # 7. Ürogenital ve Üreme 2
+    ]
+
+    def _find_block_for_date(iso_date):
+        """Verilen ISO tarihinin hangi blok aralığına düştüğünü bulur."""
+        for b_idx, (start, end) in enumerate(block_date_ranges):
+            if start <= iso_date <= end:
+                return b_idx
+        return None  # Aralık dışı (muhtemelen Block 8 veya bilinmeyen)
+
+    # Map the first 7 blocks using date ranges (not rigid idx//8)
     for idx, (iso, l_tokens) in enumerate(left_dates):
-        block_idx = min(idx // 8, len(block_depts) - 1)
+        block_idx = _find_block_for_date(iso)
+        if block_idx is None or block_idx >= len(block_depts):
+            continue  # Block 8 (Sinir-Duyu) ayrı işleniyor
         depts_left, depts_right = block_depts[block_idx]
 
         rotation_map[iso] = {}
@@ -290,9 +370,10 @@ def extract_pathology_microbiology():
                 cells.append(' '.join(texts).strip())
 
             row_str = ' '.join(cells)
-            date_m = re.search(r'(\d{2})\.(\d{2})\.(\d{4})', row_str)
+            # FIX-9: Tek basamaklı gün/ay değerlerini de kabul et (ör: 5.10.2026)
+            date_m = re.search(r'(\d{1,2})\.(\d{1,2})\.(\d{4})', row_str)
             if date_m:
-                d, m, y = date_m.group(1), date_m.group(2), date_m.group(3)
+                d, m, y = date_m.group(1).zfill(2), date_m.group(2).zfill(2), date_m.group(3)
                 iso_date = f"{y}-{m}-{d}"
                 lab_map[iso_date] = lab_map.get(iso_date, [])
 

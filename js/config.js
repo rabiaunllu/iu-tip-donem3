@@ -16,5 +16,5 @@ const TR_AYLAR = {
 
 // Geri Bildirim & İstek Havuzu Google Apps Script Webhook URL'si
 // Kullanıcı Google E-Tablo kurup URL'sini Ayarlar modalından veya buradan değiştirebilir
-const DEFAULT_FEEDBACK_WEBHOOK_URL = '';
+const DEFAULT_FEEDBACK_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby0XaPjoV-Lr_XHZvt4xBhCcZ1esemtN-qj6f1bw929GYZaEaq9_SfspGHiOxFg2gO9/exec';
 
