@@ -201,7 +201,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   const feedbackCategoryContainer = document.getElementById('feedbackCategoryContainer');
   const feedbackMessage = document.getElementById('feedbackMessage');
   const feedbackCharCount = document.getElementById('feedbackCharCount');
-  const feedbackContact = document.getElementById('feedbackContact');
   const feedbackRelatedGroup = document.getElementById('feedbackRelatedGroup');
   const feedbackHoneypot = document.getElementById('feedbackHoneypot');
   const btnSubmitFeedback = document.getElementById('btnSubmitFeedback');
@@ -255,7 +254,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       feedbackMessage.value = '';
       feedbackMessage.placeholder = CATEGORY_PLACEHOLDERS['📅 Ders Programı Hatası'];
     }
-    if (feedbackContact) feedbackContact.value = '';
     if (feedbackHoneypot) feedbackHoneypot.value = '';
     if (feedbackCharCount) feedbackCharCount.innerText = '0 / 1000';
     if (btnSubmitFeedback) {
@@ -352,8 +350,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const groupInfo = feedbackRelatedGroup && feedbackRelatedGroup.value
       ? feedbackRelatedGroup.value
       : (isAll ? `Dönem ${state.group} — Tüm Sınıf` : `Dönem ${state.group} — Grup ${state.subgroup.toUpperCase()}`);
-    const contact = feedbackContact ? feedbackContact.value.trim() : '';
-
     const webhookUrl = localStorage.getItem('iutip_feedback_webhook_url') || DEFAULT_FEEDBACK_WEBHOOK_URL;
 
     if (btnSubmitFeedback) {
@@ -371,7 +367,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             category: selectedFeedbackCategory,
             groupInfo: groupInfo,
             message: msg,
-            contact: contact || 'Belirtilmedi',
+            contact: 'Anonim',
             botCheck: ''
           })
         });
