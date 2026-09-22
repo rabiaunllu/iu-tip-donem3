@@ -170,18 +170,44 @@ async function fetchLiveSheets() {
 
 function normalizeRawSheetRows(rows) {
   const lectures = [];
+  const KNOWN_END_TIMES = {
+    '3A_2026-09-25_11:50': '12:30',
+    '3A_2026-12-24_11:00': '11:40',
+    '3A_2027-06-03_13:00': '14:20'
+  };
+
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
     if (r.length < 5) continue;
     const dateStr = (r[1] || '').trim();
     const iso = toISOFromStr(dateStr);
     if (!iso) continue;
+
+    const start = (r[2] || '').trim();
+    let end = (r[3] || '').trim();
+    const subject = (r[4] || '').trim();
+    const patchKey = `${state.group}_${iso}_${start}`;
+    if (!end && KNOWN_END_TIMES[patchKey]) {
+      end = KNOWN_END_TIMES[patchKey];
+    }
+
+    // Mükerrer boş satır filtresi
+    if (subject) {
+      for (let j = lectures.length - 1; j >= 0; j--) {
+        if (lectures[j].date === iso && lectures[j].start === start && !lectures[j].subject) {
+          lectures.splice(j, 1);
+        }
+      }
+    } else if (lectures.some(l => l.date === iso && l.start === start)) {
+      continue;
+    }
+
     lectures.push({
       date: iso,
       date_str: dateStr,
-      start: (r[2] || '').trim(),
-      end: (r[3] || '').trim(),
-      subject: (r[4] || '').trim(),
+      start,
+      end,
+      subject,
       department: (r[5] || '').trim(),
       location_raw: (r[6] || '').trim()
     });
@@ -459,8 +485,37 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
       };
     }
 
-    // 8. Öğretim Üyesi Uygulama (11:10 - 12:10 Dilim Rotasyonları)
+    // 8. Öğretim Üyesi Uygulama (11:10 - 12:10 Dilim Rotasyonları veya Münferit Grup Pratikleri)
     if (/Öğretim\s+üyesi\s+Uygulama/i.test(s)) {
+      // Başlıkta doğrudan belirtilen münferit alt grup var mı? (ör: "Öğretim üyesi Uygulama 2   -  B2")
+      const inlineGrpMatch = s.match(/-\s*([AB][1-8])/i);
+      if (inlineGrpMatch) {
+        const targetGrp = inlineGrpMatch[1].toUpperCase();
+        const dept = (lec.department || 'Klinik Bilimler').trim();
+        if (subgroup === targetGrp) {
+          return {
+            cardType: 'practice',
+            badge: 'Uygulama',
+            resolvedLocation: `🔬 ${dept} (Grup ${targetGrp})`,
+            note: `Öğr. Üyesi Uygulaması: ${dept} (Grup ${targetGrp})`
+          };
+        } else if (subgroup !== 'all') {
+          return {
+            cardType: 'free',
+            badge: 'Boş',
+            resolvedLocation: `Dinlenme / Bireysel Çalışma (Sadece Grup ${targetGrp} Pratiği)`,
+            note: `Bu oturum sadece Grup ${targetGrp} içindir.`
+          };
+        } else {
+          return {
+            cardType: 'practice',
+            badge: 'Uygulama',
+            resolvedLocation: `🔬 ${dept} (Sadece Grup ${targetGrp})`,
+            note: `Öğr. Üyesi Uygulaması: ${dept} (Grup ${targetGrp})`
+          };
+        }
+      }
+
       const dayRot = rotations ? rotations[iso] : null;
       if (subgroup !== 'all' && dayRot && dayRot[subgroup]) {
         const dept = dayRot[subgroup];

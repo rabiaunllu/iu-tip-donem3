@@ -121,11 +121,9 @@ for (const g of ['3A', '3B']) {
 }
 
 console.log(`Audited ${totalAudited} lecture-subgroup instances across entire academic year.`);
-if (vagueCount > 10) {
-  console.error(`FAIL: Found ${vagueCount} vague locations (threshold: 10)! Check rotation data.`);
+if (vagueCount > 0) {
+  console.error(`FAIL: Found ${vagueCount} vague locations! Expected exactly 0.`);
   process.exit(1);
-} else if (vagueCount > 0) {
-  console.warn(`WARN: ${vagueCount} vague locations found (within acceptable threshold of 10 — likely PDF source gaps).`);
 } else {
   console.log('SUCCESS: Exactly 0 vague locations found across the entire academic year!');
 }
@@ -286,4 +284,55 @@ if (conflictCount > 0) {
   console.log('SUCCESS: Saat çakışması bulunmadı!');
 }
 
-console.log('\n=== TÜM DOĞRULAMA KONTROLLERI TAMAMLANDI ===');
+// ═══════════════════════════════════════════════════════════════
+// FIX-17: LABORATUVAR VERİ BÜTÜNLÜĞÜ DENETİMİ
+// ═══════════════════════════════════════════════════════════════
+console.log('--- FIX-17: Laboratuvar Bütünlük Denetimi ---');
+const labs = db.laboratories || {};
+const labDates = Object.keys(labs);
+let totalAssignments = 0;
+for (const day of Object.values(labs)) {
+  for (const item of day) {
+    totalAssignments += (item.groups || []).length;
+  }
+}
+
+console.log(`Laboratuvar takvim günleri: ${labDates.length}, toplam alt grup ataması: ${totalAssignments}`);
+if (labDates.length !== 43) {
+  console.error(`FAIL: Beklenen 43 laboratuvar tarihi, bulunan: ${labDates.length}`);
+  process.exit(1);
+}
+if (totalAssignments !== 84) {
+  console.error(`FAIL: Beklenen 84 alt grup laboratuvar ataması, bulunan: ${totalAssignments}`);
+  process.exit(1);
+}
+
+// 25.05.2027 özel saat kontrolü
+const may25 = labs['2027-05-25'] || [];
+const hasCustomTimes = may25.some(it => it.time.includes('13:30') || it.time.includes('15:30'));
+if (!hasCustomTimes) {
+  console.error('FAIL: 25.05.2027 özel laboratuvar saatleri (13:30-15:20 ve 15:30-17:20) korunamadı!');
+  process.exit(1);
+}
+console.log('SUCCESS: 43 takvim günü ve 84 alt grup laboratuvar seansı %100 eksiksiz doğrulandı!');
+
+// ═══════════════════════════════════════════════════════════════
+// FIX-18: EKSİK BİTİŞ SAATİ DENETİMİ
+// ═══════════════════════════════════════════════════════════════
+console.log('--- FIX-18: Eksik Bitiş Saati Denetimi ---');
+let missingEndCount = 0;
+for (const g of ['3A', '3B']) {
+  for (const l of db['lectures_' + g]) {
+    if (l.start && (!l.end || l.end.trim() === '')) {
+      missingEndCount++;
+      console.error(`Missing end time: [${g}] ${l.date} ${l.start} "${l.subject}"`);
+    }
+  }
+}
+if (missingEndCount > 0) {
+  console.error(`FAIL: ${missingEndCount} dersin bitiş saati eksik!`);
+  process.exit(1);
+}
+console.log('SUCCESS: Tüm derslerin başlangıç ve bitiş saatleri tam!');
+
+console.log('\n=== TÜM DOĞRULAMA KONTROLLERI TAMAMLANDI (SIFIR HATA) ===');

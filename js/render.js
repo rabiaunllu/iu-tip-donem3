@@ -93,19 +93,43 @@ function renderSchedule() {
     if (isFree && !state.showFreeStudy && !searchLower) continue;
 
     // Laboratuvar kontrolü (Tıbbi Patoloji & Mikrobiyoloji)
-    // FIX-5: Lab notunu sadece lab saati kartına (14:30 civarı) veya lab türü kartlara ekle
-    // Önceki kod tüm günlük derslere lab notu ekliyordu (08:30 Kardiyoloji kartında bile lab notu çıkıyordu)
+    // Öğrencinin alt grubuna (A1..A8 / B1..B8) veya Tüm Sınıf seçimine göre kesin eşleme
     let note = details.note;
     const dayLabs = labs[iso];
-    if (dayLabs && state.subgroup !== 'all') {
+    if (dayLabs) {
       const lecStartNorm = normalizeTime(lec.start);
-      const isLabTimeSlot = lecStartNorm >= '14:00' && lecStartNorm <= '16:30';
+      const isLabTimeSlot = (lecStartNorm >= '13:30' && lecStartNorm <= '16:30');
       const isLabCard = details.cardType === 'practice' && details.badge === 'Laboratuvar';
+
       if (isLabTimeSlot || isLabCard) {
-        for (const labItem of dayLabs) {
-          if (labItem.groups && labItem.groups.includes(state.subgroup)) {
-            note += (note ? ' | ' : '') + `🧫 ${labItem.type} Pratiği (${labItem.time})`;
+        const groupLetter = state.group === '3A' ? 'A' : 'B';
+        const relevantLabs = dayLabs.filter(lab => lab.groups && lab.groups.some(g => g.startsWith(groupLetter)));
+
+        if (relevantLabs.length > 0) {
+          if (state.subgroup === 'all') {
+            // Tüm sınıf modunda: ilgili şubenin o günkü tüm laboratuvar seanslarını göster
+            const labDesc = relevantLabs.map(it => `${it.groups.join(', ')}: ${it.type} (${it.time})`).join(' | ');
+            note += (note ? ' | ' : '') + `🧫 Laboratuvar: ${labDesc}`;
+          } else {
+            // Alt grup (A1..A8 / B1..B8) eşlemesi: A1-A4 -> A1, A5-A8 -> A2
+            const num = parseInt(state.subgroup.substring(1), 10);
+            const studentLabGroup = (num <= 4) ? `${groupLetter}1` : `${groupLetter}2`;
+
+            const studentLabs = relevantLabs.filter(lab =>
+              lab.groups && (lab.groups.includes(state.subgroup) || lab.groups.includes(studentLabGroup))
+            );
+
+            for (const labItem of studentLabs) {
+              const labLabel = labItem.groups.includes(state.subgroup)
+                ? `Grup ${state.subgroup}`
+                : `Lab ${studentLabGroup} (Alt Grup ${studentLabGroup === groupLetter + '1' ? '1-4' : '5-8'})`;
+              note += (note ? ' | ' : '') + `🧫 ${labItem.type} Pratiği (${labItem.time}) [${labLabel}]`;
+            }
           }
+        } else if (details.badge === 'Laboratuvar' || /uygulama.*(patoloji|mikrobiyoloji)/i.test(lec.subject)) {
+          // Fakülte tablosunda generic lab yazılmış ama o gün bu şube için lab yoksa (ör: 29 Nisan 3A)
+          const otherGroup = state.group === '3A' ? '3B' : '3A';
+          note += (note ? ' | ' : '') + `ℹ️ Bu laboratuvar oturumu Dönem ${otherGroup} grubu içindir.`;
         }
       }
     }
@@ -133,8 +157,24 @@ function renderSchedule() {
 
   // FIX-4: normalizeTime ile saatler "08:30", "09:20" formatına dönüştürüldüğü için
   // localeCompare artık doğru sıralama üretir (önceki hata: "10:10" < "8:30")
+  // FIX-19: Resmi program saat çakışması tespiti (Öğrencilerin mağdur olmaması için)
   weekDays.forEach(d => {
     d.lectures.sort((a, b) => (a.start || '').localeCompare(b.start || ''));
+
+    for (let i = 0; i < d.lectures.length - 1; i++) {
+      const cur = d.lectures[i];
+      if (cur.cardType === 'free') continue;
+      for (let j = i + 1; j < d.lectures.length; j++) {
+        const next = d.lectures[j];
+        if (next.cardType === 'free') continue;
+        if (next.start && cur.end && next.start < cur.end) {
+          cur.hasConflict = true;
+          next.hasConflict = true;
+          cur.conflictWith = next.subject;
+          next.conflictWith = cur.subject;
+        }
+      }
+    }
   });
 
   const totalLectures = weekDays.reduce((acc, d) => acc + d.lectures.length, 0);
@@ -293,9 +333,16 @@ function getLectureCardHTML(lec) {
         <span class="text-[10px] font-mono font-bold text-slate-700 bg-white/90 px-1.5 py-0.5 rounded border border-slate-200/60 shadow-2xs">
           ${lec.start} - ${lec.end}
         </span>
-        <span class="text-[9px] px-1.5 py-0.5 rounded ${badgeClass}">
-          ${badge}
-        </span>
+        <div class="flex items-center gap-1">
+          ${lec.hasConflict ? `
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 font-extrabold flex items-center gap-0.5" title="Resmi programda saat çakışması">
+              <i data-lucide="alert-triangle" class="w-2.5 h-2.5"></i> Çakışma
+            </span>
+          ` : ''}
+          <span class="text-[9px] px-1.5 py-0.5 rounded ${badgeClass}">
+            ${badge}
+          </span>
+        </div>
       </div>
 
       <h5 class="text-[11px] font-bold leading-tight mt-1 text-slate-900">${escapeHTML(lec.subject)}</h5>
@@ -304,6 +351,13 @@ function getLectureCardHTML(lec) {
         <i data-lucide="map-pin" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
         <div class="truncate flex-1">${lec.yer}</div>
       </div>
+
+      ${lec.hasConflict ? `
+        <div class="mt-1.5 px-2 py-1 rounded-lg bg-amber-50/90 border border-amber-300 text-[9.5px] text-amber-900 font-bold flex items-start gap-1.5 shadow-2xs">
+          <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5"></i>
+          <span class="leading-tight">⚠️ Resmi fakülte programında bu saatte çakışma var: "${escapeHTML(lec.conflictWith)}". Koordinatörlük saat duyurusunu teyit ediniz.</span>
+        </div>
+      ` : ''}
 
       ${lec.note ? `
         <div class="mt-1.5 pt-1 border-t border-amber-200/70 text-[9px] text-amber-900 font-bold flex items-center gap-1">

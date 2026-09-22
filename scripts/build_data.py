@@ -124,6 +124,13 @@ def process_theoretical(group_name):
     rows = fetch_csv(url)
     lectures = []
 
+    # FIX-16: Bilinen eksik bitiş saatleri yaması (Fakülte tablosunda bitişi boş bırakılan standart bloklar)
+    KNOWN_END_TIMES = {
+        ('3A', '2026-09-25', '11:50'): '12:30',
+        ('3A', '2026-12-24', '11:00'): '11:40',
+        ('3A', '2027-06-03', '13:00'): '14:20'
+    }
+
     for r in rows[1:]:
         if len(r) < 5:
             continue
@@ -137,6 +144,18 @@ def process_theoretical(group_name):
         konu = r[4].strip() if len(r) > 4 else ''
         dilim = r[5].strip() if len(r) > 5 else ''
         yer = r[6].strip() if len(r) > 6 else ''
+
+        # Eksik bitiş saatlerini doldur
+        patch_key = (group_name, iso_date, bas_saat)
+        if not bit_saat and patch_key in KNOWN_END_TIMES:
+            bit_saat = KNOWN_END_TIMES[patch_key]
+
+        # Mükerrer boş satır temizliği: Aynı saatte dolu ders varsa boş olanı sil / atla
+        if konu:
+            lectures = [l for l in lectures if not (l['date'] == iso_date and l['start'] == bas_saat and not l['subject'])]
+        else:
+            if any(l['date'] == iso_date and l['start'] == bas_saat for l in lectures):
+                continue
 
         lectures.append({
             'date': iso_date,
@@ -280,17 +299,22 @@ def extract_rotations_3a():
         for l in reader.pages[p_idx].extract_text().splitlines():
             iso = to_iso_date(l)
             if iso:
-                line_after_day = re.sub(r'^.*?(Pazartesi|Salı|Sali|Çarşamba|Carsamba|Perşembe|Persembe|Cuma)\s*', '', l, flags=re.IGNORECASE).strip()
-                tokens = line_after_day.split()
-                left_dates.append((iso, tokens))
+                # Sütun bazlı token'ları ayıkla (A1-A2 gibi birleşik sütunları korur)
+                col_tokens = [tok for tok in l.split() if re.search(r'A[1-8]', tok)]
+                # FIX: 24 Mart 2027 döngüsel rotasyon 8. günü PDF dizgi hatası ('A4 A1 A2 A3 A4 A5' -> ilk A4 grubu A8'dir)
+                if iso == '2027-03-24' and len(col_tokens) >= 5 and col_tokens[0] == 'A4' and col_tokens[4] == 'A4':
+                    col_tokens[0] = 'A8'
+                left_dates.append((iso, col_tokens))
 
     # Collect all right-side group tokens from pages 1, 3, 5, 7, 9
     right_tokens_list = []
     for p_idx in [1, 3, 5, 7, 9]:
         for l in reader.pages[p_idx].extract_text().splitlines():
-            g = re.findall(r'A[1-8]', l)
-            if g and not any(k in l.upper() for k in ['DÖNEM', 'UYGULAMA', 'TARİH', 'DİLİM']):
-                right_tokens_list.append(l.strip().split())
+            if any(k in l.upper() for k in ['DÖNEM', 'UYGULAMA', 'TARİH', 'DİLİM']):
+                continue
+            col_tokens = [tok for tok in l.split() if re.search(r'A[1-8]', tok)]
+            if col_tokens:
+                right_tokens_list.append(col_tokens)
 
     # FIX-8: Blok sınırlarını tarih aralıklarına göre belirle (önceki idx//8 sabit bölümü
     # tatil günlerinde kayma yaratıyordu — 29 Ekim, 23 Nisan, dini bayramlar vb.)
@@ -313,23 +337,23 @@ def extract_rotations_3a():
         return None  # Aralık dışı (muhtemelen Block 8 veya bilinmeyen)
 
     # Map the first 7 blocks using date ranges (not rigid idx//8)
-    for idx, (iso, l_tokens) in enumerate(left_dates):
+    for idx, (iso, l_col_tokens) in enumerate(left_dates):
         block_idx = _find_block_for_date(iso)
         if block_idx is None or block_idx >= len(block_depts):
             continue  # Block 8 (Sinir-Duyu) ayrı işleniyor
         depts_left, depts_right = block_depts[block_idx]
 
         rotation_map[iso] = {}
-        for col, tok in enumerate(l_tokens):
+        for col, tok in enumerate(l_col_tokens):
             if col < len(depts_left):
-                for g in re.findall(r'A\d', tok):
+                for g in re.findall(r'A[1-8]', tok):
                     rotation_map[iso][g] = depts_left[col]
 
         if idx < len(right_tokens_list):
-            r_tokens = right_tokens_list[idx]
-            for col, tok in enumerate(r_tokens):
+            r_col_tokens = right_tokens_list[idx]
+            for col, tok in enumerate(r_col_tokens):
                 if col < len(depts_right):
-                    for g in re.findall(r'A\d', tok):
+                    for g in re.findall(r'A[1-8]', tok):
                         rotation_map[iso][g] = depts_right[col]
 
     # Block 8: Sinir-Duyu 2 (Page 11, index 10)
@@ -361,34 +385,53 @@ def extract_pathology_microbiology():
 
     with zipfile.ZipFile(docx_path) as z:
         tree = ET.fromstring(z.read('word/document.xml'))
-        ns = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
 
-        for tr in tree.iter(f'{ns}tr'):
-            cells = []
-            for tc in tr.findall(f'{ns}tc'):
-                texts = [p.text for p in tc.iter(f'{ns}t') if p.text]
-                cells.append(' '.join(texts).strip())
+        for tr in tree.iter('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}tr'):
+            col_pos = 0
+            cells_dict = {}
+            for tc in tr.findall('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}tc'):
+                t = ' '.join(p.text for p in tc.iter('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t') if p.text).strip()
+                gs = tc.find('.//{http://schemas.openxmlformats.org/wordprocessingml/2006/main}gridSpan')
+                span = int(gs.attrib.get('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val', '1')) if gs is not None else 1
+                for p in range(col_pos, col_pos + span):
+                    cells_dict[p] = t
+                col_pos += span
 
-            row_str = ' '.join(cells)
-            # FIX-9: Tek basamaklı gün/ay değerlerini de kabul et (ör: 5.10.2026)
-            date_m = re.search(r'(\d{1,2})\.(\d{1,2})\.(\d{4})', row_str)
-            if date_m:
-                d, m, y = date_m.group(1).zfill(2), date_m.group(2).zfill(2), date_m.group(3)
-                iso_date = f"{y}-{m}-{d}"
-                lab_map[iso_date] = lab_map.get(iso_date, [])
+            # Kolon 3: Tarih ve özel saat bilgisi (ör: 20.10 .2026 veya 25.05.2027 (13.30-15.20))
+            date_raw = cells_dict.get(3, '')
+            m = re.search(r'(\d{1,2})\s*\.\s*(\d{1,2})\s*\.\s*(\d{4})', date_raw)
+            if m:
+                d, m_num, y = m.group(1).zfill(2), m.group(2).zfill(2), m.group(3)
+                iso = f"{y}-{m_num}-{d}"
+                time_m = re.search(r'\((\d{1,2}[.:]\d{2}\s*-\s*\d{1,2}[.:]\d{2})\)', date_raw)
+                custom_time = time_m.group(1).replace('.', ':') if time_m else '14:30 - 16:20'
 
-                for c in cells:
-                    groups = re.findall(r'[AB][1-8]', c)
-                    if groups:
-                        lab_type = 'Tıbbi Patoloji' if any(p in row_str.upper() for p in ['PATOLOJİ', 'PATOLOJI']) else 'Mikrobiyoloji'
-                        lab_map[iso_date].append({
-                            'groups': groups,
-                            'type': lab_type,
-                            'time': '14:30 - 16:20',
-                            'info': c
-                        })
+                lab_map[iso] = lab_map.get(iso, [])
 
-    print(f"[Laboratuvar] Toplam {len(lab_map)} farkli tarihte Patoloji/Mikrobiyoloji pratigi cikarildi.")
+                # Kolon 4: Daima Mikrobiyoloji alt grubu
+                c4 = cells_dict.get(4, '')
+                g4 = [re.sub(r'\s+', '', g) for g in re.findall(r'[AB]\s*[1-8]', c4)]
+                if g4:
+                    lab_map[iso].append({
+                        'groups': g4,
+                        'type': 'Mikrobiyoloji',
+                        'time': custom_time,
+                        'info': c4
+                    })
+
+                # Kolon 5: Daima Tıbbi Patoloji alt grubu
+                c5 = cells_dict.get(5, '')
+                g5 = [re.sub(r'\s+', '', g) for g in re.findall(r'[AB]\s*[1-8]', c5)]
+                if g5:
+                    lab_map[iso].append({
+                        'groups': g5,
+                        'type': 'Tıbbi Patoloji',
+                        'time': custom_time,
+                        'info': c5
+                    })
+
+    total_assignments = sum(len(item['groups']) for day in lab_map.values() for item in day)
+    print(f"[Laboratuvar] Toplam {len(lab_map)} takvim gununde {total_assignments} alt grup Patoloji/Mikrobiyoloji pratigi cikarildi.")
     return lab_map
 
 # ═════════════════════════════════════════════════════════════════

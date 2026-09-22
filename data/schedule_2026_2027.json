@@ -1,6 +1,6 @@
 {
   "version": "2026-2027-v1",
-  "generated_at": "2026-09-20T23:14:34.640239",
+  "generated_at": "2026-09-23T01:25:57.995737",
   "semester_start": "2026-09-01",
   "semester_end": "2027-07-09",
   "lectures_3A": [
@@ -989,7 +989,7 @@
       "date": "2026-09-25",
       "date_str": "25 Eylül 2026 Cuma",
       "start": "11:50",
-      "end": "",
+      "end": "12:30",
       "subject": "2-Üst ekstremite Muayenesi / Doç.Dr. Ömer Ayık/(Dr.Öğr.Üyesi Alper Ş.KENDİRCİ)",
       "department": "HAREKET II DİLİMİ / ORTOPEDİ VE TRAVMATOLOJİ AD.",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
@@ -998,16 +998,7 @@
       "date": "2026-09-25",
       "date_str": "25 Eylül 2026 Cuma",
       "start": "14:00",
-      "end": "14:50",
-      "subject": "1-Spor Yaralanmalarından Korunma / Prof.Dr. Bülent BAYRAKTAR (Prof.Dr. Gökhan METİN)",
-      "department": "HAREKET II DİLİMİ / SPOR HEKİMLİĞİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
-    },
-    {
-      "date": "2026-09-25",
-      "date_str": "25 Eylül 2026 Cuma",
-      "start": "15:00",
-      "end": "15:40",
+      "end": "14:40",
       "subject": "SERBEST ÇALIŞMA",
       "department": "",
       "location_raw": ""
@@ -1015,8 +1006,17 @@
     {
       "date": "2026-09-25",
       "date_str": "25 Eylül 2026 Cuma",
-      "start": "15:50",
-      "end": "16:30",
+      "start": "14:50",
+      "end": "15:30",
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
+    },
+    {
+      "date": "2026-09-25",
+      "date_str": "25 Eylül 2026 Cuma",
+      "start": "15:40",
+      "end": "16:00",
       "subject": "SERBEST ÇALIŞMA",
       "department": "",
       "location_raw": ""
@@ -1287,9 +1287,9 @@
       "date_str": "1 Ekim 2026 Perşembe",
       "start": "15:20",
       "end": "16:00",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Spor Yaralanmalarından Korunma / Prof.Dr. Bülent BAYRAKTAR (Prof.Dr. Gökhan METİN)",
+      "department": "HAREKET II DİLİMİ / SPOR HEKİMLİĞİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-10-02",
@@ -1350,16 +1350,16 @@
       "date_str": "2 Ekim 2026 Cuma",
       "start": "15:00",
       "end": "15:40",
-      "subject": "",
+      "subject": "ÖLÇME VE DEĞERLENDİRME BİLGİLENDİRME TOPLANTISI (İngilizce Tıp ile ortak)",
       "department": "",
-      "location_raw": ""
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-10-02",
       "date_str": "2 Ekim 2026 Cuma",
       "start": "15:50",
       "end": "16:30",
-      "subject": "",
+      "subject": "SERBEST ÇALIŞMA",
       "department": "",
       "location_raw": ""
     },
@@ -4868,7 +4868,7 @@
       "date": "2026-12-24",
       "date_str": "24 Aralık 2026 Perşembe",
       "start": "11:00",
-      "end": "",
+      "end": "11:40",
       "subject": "4-Antiviraller / Prof.Dr. Ayşe Pınar YAMANTÜRK ÇELİK (Prof.Dr. A. Yağız ÜRESİN)",
       "department": "SOLUNUM II DİLİMİ / TIBBİ FARMAKOLOJİ AD.",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
@@ -10934,7 +10934,7 @@
       "date": "2027-06-03",
       "date_str": "3 Haziran 2027 Perşembe",
       "start": "13:00",
-      "end": "",
+      "end": "14:20",
       "subject": "SERBEST ÇALIŞMA",
       "department": "",
       "location_raw": ""
@@ -12026,9 +12026,9 @@
       "date_str": "21 Eylül 2026 Pazartesi",
       "start": "13:30",
       "end": "14:10",
-      "subject": "SERBEST ÇALIŞMA",
+      "subject": "14-Sindirim sisteminin muayenesi II  ek ders/ Prof. Dr. Kadir DEMİR  (Prof.Dr. Selman Fatih BEŞIŞIK)",
       "department": "SEMİYOLOJİ DİLİMİ / İÇ HASTALIKLARI AD.",
-      "location_raw": ""
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-21",
@@ -12080,45 +12080,45 @@
       "date_str": "22 Eylül 2026 Salı",
       "start": "11:00",
       "end": "11:40",
-      "subject": "1-Antimikrobiyal ilaçların temel özellikleri ve direnç gelişimi / Prof.Dr. A. Pınar YAMANTÜRK ÇELİK (Prof.Dr. Ali Yağız ÜRESİN)",
-      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ FARMAKOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-22",
       "date_str": "22 Eylül 2026 Salı",
       "start": "11:50",
       "end": "12:30",
-      "subject": "1-Psikiyatriye giriş ve anamnez / Öğr.Üyesi Dr. Ezgi İnce GULIYEV/ Doç.Dr. Müge BOZKURT",
-      "department": "SEMİYOLOJİ DİLİMİ / RUH SAĞLIĞI VE HASTALIKLARI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-22",
       "date_str": "22 Eylül 2026 Salı",
       "start": "13:30",
       "end": "14:10",
-      "subject": "1-Brucella - Francisella cinsleri / Prof.Dr. Zerrin AKTAŞ (Prof.Dr. Betigül ÖNGEN)",
-      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-22",
       "date_str": "22 Eylül 2026 Salı",
       "start": "14:20",
       "end": "15:00",
-      "subject": "1-Lenf gangliyonu hastalıkları / Prof.Dr. Gülçin YEGEN / (Dr.Öğr.Üyesi Ali Yılmaz ALTAY)",
-      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ PATOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-22",
       "date_str": "22 Eylül 2026 Salı",
       "start": "15:10",
       "end": "15:50",
-      "subject": "2-Hodgkin lenfoma /  Prof.Dr. Gülçin YEGEN / (Dr.Öğr.Üyesi Ali Yılmaz ALTAY)",
-      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ PATOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-23",
@@ -12188,9 +12188,9 @@
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "08:30",
       "end": "09:10",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "Öğretim üyesi Uygulama 2   -  B2",
+      "department": "KAN-LENFOİD II DİLİMİ",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
       "date": "2026-09-24",
@@ -12206,9 +12206,9 @@
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "10:10",
       "end": "10:50",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Antimikrobiyal ilaçların temel özellikleri ve direnç gelişimi / Prof.Dr. A. Pınar YAMANTÜRK ÇELİK (Prof.Dr. Ali Yağız ÜRESİN)",
+      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ FARMAKOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-24",
@@ -12224,8 +12224,8 @@
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "11:50",
       "end": "12:30",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
+      "subject": "1-Psikiyatriye giriş ve anamnez / Öğr.Üyesi Dr. Ezgi İnce GULIYEV/ Doç.Dr. Müge BOZKURT",
+      "department": "SEMİYOLOJİ DİLİMİ / RUH SAĞLIĞI VE HASTALIKLARI AD.",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
@@ -12287,18 +12287,18 @@
       "date_str": "25 Eylül 2026 Cuma",
       "start": "14:00",
       "end": "14:50",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Lenf gangliyonu hastalıkları / Prof.Dr. Gülçin YEGEN / (Dr.Öğr.Üyesi Ali Yılmaz ALTAY)",
+      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ PATOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-25",
       "date_str": "25 Eylül 2026 Cuma",
       "start": "15:00",
       "end": "15:40",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "2-Hodgkin lenfoma /  Prof.Dr. Gülçin YEGEN / (Dr.Öğr.Üyesi Ali Yılmaz ALTAY)",
+      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ PATOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-25",
@@ -12620,16 +12620,16 @@
       "date_str": "2 Ekim 2026 Cuma",
       "start": "15:00",
       "end": "15:40",
-      "subject": "",
+      "subject": "ÖLÇME VE DEĞERLENDİRME BİLGİLENDİRME TOPLANTISI (İngilizce Tıp ile ortak)",
       "department": "",
-      "location_raw": ""
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-10-02",
       "date_str": "2 Ekim 2026 Cuma",
       "start": "15:50",
       "end": "16:30",
-      "subject": "",
+      "subject": "SERBEST ÇALIŞMA",
       "department": "",
       "location_raw": ""
     },
@@ -12764,9 +12764,9 @@
       "date_str": "7 Ekim 2026 Çarşamba",
       "start": "08:30",
       "end": "09:10",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "Öğretim üyesi Uygulama 2   -  B3",
+      "department": "KAN-LENFOİD II DİLİMİ",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
       "date": "2026-10-07",
@@ -12953,9 +12953,9 @@
       "date_str": "12 Ekim 2026 Pazartesi",
       "start": "09:20",
       "end": "10:00",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Brucella - Francisella cinsleri / Prof.Dr. Zerrin AKTAŞ (Prof.Dr. Betigül ÖNGEN)",
+      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-10-12",
@@ -14180,15 +14180,6 @@
       "subject": "16-Oranların (Sıklıkların) karşılaştırılması - güven aralığı tahmini - z testi ve ki-kare testleri / Dr.Öğr.Üyesi Sevda ÖZEL YILDIZ/(Dr.Başak GÜRTEKİN) A + B Grubu Ortak",
       "department": "DİKEY KORİDOR III(A) DİLİMİ / BİYOİSTATİSTİK AD.",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
-    },
-    {
-      "date": "2026-12-23",
-      "date_str": "23 Aralık 2026 Çarşamba",
-      "start": "08:30",
-      "end": "09:10",
-      "subject": "",
-      "department": "",
-      "location_raw": ""
     },
     {
       "date": "2026-11-10",
@@ -22979,10 +22970,11 @@
       "A6": "Genel Cerrahi"
     },
     "2027-03-24": {
-      "A4": "Çocuk Gastro",
+      "A8": "Gastroenteroloji",
       "A1": "Gastroenteroloji",
       "A2": "Gastroenteroloji",
       "A3": "Çocuk Gastro",
+      "A4": "Çocuk Gastro",
       "A5": "Genel Pediatri",
       "A6": "Acil Dahiliye",
       "A7": "Genel Cerrahi"
@@ -23058,8 +23050,12 @@
       "A6": "Üroloji"
     },
     "2027-04-28": {
-      "A8": "Nefroloji",
-      "A1": "Nefroloji",
+      "A8": "Kadın Doğum",
+      "A1": "Kadın Doğum",
+      "A2": "Kadın Doğum",
+      "A3": "Nefroloji",
+      "A4": "Nefroloji",
+      "A5": "Nefroloji",
       "A6": "Çocuk Nefrolojisi",
       "A7": "Üroloji"
     },
@@ -23148,7 +23144,7 @@
     "2026-09-21": {
       "B1": "HEMATOLOJİ",
       "B2": "HEMATOLOJİ",
-      "B3": "GERİATRİ",
+      "B3": "GERATRİ",
       "B4": "ACİL DAHİLİYE",
       "B5": "KAN MERKEZİ",
       "B6": "ÇOCUK HEMATOLOJİSİ",
@@ -23158,7 +23154,7 @@
     "2026-09-23": {
       "B2": "HEMATOLOJİ",
       "B3": "HEMATOLOJİ",
-      "B4": "GERİATRİ",
+      "B4": "GERATRİ",
       "B5": "ACİL DAHİLİYE",
       "B6": "KAN MERKEZİ",
       "B7": "ÇOCUK HEMATOLOJİSİ",
@@ -23168,7 +23164,7 @@
     "2026-09-28": {
       "B3": "HEMATOLOJİ",
       "B4": "HEMATOLOJİ",
-      "B5": "GERİATRİ",
+      "B5": "GERATRİ",
       "B6": "ACİL DAHİLİYE",
       "B7": "KAN MERKEZİ",
       "B8": "ÇOCUK HEMATOLOJİSİ",
@@ -23178,7 +23174,7 @@
     "2026-09-30": {
       "B4": "HEMATOLOJİ",
       "B5": "HEMATOLOJİ",
-      "B6": "GERİATRİ",
+      "B6": "GERATRİ",
       "B7": "ACİL DAHİLİYE",
       "B8": "KAN MERKEZİ",
       "B1": "ÇOCUK HEMATOLOJİSİ",
@@ -23188,7 +23184,7 @@
     "2026-10-05": {
       "B5": "HEMATOLOJİ",
       "B6": "HEMATOLOJİ",
-      "B7": "GERİATRİ",
+      "B7": "GERATRİ",
       "B8": "ACİL DAHİLİYE",
       "B1": "KAN MERKEZİ",
       "B2": "ÇOCUK HEMATOLOJİSİ",
@@ -23198,7 +23194,7 @@
     "2026-10-07": {
       "B6": "HEMATOLOJİ",
       "B7": "HEMATOLOJİ",
-      "B8": "GERİATRİ",
+      "B8": "GERATRİ",
       "B1": "ACİL DAHİLİYE",
       "B2": "KAN MERKEZİ",
       "B3": "ÇOCUK HEMATOLOJİSİ",
@@ -23208,7 +23204,7 @@
     "2026-10-12": {
       "B7": "HEMATOLOJİ",
       "B8": "HEMATOLOJİ",
-      "B1": "GERİATRİ",
+      "B1": "GERATRİ",
       "B2": "ACİL DAHİLİYE",
       "B3": "KAN MERKEZİ",
       "B4": "ÇOCUK HEMATOLOJİSİ",
@@ -23218,7 +23214,7 @@
     "2026-10-14": {
       "B8": "HEMATOLOJİ",
       "B1": "HEMATOLOJİ",
-      "B2": "GERİATRİ",
+      "B2": "GERATRİ",
       "B3": "ACİL DAHİLİYE",
       "B4": "KAN MERKEZİ",
       "B5": "ÇOCUK HEMATOLOJİSİ",
@@ -23802,7 +23798,7 @@
         "groups": [
           "A2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 - (H)"
       }
@@ -23820,12 +23816,47 @@
         "groups": [
           "A1"
         ],
-        "type": "Mikrobiyoloji",
+        "type": "Tıbbi Patoloji",
         "time": "14:30 - 16:20",
         "info": "A1 -  (H) (BB-GÜ)"
       }
     ],
-    "2026-10-15": [],
+    "2026-10-15": [
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 - (KL 1)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2-  (H) (BB-GÜ)"
+      }
+    ],
+    "2026-10-20": [
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -  (KL 2)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B1-  (KL)  (GY-AYA)"
+      }
+    ],
     "2026-10-22": [
       {
         "groups": [
@@ -23834,6 +23865,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1 -   (KL 2)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -   (KL) (GY-AYA)"
       }
     ],
     "2026-10-27": [
@@ -23861,7 +23900,7 @@
         "groups": [
           "A2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 -   (KL 2)"
       },
@@ -23882,6 +23921,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A1-  (KL 2)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -   (KL) (GY-AYA)"
       }
     ],
     "2026-11-10": [
@@ -23897,7 +23944,7 @@
         "groups": [
           "B1"
         ],
-        "type": "Mikrobiyoloji",
+        "type": "Tıbbi Patoloji",
         "time": "14:30 - 16:20",
         "info": "B1 -  (H) (BB-GÜ)"
       }
@@ -23910,6 +23957,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1-   (H)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -   (H) (BB-GÜ)"
       }
     ],
     "2026-11-24": [
@@ -23925,7 +23980,7 @@
         "groups": [
           "A1"
         ],
-        "type": "Mikrobiyoloji",
+        "type": "Tıbbi Patoloji",
         "time": "14:30 - 16:20",
         "info": "A1-   (D) (AB-ÖH)"
       }
@@ -23935,12 +23990,28 @@
         "groups": [
           "B2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B2 -   (SL 1)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -   (D) (AB-ÖH)"
       }
     ],
     "2026-12-01": [
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -   (SL 2)"
+      },
       {
         "groups": [
           "B1"
@@ -23958,6 +24029,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1-   (SL 2)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -   (SL) (YÖ-DVB)"
       }
     ],
     "2026-12-08": [
@@ -23965,7 +24044,7 @@
         "groups": [
           "A2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 -   (SL 1)"
       },
@@ -23986,6 +24065,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A1-   (SL 1)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -  (SL) (YÖ-DVB)"
       }
     ],
     "2026-12-15": [
@@ -24001,7 +24088,7 @@
         "groups": [
           "B1"
         ],
-        "type": "Mikrobiyoloji",
+        "type": "Tıbbi Patoloji",
         "time": "14:30 - 16:20",
         "info": "B1-   (D) (AB-ÖH)"
       }
@@ -24014,17 +24101,50 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 - (SL 2)"
-      }
-    ],
-    "2027-02-09": [],
-    "2027-02-11": [
+      },
       {
         "groups": [
           "B2"
         ],
         "type": "Tıbbi Patoloji",
         "time": "14:30 - 16:20",
+        "info": "B 2 -  (D) (AB-ÖH)"
+      }
+    ],
+    "2027-02-09": [
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 - (SND 1)"
+      },
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 1 - (END) (GY-SÖ)"
+      }
+    ],
+    "2027-02-11": [
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
         "info": "B2 - (SND 1)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 - (END) (GY-SÖ)"
       }
     ],
     "2027-02-16": [
@@ -24032,9 +24152,17 @@
         "groups": [
           "B2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B2-   (SND 2)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 -  (SND) (MB-NB)"
       }
     ],
     "2027-02-18": [
@@ -24050,7 +24178,7 @@
         "groups": [
           "B2"
         ],
-        "type": "Mikrobiyoloji",
+        "type": "Tıbbi Patoloji",
         "time": "14:30 - 16:20",
         "info": "B2 -  (SND) (MB-NB)"
       }
@@ -24063,6 +24191,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A1 - (SND 1)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 - (END) (GY-SÖ)"
       }
     ],
     "2027-02-25": [
@@ -24070,7 +24206,7 @@
         "groups": [
           "A2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2-  (SND 1)"
       },
@@ -24083,8 +24219,42 @@
         "info": "B2 - (END) (GY-SÖ)"
       }
     ],
-    "2027-03-02": [],
-    "2027-03-04": [],
+    "2027-03-02": [
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -  (SND 2)"
+      },
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 1 -   (SND) (MB-NB)"
+      }
+    ],
+    "2027-03-04": [
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 1 -  (SND 2)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -  (SND) (MB-NB)"
+      }
+    ],
     "2027-04-01": [
       {
         "groups": [
@@ -24093,6 +24263,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 -  (ÜRG 1)"
+      },
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 1 -  (ÜRG 1) (SÖ-AB)"
       }
     ],
     "2027-04-06": [
@@ -24103,6 +24281,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A1 -  (ÜRG 1)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -  (ÜRG 1) (SÖ-AB)"
       }
     ],
     "2027-04-08": [
@@ -24110,9 +24296,17 @@
         "groups": [
           "B2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B2 -  (SND 1)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 -  (SND 1) (BB-GÜ)"
       }
     ],
     "2027-04-13": [
@@ -24123,6 +24317,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1 -  (SND 1)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -  (SND 1) (BB-GÜ)"
       }
     ],
     "2027-04-15": [
@@ -24133,6 +24335,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 -   (ÜRG 2)"
+      },
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 1 -  (ÜRG 2) (YÖ-ÖH)"
       }
     ],
     "2027-04-20": [
@@ -24143,6 +24353,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A1 -  (ÜRG 2)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -  (ÜRG 2) (YÖ-ÖH)"
       }
     ],
     "2027-04-22": [
@@ -24153,6 +24371,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B2 -  (SND 2)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 -  (SND 2) (ŞÖS-BYE)"
       }
     ],
     "2027-04-27": [
@@ -24163,6 +24389,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1 -  (SND 2)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -   (SND 2) (ŞÖS-BYE)"
       }
     ],
     "2027-04-29": [
@@ -24173,6 +24407,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B2 -   (ÜRG 1)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 -  (ÜRG 1) (SÖ-AB)"
       }
     ],
     "2027-05-04": [
@@ -24183,6 +24425,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1 -  (ÜRG 1)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -  (ÜRG 1) (SÖ-AB)"
       }
     ],
     "2027-05-06": [
@@ -24190,9 +24440,17 @@
         "groups": [
           "A2"
         ],
-        "type": "Tıbbi Patoloji",
+        "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A2 -  (SND 1)"
+      },
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 1 -  (SND 1) (BB-GÜ)"
       }
     ],
     "2027-05-11": [
@@ -24203,6 +24461,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "A1 -  (SND 1)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "A 2 -  (SND 1) (BB-GÜ)"
       }
     ],
     "2027-05-13": [
@@ -24213,6 +24479,14 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B2 -  (ÜRG 2)"
+      },
+      {
+        "groups": [
+          "B1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 1 -  (ÜRG 2) (YÖ-ÖH)"
       }
     ],
     "2027-05-20": [
@@ -24223,16 +24497,48 @@
         "type": "Mikrobiyoloji",
         "time": "14:30 - 16:20",
         "info": "B1 -  (ÜRG 2)"
+      },
+      {
+        "groups": [
+          "B2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "14:30 - 16:20",
+        "info": "B 2 -  (ÜRG 2) (YÖ-ÖH)"
       }
     ],
     "2027-05-25": [
       {
         "groups": [
+          "A2"
+        ],
+        "type": "Mikrobiyoloji",
+        "time": "13:30-15:20",
+        "info": "A 2 -  (SND 2)"
+      },
+      {
+        "groups": [
+          "A1"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "13:30-15:20",
+        "info": "A 1 -  (SND 2) (ŞÖS-BYE)"
+      },
+      {
+        "groups": [
           "A1"
         ],
         "type": "Mikrobiyoloji",
-        "time": "14:30 - 16:20",
+        "time": "15:30-17:20",
         "info": "A1 -  (SND 2)"
+      },
+      {
+        "groups": [
+          "A2"
+        ],
+        "type": "Tıbbi Patoloji",
+        "time": "15:30-17:20",
+        "info": "A 2 -  (SND 2) (ŞÖS-BYE)"
       }
     ]
   },
