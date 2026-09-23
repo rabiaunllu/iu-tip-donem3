@@ -202,6 +202,21 @@ function normalizeRawSheetRows(rows) {
       continue;
     }
 
+    // FIX-21: Canlı Google Sheet'ten çekilen satırlarda diğer şubeye ait jenerik lab satırlarını filtrele
+    const su = subject.toUpperCase();
+    if (su.includes('PATOLOJ') && (su.includes('MİKROBİYOLOJ') || su.includes('MIKROBIYOLOJ') || su.includes('UYGULAMA'))) {
+      const labs = state.db && state.db.laboratories ? state.db.laboratories : null;
+      if (labs && labs[iso]) {
+        const groupLetter = state.group === '3A' ? 'A' : 'B';
+        const dayLabs = labs[iso];
+        const hasMyLab = dayLabs.some(l => l.groups && l.groups.some(g => g.startsWith(groupLetter)));
+        if (!hasMyLab) {
+          // Bu laboratuvar seansı diğer şube içindir; öğrenci programını yanıltıcı kartla kirletme
+          continue;
+        }
+      }
+    }
+
     lectures.push({
       date: iso,
       date_str: dateStr,
@@ -248,7 +263,7 @@ function parseAmfiSchedule(rows) {
         const bas = saatRaw.split(/[-–]/)[0].trim().replace(':', '.');
         daysMap[currentDay][bas] = daysMap[currentDay][bas] || {};
         for (let c = 1; c < Math.min(row.length, currentHeaders.length); c++) {
-          const val = row[c].trim();
+          const val = (row[c] || '').trim();
           const amfi = currentHeaders[c];
           if (val && amfi) daysMap[currentDay][bas][amfi] = val;
         }
@@ -257,6 +272,70 @@ function parseAmfiSchedule(rows) {
   }
   return daysMap;
 }
+
+function normalizeAmfiName(rawName) {
+  if (!rawName) return 'Resmi Amfi Portalı';
+  if (/kemal\s*atay/i.test(rawName)) return 'Kemal Atay Amfisi';
+  if (/az[iİıI]z\s*sancar/i.test(rawName)) return 'Aziz Sancar Amfisi';
+  if (/tevf[iİıI]k\s*sa[ğg]lam/i.test(rawName)) return 'Tevfik Sağlam Amfisi';
+  if (/sam[iİıI]\s*zan/i.test(rawName)) return 'Sami Zan Amfisi';
+  if (/cem[iİıI]l\s*topuzlu/i.test(rawName)) return 'Cemil Topuzlu Amfisi';
+  if (/muzaffer\s*aksoy/i.test(rawName)) return 'Muzaffer Aksoy Amfisi';
+  if (/temel\s*b[iİıI]l[iİıI]mler/i.test(rawName)) return 'Temel Bilimler Amfi III';
+  if (/esk[iİıI]\s*f[iİıI]z[iİıI]k/i.test(rawName)) return 'Eski Fizik Tedavi Dersliği';
+  return rawName.trim();
+}
+
+function findAmfiFromLiveSchedule(dayLower, startHour, groupName) {
+  if (!state.cacheData || !state.cacheData.amfi) return null;
+  const amfiSchedule = state.cacheData.amfi;
+  if (typeof amfiSchedule !== 'object' || Object.keys(amfiSchedule).length === 0) return null;
+
+  let matchedDayKey = null;
+  for (const dk of Object.keys(amfiSchedule)) {
+    if (dayLower.includes(dk) || dk.includes(dayLower)) {
+      matchedDayKey = dk;
+      break;
+    }
+  }
+  if (!matchedDayKey) return null;
+
+  const dayData = amfiSchedule[matchedDayKey];
+  if (!dayData || typeof dayData !== 'object') return null;
+
+  const cleanHour = (startHour || '').replace(':', '.');
+  const targetHour = cleanHour.startsWith('0') ? cleanHour.substring(1) : cleanHour;
+  const groupPattern = groupName === '3A'
+    ? /(3\s*A|DÖNEM\s*3\s*-\s*TÜRKÇE\s*-\s*A|DÖNEM\s*3\s*A|3A)/i
+    : /(3\s*B|DÖNEM\s*3\s*-\s*TÜRKÇE\s*-\s*B|DÖNEM\s*3\s*B|3B)/i;
+
+  // 1. Saat bazlı eşleşme ara
+  for (const [hourKey, amfiMap] of Object.entries(dayData)) {
+    const hNorm = hourKey.replace(':', '.');
+    const hClean = hNorm.startsWith('0') ? hNorm.substring(1) : hNorm;
+    if (hClean === targetHour || (targetHour && hClean.startsWith(targetHour.split('.')[0]))) {
+      for (const [amfiName, cellVal] of Object.entries(amfiMap)) {
+        if (groupPattern.test(cellVal)) {
+          return normalizeAmfiName(amfiName);
+        }
+      }
+    }
+  }
+
+  // 2. Gün geneli amfi eşleşmesi ara
+  for (const amfiMap of Object.values(dayData)) {
+    if (typeof amfiMap === 'object') {
+      for (const [amfiName, cellVal] of Object.entries(amfiMap)) {
+        if (groupPattern.test(cellVal)) {
+          return normalizeAmfiName(amfiName);
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
 
 function resolveLectureAmfi(lec, gunStr, groupName) {
   const s = (lec.subject || '').trim();
@@ -295,7 +374,36 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
     }
   }
 
-  // 4. Fakülte resmi amfi tablosundan doğrulanmış gün bazlı amfi dağılımı (Pazartesi, Salı, Perşembe, Cuma)
+  // 4. CANLI / SON DAKİKA AMFİ DEĞİŞİKLİĞİ ÖNCELİĞİ:
+  // Hoca veya dekanlık Google E-Tablo'da dersin "Yer" sütununa spesifik bir amfi adı yazmışsa,
+  // bu canlı bilgi statik gün dağılımından DAHA ÖNCELİKLİDİR (Hoca 5dk önce değiştirse bile yakalanır)!
+  // Türkçe i/ı harf duyarsız regex eşleşmesi kullanılır.
+  const amfiKeywords = [
+    { pattern: /kemal\s*atay/i, name: 'Kemal Atay Amfisi' },
+    { pattern: /sam[iİıI]\s*zan/i, name: 'Sami Zan Amfisi' },
+    { pattern: /az[iİıI]z\s*sancar/i, name: 'Aziz Sancar Amfisi' },
+    { pattern: /tevf[iİıI]k\s*sa[ğg]lam/i, name: 'Tevfik Sağlam Amfisi' },
+    { pattern: /cem[iİıI]l\s*topuzlu/i, name: 'Cemil Topuzlu Amfisi' },
+    { pattern: /muzaffer\s*aksoy/i, name: 'Muzaffer Aksoy Amfisi' },
+    { pattern: /temel\s*b[iİıI]l[iİıI]mler/i, name: 'Temel Bilimler Amfi III' },
+    { pattern: /esk[iİıI]\s*f[iİıI]z[iİıI]k/i, name: 'Eski Fizik Tedavi Dersliği' }
+  ];
+
+  for (const item of amfiKeywords) {
+    if (item.pattern.test(rawLoc)) {
+      return { name: item.name, isKnown: true, isLiveOverride: true };
+    }
+  }
+
+  // 5. CANLI ÇEKİLEN AMFİ E-TABLOSU (state.cacheData.amfi):
+  if (state.cacheData && state.cacheData.amfi) {
+    const liveAmfi = findAmfiFromLiveSchedule(gLower, startHour, groupName);
+    if (liveAmfi) {
+      return { name: liveAmfi, isKnown: true, isLiveSchedule: true };
+    }
+  }
+
+  // 6. Fakülte resmi amfi tablosundan doğrulanmış gün bazlı amfi dağılımı (Pazartesi, Salı, Perşembe, Cuma)
   const weeklyMap = (state.db && state.db.amfi_default && state.db.amfi_default.weekly_mapping)
     ? state.db.amfi_default.weekly_mapping[groupName]
     : {
@@ -319,26 +427,6 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
       if (gLower.includes(dayKey) || dayKey.includes(gLower)) {
         return { name: amfiName, isKnown: true };
       }
-    }
-  }
-
-  // 5. Eğer konum metninde bilinen bir amfi adı doğrudan yazıyorsa
-  // FIX-3: locationUpper değişkeni rawLoc'tan türetilmelidir (önceki kod tanımsızdı → ReferenceError)
-  const locationUpper = rawLoc.toUpperCase();
-  const amfiKeywords = [
-    { key: 'KEMAL ATAY', name: 'Kemal Atay Amfisi' },
-    { key: 'SAMİ ZAN', name: 'Sami Zan Amfisi' },
-    { key: 'AZİZ SANCAR', name: 'Aziz Sancar Amfisi' },
-    { key: 'TEVFİK SAĞLAM', name: 'Tevfik Sağlam Amfisi' },
-    { key: 'CEMİL TOPUZLU', name: 'Cemil Topuzlu Amfisi' },
-    { key: 'MUZAFFER AKSOY', name: 'Muzaffer Aksoy Amfisi' },
-    { key: 'TEMEL BİLİMLER', name: 'Temel Bilimler Amfi III' },
-    { key: 'ESKİ FİZİK TEDAVİ', name: 'Eski Fizik Tedavi Dersliği' }
-  ];
-
-  for (const item of amfiKeywords) {
-    if (locationUpper.includes(item.key)) {
-      return { name: item.name, isKnown: true };
     }
   }
 
@@ -571,19 +659,25 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
 
   // 10. Teorik Ders — Gün ve ders amfisi eşleme
   const amfiInfo = resolveLectureAmfi(lec, gun, group);
+  const isLiveAmfi = !!(amfiInfo.isLiveOverride || amfiInfo.isLiveSchedule);
   let resolvedLocation = `🏛️ ${amfiInfo.name}`;
-  if (amfiInfo.isPortal) {
+  if (isLiveAmfi) {
+    resolvedLocation = `🏛️ ${amfiInfo.name} <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 ml-1 inline-flex items-center gap-0.5">⚡ Canlı Amfi</span>`;
+  } else if (amfiInfo.isPortal) {
     resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
   }
 
   const badge = amfiInfo.isSecmeli ? 'Seçmeli' : 'Teorik';
-  const note = amfiInfo.isSecmeli ? 'Farklı amfilerde seçtiğiniz derse göre dağılım yapılır' : '';
+  const note = amfiInfo.isSecmeli
+    ? 'Farklı amfilerde seçtiğiniz derse göre dağılım yapılır'
+    : (isLiveAmfi ? '✓ Canlı kaynaktan teyit edilen güncel amfi' : '');
 
   return {
     cardType: 'theory',
     badge,
     resolvedLocation,
-    note
+    note,
+    isLiveAmfi
   };
 }
 

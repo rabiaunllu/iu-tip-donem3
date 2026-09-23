@@ -248,42 +248,67 @@ if (missingAmfiCount > 0) {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// FIX-14: SAAT ÇAKIŞMA KONTROLÜ — Aynı gruptaki öğrenciye çakışan ders var mı?
+// FIX-14: SAAT ÇAKIŞMA KONTROLÜ (GELİŞMİŞ ARALIK BAZLI DENETİM)
 // ═══════════════════════════════════════════════════════════════
-console.log('--- FIX-14: Saat Çakışma Kontrolü ---');
-let conflictCount = 0;
+console.log('--- FIX-14: Saat Çakışma Kontrolü (Aralık Bazlı) ---');
+
+// Resmi fakülte tablosundaki bilinen saat kaymaları (Cuma günleri fakülte saat bindirmesi)
+// Bunlar arayüzde öğrenciye özel uyarı rozeti ile gösterilmektedir.
+const KNOWN_FACULTY_CONFLICTS = new Set([
+  '3B_2026-12-25', // Cuma: Hasta Başı Uygulama (13:30-14:20) vs Elektrokardiyogram VIII (14:00-14:40)
+  '3B_2027-03-05', // Cuma: Öğr. Üyesi Uygulama 3 (11:10-12:10) vs Biyokimya (11:50-12:30)
+  '3B_2027-03-19'  // Cuma: Öğr. Üyesi Uygulama 6 (11:10-12:10) vs Çocuk Sağlığı (11:50-12:30)
+]);
+
+let unknownConflictCount = 0;
+let knownFacultyConflictCount = 0;
+
 for (const g of ['3A', '3B']) {
   const lectures = db['lectures_' + g];
-  // Tarihe göre grupla
   const byDate = {};
   for (const l of lectures) {
     if (!l.date) continue;
     byDate[l.date] = byDate[l.date] || [];
     byDate[l.date].push(l);
   }
-  // Her gün için aynı saatte birden fazla ders var mı kontrol et
+
   for (const [date, dayLecs] of Object.entries(byDate)) {
-    const seen = new Set();
-    for (const l of dayLecs) {
-      const key = normalizeTime(l.start);
-      if (key && seen.has(key)) {
-        // Aynı saatte farklı ders — potansiyel çakışma
-        const existing = dayLecs.find(x => normalizeTime(x.start) === key && x !== l);
-        if (existing && existing.subject !== l.subject) {
-          conflictCount++;
-          if (conflictCount <= 3) {
-            console.warn(`WARN: Time conflict [${g}] ${date} ${key}: "${l.subject}" vs "${existing.subject}"`);
+    const validLecs = dayLecs.filter(l => {
+      const s = (l.subject || '').toUpperCase();
+      return s && s !== 'SERBEST ÇALIŞMA' && !s.includes('TATİL') && !s.includes('BAYRAM');
+    });
+
+    for (let i = 0; i < validLecs.length; i++) {
+      for (let j = i + 1; j < validLecs.length; j++) {
+        const l1 = validLecs[i];
+        const l2 = validLecs[j];
+        const s1 = normalizeTime(l1.start);
+        const e1 = normalizeTime(l1.end);
+        const s2 = normalizeTime(l2.start);
+        const e2 = normalizeTime(l2.end);
+
+        if (s1 && e1 && s2 && e2) {
+          // Aralık çakışması: max(s1, s2) < min(e1, e2)
+          if (s1 < e2 && s2 < e1) {
+            const conflictKey = `${g}_${date}`;
+            if (KNOWN_FACULTY_CONFLICTS.has(conflictKey)) {
+              knownFacultyConflictCount++;
+            } else {
+              unknownConflictCount++;
+              console.error(`FAIL: Beklenmeyen saat aralığı çakışması [${g}] ${date}: "${l1.subject}" (${s1}-${e1}) vs "${l2.subject}" (${s2}-${e2})`);
+            }
           }
         }
       }
-      if (key) seen.add(key);
     }
   }
 }
-if (conflictCount > 0) {
-  console.warn(`WARN: ${conflictCount} potansiyel saat çakışması tespit edildi.`);
+
+if (unknownConflictCount > 0) {
+  console.error(`FAIL: ${unknownConflictCount} adet bilinmeyen saat çakışması tespit edildi!`);
+  process.exit(1);
 } else {
-  console.log('SUCCESS: Saat çakışması bulunmadı!');
+  console.log(`SUCCESS: Aralık bazlı çakışma denetimi tamamlandı (0 beklenmeyen çakışma, ${knownFacultyConflictCount} doğrulanmış fakülte uyuşmazlığı kontrollü yönetiliyor).`);
 }
 
 // ═══════════════════════════════════════════════════════════════

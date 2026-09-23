@@ -117,7 +117,7 @@ def fetch_csv(url, max_retries=3):
 # ═════════════════════════════════════════════════════════════════
 # 1. TEORİK DERSLERİ ÇEK & TEMİZLE (3A & 3B)
 # ═════════════════════════════════════════════════════════════════
-def process_theoretical(group_name):
+def process_theoretical(group_name, labs=None):
     cfg = CONFIGS[group_name]
     url = f"https://docs.google.com/spreadsheets/d/{cfg['id']}/gviz/tq?tqx=out:csv&gid={cfg['gid']}"
     print(f"[{group_name}] Teorik program Google Sheet'ten cekiliyor...")
@@ -150,6 +150,20 @@ def process_theoretical(group_name):
         if not bit_saat and patch_key in KNOWN_END_TIMES:
             bit_saat = KNOWN_END_TIMES[patch_key]
 
+        # FIX-21: Jenerik laboratuvar oturumu filtresi
+        # Fakülte teorik tablosunda her iki şubeye de şablon olarak eklenen "Uygulama (Patoloji / Mikrobiyoloji)"
+        # satırlarını denetle: Eğer o tarihte resmi lab protokolünde (labs) bu şubeye ait (3A için A, 3B için B)
+        # hiçbir oturum yoksa (yalnızca diğer şube için lab açılmışsa), bu satırı şube programına ekleme!
+        konu_upper = konu.upper()
+        if konu and ('PATOLOJ' in konu_upper) and ('MİKROBİYOLOJ' in konu_upper or 'MIKROBIYOLOJ' in konu_upper or 'UYGULAMA' in konu_upper):
+            if labs and iso_date in labs:
+                group_letter = 'A' if group_name == '3A' else 'B'
+                day_labs = labs.get(iso_date, [])
+                has_my_lab = any(any(g.startswith(group_letter) for g in (item.get('groups') or [])) for item in day_labs)
+                if day_labs and not has_my_lab:
+                    # O gün laboratuvar yalnızca diğer şube için! (Örnek: 2027-04-29'da lab B1/B2 için, 3A'da yok)
+                    continue
+
         # Mükerrer boş satır temizliği: Aynı saatte dolu ders varsa boş olanı sil / atla
         if konu:
             lectures = [l for l in lectures if not (l['date'] == iso_date and l['start'] == bas_saat and not l['subject'])]
@@ -169,6 +183,7 @@ def process_theoretical(group_name):
 
     print(f"[{group_name}] Toplam {len(lectures)} ders ayristirildi.")
     return lectures
+
 
 # ═════════════════════════════════════════════════════════════════
 # 2. ÖĞRETİM ÜYESİ UYGULAMA ROTASYONLARI - 3B (EXCEL)
@@ -482,11 +497,11 @@ def extract_amfi_schedule():
 def main():
     print("=== IU TIP DONEM 3 VERI DERLEME BASLADI ===")
     
-    lectures_3a = process_theoretical('3A')
-    lectures_3b = process_theoretical('3B')
+    labs = extract_pathology_microbiology()
+    lectures_3a = process_theoretical('3A', labs)
+    lectures_3b = process_theoretical('3B', labs)
     rotations_3a = extract_rotations_3a()
     rotations_3b = extract_rotations_3b()
-    labs = extract_pathology_microbiology()
     amfi = extract_amfi_schedule()
 
     bundle = {

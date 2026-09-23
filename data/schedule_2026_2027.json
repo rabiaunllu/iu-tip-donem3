@@ -1,6 +1,6 @@
 {
   "version": "2026-2027-v1",
-  "generated_at": "2026-09-23T01:25:57.995737",
+  "generated_at": "2026-09-24T00:22:16.226577",
   "semester_start": "2026-09-01",
   "semester_end": "2027-07-09",
   "lectures_3A": [
@@ -891,18 +891,18 @@
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "09:20",
       "end": "10:00",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "4-Sarkopeni / Prof.Dr.Bülent SAKA",
+      "department": "HAREKET II DİLİMİ / İÇ HASTALIKLARI AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-24",
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "10:10",
       "end": "10:50",
-      "subject": "4-Sarkopeni / Prof.Dr.Bülent SAKA",
-      "department": "HAREKET II DİLİMİ / İÇ HASTALIKLARI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-24",
@@ -1233,9 +1233,9 @@
       "date_str": "1 Ekim 2026 Perşembe",
       "start": "09:20",
       "end": "10:00",
-      "subject": "1-Hareket sistemi fizyolojisi / Prof.Dr. Tamer DEMİRALP (Prof.Dr. F. Aytül Uyar)",
-      "department": "HAREKET II DİLİMİ / FİZYOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-10-01",
@@ -1368,9 +1368,9 @@
       "date_str": "5 Ekim 2026 Pazartesi",
       "start": "08:30",
       "end": "09:10",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Hareket sistemi fizyolojisi / Prof.Dr. Tamer DEMİRALP (Prof.Dr. F. Aytül Uyar)",
+      "department": "HAREKET II DİLİMİ / FİZYOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-10-05",
@@ -2084,15 +2084,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-10-20",
-      "date_str": "20 Ekim 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-10-21",
       "date_str": "21 Ekim 2026 Çarşamba",
       "start": "08:30",
@@ -2197,15 +2188,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-7 A Grubu (İç H.) B Grubu (ÇSvH)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2026-10-22",
-      "date_str": "22 Ekim 2026 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -2358,9 +2340,9 @@
       "date_str": "27 Ekim 2026 Salı",
       "start": "09:20",
       "end": "10:00",
-      "subject": "3-Hemorajik ateş etkeni viruslar / Prof.Dr.Hayriye KIRKOYUN UYSAL (Doç.Dr. Mustafa ÖNEL)",
-      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-10-27",
@@ -2493,9 +2475,9 @@
       "date_str": "30 Ekim 2026 Cuma",
       "start": "10:10",
       "end": "10:50",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "3-Hemorajik ateş etkeni viruslar / Prof.Dr.Hayriye KIRKOYUN UYSAL (Doç.Dr. Mustafa ÖNEL)",
+      "department": "KAN-LENFOİD II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-10-30",
@@ -2948,15 +2930,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-11-10",
-      "date_str": "10 Kasım 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-11-11",
       "date_str": "11 Kasım 2026 Çarşamba",
       "start": "08:30",
@@ -3072,15 +3045,6 @@
       "subject": "19-Trombosit hastalıkları / Prof.Dr. İpek YÖNAL HİNDİLERDEN (Dr.Öğr.Üyesi Simge ERDEM)",
       "department": "KAN-LENFOİD II DİLİMİ / İÇ HASTALIKLARI AD.",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
-    },
-    {
-      "date": "2026-11-12",
-      "date_str": "12 Kasım 2026 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
       "date": "2026-11-13",
@@ -3821,15 +3785,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-12-01",
-      "date_str": "1 Aralık 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-12-02",
       "date_str": "2 Aralık 2026 Çarşamba",
       "start": "08:30",
@@ -3925,15 +3880,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-16 A Grubu (İç H.) B Grubu (ÇSvH)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2026-12-03",
-      "date_str": "3 Aralık 2026 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -6413,15 +6359,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2027-02-16",
-      "date_str": "16 Şubat 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-02-17",
       "date_str": "17 Şubat 2027 Çarşamba",
       "start": "8:30",
@@ -6554,15 +6491,6 @@
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-29 A Grubu (İç H.) B Grubu (ÇSvH)",
       "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-02-18",
-      "date_str": "18 Şubat 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
@@ -8591,15 +8519,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2027-04-08",
-      "date_str": "8 Nisan 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-04-09",
       "date_str": "9 Nisan 2027 Cuma",
       "start": "8:30",
@@ -8812,15 +8731,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-40 A Grubu (ÇSvH) B Grubu (İç H.)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-04-13",
-      "date_str": "13 Nisan 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -9293,15 +9203,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
-      "date": "2027-04-22",
-      "date_str": "22 Nisan 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": ""
-    },
-    {
       "date": "2027-04-23",
       "date_str": "23 Nisan 2027 Cuma",
       "start": "8:30",
@@ -9446,15 +9347,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
-      "date": "2027-04-27",
-      "date_str": "27 Nisan 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
-    },
-    {
       "date": "2027-04-28",
       "date_str": "28 Nisan 2027 Çarşamba",
       "start": "8:30",
@@ -9596,15 +9488,6 @@
       "end": "15:50",
       "subject": "ENTEGRE OTURUM Ürolojik ve nefrolojik açıdan Hematüriler / Doç.Dr. Selçuk ERDEM, Dr.Öğr. Üyesi Ahmet Burak DİRİM",
       "department": "ÜROGENİTAL VE ÜREME II DİLİMİ / İÇ HASTALIKLARI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
-    },
-    {
-      "date": "2027-04-29",
-      "date_str": "29 Nisan 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
@@ -9784,15 +9667,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-43 A Grubu (ÇSvH) B Grubu (İç H.)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-05-04",
-      "date_str": "4 Mayıs 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -10292,15 +10166,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
-      "date": "2027-05-13",
-      "date_str": "13 Mayıs 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-05-14",
       "date_str": "14 Mayıs 2027 Cuma",
       "start": "8:30",
@@ -10452,15 +10317,6 @@
       "subject": "11-Derinin migratuvar hücre kaynaklı tümörleri (Dermal tümörler) /  Dr. Öğr. Üyesi Begüm YENİ ERDEM / Prof.Dr. Şule ÖZTÜRK SARI",
       "department": "SİNİR DUYU II DİLİMİ / TIBBİ PATOLOJİ AD.",
       "location_raw": ""
-    },
-    {
-      "date": "2027-05-20",
-      "date_str": "20 Mayıs 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
       "date": "2027-05-21",
@@ -12751,15 +12607,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-10-06",
-      "date_str": "6 Ekim 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-10-07",
       "date_str": "7 Ekim 2026 Çarşamba",
       "start": "08:30",
@@ -12873,15 +12720,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-3 A Grubu (ÇSvH) B Grubu (İç H.)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2026-10-08",
-      "date_str": "8 Ekim 2026 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -13696,15 +13534,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-10-27",
-      "date_str": "27 Ekim 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-10-28",
       "date_str": "28 Ekim 2026 Çarşamba",
       "start": "08:30",
@@ -13820,15 +13649,6 @@
       "subject": "10-İnfeksiyonla ilişikli romatizmal hastalıklar / Prof.Dr. Ahmet GÜL (Prof.Dr.Yasemin YALÇINKAYA)",
       "department": "HAREKET II DİLİMİ / İÇ HASTALIKLARI AD.",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
-    },
-    {
-      "date": "2026-10-30",
-      "date_str": "30 Ekim 2026 Cuma",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
       "date": "2026-11-02",
@@ -13948,15 +13768,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-11-03",
-      "date_str": "3 Kasım 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-11-04",
       "date_str": "4 Kasım 2026 Çarşamba",
       "start": "08:30",
@@ -14070,15 +13881,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-10 A Grubu (ÇSvH) B Grubu (İç H.)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2026-11-05",
-      "date_str": "5 Kasım 2026 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -15379,15 +15181,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2026-12-08",
-      "date_str": "8 Aralık 2026 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2026-12-09",
       "date_str": "9 Aralık 2026 Çarşamba",
       "start": "08:30",
@@ -15483,15 +15276,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-18 A Grubu (ÇSvH) B Grubu (İç H.)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2026-12-10",
-      "date_str": "10 Aralık 2026 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -18502,15 +18286,6 @@
       "location_raw": ""
     },
     {
-      "date": "2027-03-02",
-      "date_str": "2 Mart 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-03-03",
       "date_str": "3 Mart 2027 Çarşamba",
       "start": "08:30",
@@ -18642,15 +18417,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-33 A Grubu (ÇSvH) B Grubu (İç H.)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-03-04",
-      "date_str": "4 Mart 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -19663,15 +19429,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2027-04-01",
-      "date_str": "1 Nisan 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-04-02",
       "date_str": "2 Nisan 2027 Cuma",
       "start": "8:30",
@@ -19794,15 +19551,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-38 A Grubu (İç H.) B Grubu (ÇSvH)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-04-06",
-      "date_str": "6 Nisan 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji )",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -20302,15 +20050,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2027-04-15",
-      "date_str": "15 Nisan 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-04-16",
       "date_str": "16 Nisan 2027 Cuma",
       "start": "08:30",
@@ -20451,15 +20190,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-42 A Grubu (İç H.) B Grubu (ÇSvH)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-04-20",
-      "date_str": "20 Nisan 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -21247,15 +20977,6 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
-      "date": "2027-05-06",
-      "date_str": "6 Mayıs 2027 Perşembe",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
       "date": "2027-05-07",
       "date_str": "7 Mayıs 2027 Cuma",
       "start": "08:30",
@@ -21468,15 +21189,6 @@
       "start": "13:30",
       "end": "14:20",
       "subject": "Hasta Başı Uygulama-45 A Grubu (İç H.) B Grubu (ÇSvH)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
-    },
-    {
-      "date": "2027-05-11",
-      "date_str": "11 Mayıs 2027 Salı",
-      "start": "14:30",
-      "end": "16:20",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
       "department": "SEMİYOLOJİ DİLİMİ",
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
@@ -21974,15 +21686,6 @@
       "subject": "SERBEST ÇALIŞMA",
       "department": "",
       "location_raw": ""
-    },
-    {
-      "date": "2027-05-25",
-      "date_str": "25 Mayıs 2027 Salı",
-      "start": "13:30",
-      "end": "17:30",
-      "subject": "Uygulama (Patoloji / Mikrobiyoloji)",
-      "department": "SEMİYOLOJİ DİLİMİ",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI UYGULAMA PROGRAMI VE YERİNE BAKINIZ"
     },
     {
       "date": "2027-05-26",
