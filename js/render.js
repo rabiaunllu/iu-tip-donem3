@@ -119,19 +119,31 @@ function renderSchedule() {
               lab.groups && (lab.groups.includes(state.subgroup) || lab.groups.includes(studentLabGroup))
             );
 
-            for (const labItem of studentLabs) {
-              const labLabel = labItem.groups.includes(state.subgroup)
-                ? `Grup ${state.subgroup}`
-                : `Lab ${studentLabGroup} (Alt Grup ${studentLabGroup === groupLetter + '1' ? '1-4' : '5-8'})`;
-              note += (note ? ' | ' : '') + `🧫 ${labItem.type} Pratiği (${labItem.time}) [${labLabel}]`;
+            if (studentLabs.length > 0) {
+              for (const labItem of studentLabs) {
+                const labLabel = labItem.groups.includes(state.subgroup)
+                  ? `Grup ${state.subgroup}`
+                  : `Lab ${studentLabGroup} (Alt Grup ${studentLabGroup === groupLetter + '1' ? '1-4' : '5-8'})`;
+                note += (note ? ' | ' : '') + `🧫 ${labItem.type} Pratiği (${labItem.time}) [${labLabel}]`;
+              }
+            } else if (isLabCard) {
+              // Şubenin o gün labı var ama öğrencinin kendi alt grubu için değil
+              details.cardType = 'free';
+              details.badge = 'Boş';
+              details.resolvedLocation = `Dinlenme / Bireysel Çalışma (Lab Oturumu Diğer Alt Gruplar İçindir)`;
+              note = `Bu oturumda diğer alt grupların laboratuvarı vardır.`;
+              if (!state.showFreeStudy && !searchLower) continue;
             }
           }
         } else if (details.badge === 'Laboratuvar' || /uygulama.*(patoloji|mikrobiyoloji)/i.test(lec.subject)) {
-          // Fakülte tablosunda generic lab yazılmış ama o gün bu şube için lab yoksa (ör: 29 Nisan 3A)
-          const otherGroup = state.group === '3A' ? '3B' : '3A';
-          note += (note ? ' | ' : '') + `ℹ️ Bu laboratuvar oturumu Dönem ${otherGroup} grubu içindir.`;
+          // FIX-21: Fakülte tablosunda generic lab yazılmış ama o gün bu şube için lab yoksa (ör: 29 Nisan 3A)
+          // Bu oturum diğer şube içindir; öğrencinin takviminden tamamen çıkarılarak sahte çakışma ve mağduriyet önlenir
+          continue;
         }
       }
+    } else if (details.badge === 'Laboratuvar' || /uygulama.*(patoloji|mikrobiyoloji)/i.test(lec.subject)) {
+      // Resmi lab takviminde (docx) hiç lab olmayan tarihlerdeki jenerik şablon satırları atla
+      continue;
     }
 
     // Arama filtresi: konu, anabilim dalı, çözümlenmiş konum ve notlar içinde arama yapar
@@ -150,7 +162,8 @@ function renderSchedule() {
         yer: details.resolvedLocation,
         note,
         cardType: details.cardType,
-        badge: details.badge
+        badge: details.badge,
+        isLiveAmfi: details.isLiveAmfi
       });
     }
   }
@@ -362,6 +375,11 @@ function getLectureCardHTML(lec) {
           ${lec.start} - ${lec.end}
         </span>
         <div class="flex items-center gap-1">
+          ${lec.isLiveAmfi ? `
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold flex items-center gap-0.5 border border-emerald-200" title="Canlı kaynaktan teyit edilen güncel amfi">
+              <i data-lucide="zap" class="w-2.5 h-2.5 text-emerald-600"></i> Canlı Amfi
+            </span>
+          ` : ''}
           ${lec.hasConflict ? `
             <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 font-extrabold flex items-center gap-0.5" title="Resmi programda saat çakışması">
               <i data-lucide="alert-triangle" class="w-2.5 h-2.5"></i> Çakışma
