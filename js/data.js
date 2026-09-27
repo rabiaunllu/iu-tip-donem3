@@ -816,13 +816,10 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
   const amfiInfo = resolveLectureAmfi(lec, gun, group);
   const isLiveAmfi = !!(amfiInfo.isLiveOverride || amfiInfo.isLiveSchedule);
   let resolvedLocation = `🏛️ ${amfiInfo.name}`;
-  if (isLiveAmfi) {
-    resolvedLocation = `🏛️ ${amfiInfo.name} <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200 ml-1 inline-flex items-center gap-0.5">⚡ Canlı Amfi</span>`;
-  } else if (amfiInfo.isPortal) {
+  if (amfiInfo.isPortal) {
     resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
-  } else if (amfiInfo.isDraftPlan) {
-    resolvedLocation = `🏛️ ${amfiInfo.name} <span class="text-[10px] font-medium px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200 ml-1 inline-flex items-center gap-0.5" title="Resmi amfi portalında haftalık yayınlanmaktadır">Taslak Plan</span>`;
   }
+
 
   const badge = amfiInfo.isSecmeli ? 'Seçmeli' : 'Teorik';
   let note = '';

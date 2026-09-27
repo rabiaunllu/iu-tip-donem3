@@ -477,9 +477,16 @@ function updateLiveUpcoming(weekDays) {
     if (typeof currentOrNext.yer === 'string' && currentOrNext.yer.includes('<a ')) {
       locElem.innerHTML = currentOrNext.yer;
     } else {
-      locElem.innerText = currentOrNext.yer;
+      let locHtml = escapeHTML(currentOrNext.yer || 'Dönem Amfisi');
+      if (currentOrNext.isLiveAmfi) {
+        locHtml += ` <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-bold ml-1.5 inline-flex items-center gap-1">⚡ Canlı</span>`;
+      } else if (currentOrNext.isDraftPlan) {
+        locHtml += ` <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-indigo-200 border border-white/20 font-medium ml-1.5 inline-flex items-center gap-1">🕒 Taslak</span>`;
+      }
+      locElem.innerHTML = locHtml;
     }
   }
+
   
   if (window.lucide) lucide.createIcons();
 }

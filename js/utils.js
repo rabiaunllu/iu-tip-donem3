@@ -50,6 +50,17 @@ function normalizeTurkishLower(s) {
   return s.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase().normalize('NFC');
 }
 
+function escapeHTML(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+
 function toISOFromStr(str) {
   if (!str) return null;
   const parts = str.trim().split(/\s+/);
