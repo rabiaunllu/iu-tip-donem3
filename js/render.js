@@ -80,7 +80,7 @@ function renderSchedule() {
   const rotations = state.db ? (state.group === '3A' ? state.db.rotations_3A : state.db.rotations_3B) : {};
   const labs = state.db ? (state.db.laboratories || {}) : {};
 
-  const searchLower = state.searchQuery.toLowerCase().trim();
+  const searchLower = normalizeTurkishLower(state.searchQuery).trim();
 
   for (const lec of lectures) {
     const iso = lec.date;
@@ -148,7 +148,7 @@ function renderSchedule() {
 
     // Arama filtresi: konu, anabilim dalı, çözümlenmiş konum ve notlar içinde arama yapar
     if (searchLower) {
-      const fullSearchText = `${lec.subject} ${lec.department} ${lec.location_raw} ${details.resolvedLocation} ${note}`.toLowerCase();
+      const fullSearchText = normalizeTurkishLower(`${lec.subject} ${lec.department} ${lec.location_raw} ${details.resolvedLocation} ${note}`);
       if (!fullSearchText.includes(searchLower)) continue;
     }
 
@@ -163,7 +163,8 @@ function renderSchedule() {
         note,
         cardType: details.cardType,
         badge: details.badge,
-        isLiveAmfi: details.isLiveAmfi
+        isLiveAmfi: details.isLiveAmfi,
+        isDraftPlan: details.isDraftPlan
       });
     }
   }
@@ -376,10 +377,14 @@ function getLectureCardHTML(lec) {
         </span>
         <div class="flex items-center gap-1">
           ${lec.isLiveAmfi ? `
-            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold flex items-center gap-0.5 border border-emerald-200" title="Canlı kaynaktan teyit edilen güncel amfi">
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold flex items-center gap-0.5 border border-emerald-200" title="Resmi portaldan teyit edilen haftalık güncel amfi">
               <i data-lucide="zap" class="w-2.5 h-2.5 text-emerald-600"></i> Canlı Amfi
             </span>
-          ` : ''}
+          ` : (lec.isDraftPlan ? `
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-semibold flex items-center gap-0.5 border border-slate-200/90" title="Resmi amfi portalında haftalık yayınlanmaktadır (Teyit ediniz)">
+              <i data-lucide="clock" class="w-2.5 h-2.5 text-slate-400"></i> Taslak Plan
+            </span>
+          ` : '')}
           ${lec.hasConflict ? `
             <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 font-extrabold flex items-center gap-0.5" title="Resmi programda saat çakışması">
               <i data-lucide="alert-triangle" class="w-2.5 h-2.5"></i> Çakışma

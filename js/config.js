@@ -9,9 +9,9 @@ const DEFAULT_CONFIGS = {
 };
 
 const TR_AYLAR = {
-  'ocak': 1, 'şubat': 2, 'subat': 2, 'mart': 3, 'nisan': 4, 'mayıs': 5, 'mayis': 5,
-  'haziran': 6, 'temmuz': 7, 'ağustos': 8, 'agustos': 8, 'eylül': 9, 'eylul': 9,
-  'ekim': 10, 'kasım': 11, 'kasim': 11, 'aralık': 12, 'aralik': 12
+  'ocak': 1, 'şubat': 2, 'subat': 2, 'mart': 3, 'nisan': 4, 'nısan': 4, 'mayıs': 5, 'mayis': 5,
+  'haziran': 6, 'hazıran': 6, 'temmuz': 7, 'ağustos': 8, 'agustos': 8, 'eylül': 9, 'eylul': 9,
+  'ekim': 10, 'ekım': 10, 'kasım': 11, 'kasim': 11, 'aralık': 12, 'aralik': 12
 };
 
 // Geri Bildirim & İstek Havuzu Google Apps Script Webhook URL'si

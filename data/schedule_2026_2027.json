@@ -1,6 +1,6 @@
 {
   "version": "2026-2027-v1",
-  "generated_at": "2026-09-24T00:22:16.226577",
+  "generated_at": "2026-09-28T00:47:00.035297",
   "semester_start": "2026-09-01",
   "semester_end": "2027-07-09",
   "lectures_3A": [
@@ -12053,9 +12053,9 @@
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "09:20",
       "end": "10:00",
-      "subject": "1-İş ve çevre maruziyetleri ile ilişkili kan lenfoid sistem maligniteleri / Prof.Dr. Halim İŞSEVER (Prof.Dr. Ayşe Emel ÖNAL)",
-      "department": "KAN-LENFOİD II DİLİMİ / HALK SAĞLIĞI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-24",
@@ -12206,9 +12206,9 @@
       "date_str": "28 Eylül 2026 Pazartesi",
       "start": "13:30",
       "end": "14:20",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-İş ve çevre maruziyetleri ile ilişkili kan lenfoid sistem maligniteleri / Prof.Dr. Halim İŞSEVER (Prof.Dr. Ayşe Emel ÖNAL)",
+      "department": "KAN-LENFOİD II DİLİMİ / HALK SAĞLIĞI AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-28",
@@ -12242,18 +12242,18 @@
       "date_str": "29 Eylül 2026 Salı",
       "start": "09:20",
       "end": "10:00",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "Temel kavramlar ve kısa tarihçe / Prof.Dr. Ahmet GÜL (Prof.Dr. Murat İNANÇ)",
+      "department": "KAN-LENFOİD II DİLİMİ / İÇ HASTALIKLARI AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-29",
       "date_str": "29 Eylül 2026 Salı",
       "start": "10:10",
       "end": "10:50",
-      "subject": "Temel kavramlar ve kısa tarihçe / Prof.Dr. Ahmet GÜL (Prof.Dr. Murat İNANÇ)",
-      "department": "KAN-LENFOİD II DİLİMİ / İÇ HASTALIKLARI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-29",
@@ -13367,9 +13367,9 @@
       "date_str": "23 Ekim 2026 Cuma",
       "start": "11:00",
       "end": "11:40",
-      "subject": "1-Cilt ve yumuşak doku enfeksiyonu etkeni bakteriler/ Prof.Dr. Lütfiye ÖKSÜZ (Prof.Dr. Zerrin AKTAŞ)",
-      "department": "HAREKET II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-10-23",
@@ -13984,6 +13984,15 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
+      "date": "2026-12-23",
+      "date_str": "23 Aralık 2026 Çarşamba",
+      "start": "08:30",
+      "end": "09:10",
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
+    },
+    {
       "date": "2026-11-10",
       "date_str": "10 Kasım 2026 Salı",
       "start": "08:30",
@@ -14060,9 +14069,9 @@
       "date_str": "11 Kasım 2026 Çarşamba",
       "start": "10:10",
       "end": "10:50",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Cilt ve yumuşak doku enfeksiyonu etkeni bakteriler/ Prof.Dr. Lütfiye ÖKSÜZ (Prof.Dr. Zerrin AKTAŞ)",
+      "department": "HAREKET II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-11-11",
@@ -24277,5 +24286,1524 @@
         "amfi": "Cemil Topuzlu Amfisi (Ortak)"
       }
     ]
+  },
+  "amfi_published_week": {
+    "publishedDates": [
+      "2026-09-26",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-02"
+    ],
+    "weekStart": "2026-09-26",
+    "weekEnd": "2026-10-02",
+    "byDate": {
+      "2026-09-28": [
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE -DOLAŞIM DİLİMİ -HİSTOLOJİ VE EMBRİOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1 ARDIŞIK UYUM GÜNLERİ-09.30-12.30"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE -DOLAŞIM DİLİMİ -HİSTOLOJİ VE EMBRİOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ -İÇ HASTALIKLARI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -KARDİYOLOJİ-09.00-12.30"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE -DOLAŞIM DİLİMİ -BİYOKİMYA"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -FARMAKOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "HEMŞİRELİK FAKÜLESİ -10.40-12.10"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -10.00-11.30"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE -DOLAŞIM DİLİMİ -BİYOFİZİK"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 4-TÜRKÇE -ÇOCUK SAĞLIĞI VE HASTALIKLARI-11.00-16.00"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ- B8-B1  ÇOCUK SAĞLIĞI VE HAST..  HEMATOLOJİ-11.10-12.10"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HAST. GERİATRİ. -B 5-11.10-12.10"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR.ORHAN ZİYLAN- DR.İRFAN DÖNMEZ-SEMİNER -11.00-11.40"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU -ÇOCUK SAĞLIĞI VE HASTALIKLARI- HAREKET DİLİMİ -A 3 - UYGULAMA -11.10-12.10"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Farmakoloji Dersliği",
+          "rawAmfi": "FARMAKOLOJİ DERSLİK",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU -FİZİKSEL TIP VE REHABİLİTASYON - HAREKET DİLİMİ -A 5-A 6 - UYGULAMA -11.10-12.10"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ -BİYOFİZİK"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE + İNGİLİZCE - DOLAŞIM DİLİMİ -SPOR HEKİMLİĞİ-13.30-15.20"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -HALK SAĞLIĞI"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM  - 5 --TÜRKÇE E GRUBU - KLİNİK TOKSİKOLOJİ-13.00-14.30"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -FARMAKOLOJİ-13.30-15.00"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "DÖNEM  - 5 -F GRUBU -  AİLE HEKİMLİĞİ -13.00-14.30"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "ÇOCUK SAĞ. VE HAST. UYGULAMA - DR. BAĞDAGÜL AKSU 13.30-14.30"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A + B GRUBU DİKEY KORİDOR- BİYOİSTATİSTİK"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -SEMİYOLOJİ DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE +İNGİLİZCE - DOLAŞIM DİLİMİ -ANATOMİ - EK DERS-15.30-16.10"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A + B GRUBU DİKEY KORİDOR- BİYOİSTATİSTİK"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -SEMİYOLOJİ DİLİMİ - İÇ HASTALIKLARI"
+        }
+      ],
+      "2026-09-29": [
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1 ARDIŞIK UYUM GÜNLERİ-09.30-12.30"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE -KAN LENFOİD DİLİMİ - ENTEGRE OTURUM -FİZYOLOJİ ÇOCUK SAĞ VE HAST. İÇ HASTALIKLARI-08.30 -10.20"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HASTALIKLARI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "HEMŞİRELİK FAKÜLESİ -09.00-12.00"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -KARDİYOLOJİ-09.00-15.00"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "KALP DAMAR CER. DÖNEM 4- UYGULAMA -09.3-10.30"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "DÖNEM 1 SINAV TOPL.-09.00-12.00"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "ÇOCUK SAĞLIĞI  ENSTİTÜSÜ SINAV -10.00-12.00"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "FARMKOLOJİ",
+          "rawAmfi": "FARMKOLOJİ",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -10.00-12.00"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DEKANLIK TOPLANTI -11.00-13.30"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - ANATOMİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HASTALIKLARI"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ -FİZYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "DÖNEM 4-TÜRKÇE -ÇOCUK SAĞLIĞI VE HASTALIKLARI-11.00-15.00"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR. MAZHAR ORTAÇ-11.00-11.40"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - ANATOMİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -HİSTOLOJİ VE EMBRİYOLOJİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ -FİZYOLOJİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 3-TÜRKÇE - A+B+İNGİLİZCE-  GRUBU - BİLİMSEL ARAŞTIRMA-DR. HASAN KUDAT"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM  - 5 --İNGİLİZCE - DERMATOLOJİ-13.00-14.30"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -13.00-14.30"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "AİLE HEKİMLİĞİ ANABİLİM DALI SEMİNER - DR. AYŞE PALANDUZ -13.00-16.00"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 3-TÜRKÇE - A+B+İNGİLİZCE-  GRUBU - BİLİMSEL ARAŞTIRMA-DR. TZEVAT TEFİK"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        }
+      ],
+      "2026-09-30": [
+        {
+          "start": "07:30",
+          "end": "08:30",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "ANESTEZİYOLOJİ SEMİNER -07.30-08.30"
+        },
+        {
+          "start": "07:30",
+          "end": "08:30",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "07:30",
+          "end": "08:30",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "DÖNEM 5 G GRUBU GÖĞÜS CERRAHİSİ- UYGULAMA - 08.30-09.30"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -KARDİYOLOJİ-09.00-14.10"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "İÇ HASTALIKLARI DÖNEM 4 -UYGULAMA -09.00-11.00"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 09.30-10.30"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE + İNGİLİZE  - TIBBA MERHABA DİLİMİ - ENTEGRE OTURUM-09.20-10.00-TIP TARİHİ VE ETİK - HALK SAĞLIĞI- ANESTZİYOLOJİ-09.20-10.00"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ -HİSTOLOJİ VE EMBRİYOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - ORTOPEDİ VE TRAVMATOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE + İNGİLİZE  - TIBBA MERHABA DİLİMİ - ENTEGRE OTURUM-09.20-10.00- ANESTZİYOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - ORTOPEDİ VE TRAVMATOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -DİKEY KORİDOR   DİLİMİ - BİYOİSTATİSTİK"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -KAN LENFOİD DİLİMİ - DETAM"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -10.00-11.30"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE  - TIBBA MERHABA DİLİMİ -TIP EĞİTİMİ- DR.NİLÜFER ALÇALAR"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 4-TÜRKÇE -ÇOCUK SAĞLIĞI VE HASTALIKLARI-11.00-15.00"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HAST. -B1- B2 -11.10-12.10"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - HİSTOLOJİ VE EMBRİYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ -PSİKİYATRİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU -FİZİKSEL TIP VE REHABİLİTASYON - HAREKET DİLİMİ -A 7- A 8 - UYGULAMA -11.10-12.10"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HAST. GERİATRİ. -B 6 -11.10-12.10"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR.TAYFUN OKTAR -11.00-11.40"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU -ÇOCUK SAĞLIĞI VE HASTALIKLARI- HAREKET DİLİMİ -A 6 - UYGULAMA -11.10-12.10"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE  - TIBBA MERHABA DİLİMİ -TIP EĞİTİMİ- DR.NİLÜFER ALÇALAR"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ -PSİKİYATRİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "SEÇMELİ DERS- SAĞLIKLI YAŞAM VE SPOR"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 4-TÜRKÇE -ÇOCUK SAĞLIĞI VE HASTALIKLARI-13.30-16.00"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "SEÇMELİDERS-AKTERİYEL SALGINLAR TARİHİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "SEÇMELİ DERS- IMPORTANCE OF MICROORGANISM IN THE ENVIRONMENT"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "SEÇMELİ DERS- YÜZ ESTETİĞİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "SEÇMELİ DERS- TIBBİ İNGİLİZCE"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "SEÇMELİ DERS- MOLEKÜLER ARAŞTIRMA YÖNTEMLERİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "SEÇMELİ DERS- ENGELLİ PSİKOLOJİSİ"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "SEÇMELİ DERS- İLİŞKİLERİ ÖĞRENMEDE FARKINDALIK"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "SEÇMELİ DERS- ARAŞTIRMANIN ETİK VE İNTİHAL BOYUTU"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "SEÇMELİ DERS- OLGULARLA FİZYOPATOLOJİ III"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "SEÇMELİ DERS- BAKTERİYEL SALGINLAR TARİHİ"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "SEÇMELİ DERS- TIP İNGİLİZCESİ"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "SEÇMELİ DERS- STRES VE TÜKENMİŞLİKLE BAŞA ÇIKMADA MINDFULNESS/BİLİNÇLİ FARKINDALIK"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "SEÇMELİ DERS- YÜZ GENÇLEŞTİRME-FASİYAL REJUVENASYON"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "SEÇMELİ DERS- SAĞLIK PSİKOLOJİSİ"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "SEÇMELİ DERS-DERMOKOZMETİKLER VE TIP"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "SEÇMELİ DERS- BİR SAĞLIK ÇALIŞANI OLARAK KENDİ SAĞLIĞIMIZI KORUMAK : YASAL HAKLARIMIZ"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "SEÇMELİ DERS- SAĞLIKTA VE HASTALIKTA MİKROBİYOTA"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "SEÇMELİ DERS- MESLEKİ İNGİLİZCESİ"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "SEÇMELİ DERS- MOLEKÜLER VİROLOJİ VE VİRAL İMMÜNOLOJİ"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "SEÇMELİ DERS- MEDİKAL TERMİNOLOJİ"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "SEÇMELİ DERS- BAĞIMLILIK"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "SEÇMELİ DERS-OMURGA SAĞLIĞI VE ERGONOMİ"
+        }
+      ],
+      "2026-10-01": [
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU- KAN LENFOİD DİLİMİ -ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -KARDİYOLOJİ"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HAST. ALERJİ -B 2-  08.30-09.10"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ -ANESTEZİYOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - İÇ HASTALIKLARI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ -ANESTEZİYOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - ORTOPEDİ VE TRAVMATOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - PATOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - HİSTOLOJİ VE EMBRİYOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -FARMAKOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -BİYOİSTATİSTİK-11.00-12.30"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "ÇOCUK SAĞLIĞI  ENSTİTÜSÜ SINAV -10.00-12.00"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR. MURAT DURSUN -10.20-11.40"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -10.00-11.30"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE  - TIBBA MERHABA DİLİMİ -TIP EĞİTİMİ- DR.NİLÜFER ALÇALAR"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - PATOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - ANATOMİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -FARMAKOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
+          "text": "DÖNEM 4-TÜRKÇE -ÇOCUK SAĞLIĞI VE HASTALIKLARI-11.00-15.00"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE  - TIBBA MERHABA DİLİMİ -TIP EĞİTİMİ- DR.NİLÜFER ALÇALAR"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - ORTOPEDİ VE TRAVMATOLOJİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - ANATOMİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ -GENEL CERRAHİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 3-TÜRKÇE +İNGİLİZCE  -ÇOCUK SAĞLIĞI VE HASTALIKLARI TOPLANTI-13.30"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ -ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A1-3-İÇ HASTALIKLARI UYGULAMA"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A1-4-İÇ HASTALIKLARI UYGULAMA"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A1-5-İÇ HASTALIKLARI UYGULAMA"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ -ANESTZİYOLOJİ"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 4- B GRUBU- TÜRKÇE -KALP VE DAMAR CERRAHİSS-13.30-15.50"
+        },
+        {
+          "start": "13:30",
+          "end": "14:10",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
+          "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -13.30-15.00"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ -PATOLOJİ -14.30"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -DİKEY KORİDOR   DİLİMİ - BİYOİSTATİSTİK-14.30"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ -ANESTZİYOLOJİ"
+        },
+        {
+          "start": "14:20",
+          "end": "15:00",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -PATOLOJİ-14.30"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - SPOR HEKİMLİĞİ  - 15.20"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -DİKEY KORİDOR   DİLİMİ - BİYOİSTATİSTİK-15.20"
+        },
+        {
+          "start": "15:10",
+          "end": "15:50",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -PATOLOJİ-15.20"
+        },
+        {
+          "start": "16:00",
+          "end": "16:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "17:00",
+          "end": "18:00",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "ÇAPASAS -16.30-19.00"
+        }
+      ],
+      "2026-10-02": [
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ -HALK SAĞLIĞI"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - PATOLOJİ"
+        },
+        {
+          "start": "08:30",
+          "end": "09:10",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ -HALK SAĞLIĞI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 5 - HEKİMLİĞİN YASAL VE TOPLUMSAL YÖNÜ DİLİMİ - BİTİRME SINAVI -09.00-10.00"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 2-TÜRKÇE -KAN LENFOİD DİLİMİ -DETAM"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 09.30-10.30"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
+          "text": "ÇOCUK SAĞ. VE HAST. NEFROLOJİ SEMİNER -09.00-10.00"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - HİSTOLOJİ VE EMBRİYOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - ORTOPEDİ VE TRAVMATOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ -KARDİYOLOJİ"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - MİKROBİYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - KARDİYOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 5 - SEMPTOMDAN TEŞHİSE TEŞHİSTEN TEDAVİYE DİLİMİ - BİTİRME SINAVI -11.00-12.05"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ -ORTOPEDİ VE TRAVMATOLOJİ"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - BİYOKİMYA"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "11:00",
+          "end": "11:40",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - KLİNİK BAKTERİYOLOJİ VE ENFEKSİYON HASTALIKLARI"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - KARDİYOLOJİ"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-İNGİLİZCE -HAREKET  DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - BİYOKİMYA"
+        },
+        {
+          "start": "11:50",
+          "end": "12:30",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - HALK SAĞLIĞI"
+        },
+        {
+          "start": "14:00",
+          "end": "14:40",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 3-TÜRKÇE +İNGİLİZCE  -ÇOCUK SAĞLIĞI VE HASTALIKLARI TOPLANTI-14.00"
+        },
+        {
+          "start": "14:00",
+          "end": "14:40",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 5 - YAŞAM BOYU SAĞLIK DİLİMİ - BİTİRME SINAVI -14.00-14.55"
+        },
+        {
+          "start": "14:00",
+          "end": "14:40",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "text": "DÖNEM 5 - DERMAYOLOJİ GÖRSEL SINAVI -14.00-15.00"
+        },
+        {
+          "start": "14:00",
+          "end": "14:40",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "14:00",
+          "end": "14:40",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - MİKROBİYOLOJİ"
+        },
+        {
+          "start": "14:00",
+          "end": "14:40",
+          "amfi": "Temel Bilimler Amfi III",
+          "rawAmfi": "TEMEL BİLİMLER AMFİ III",
+          "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -14.00-15.30"
+        },
+        {
+          "start": "14:50",
+          "end": "15:30",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ -FİZYOLOJİ-"
+        },
+        {
+          "start": "14:50",
+          "end": "15:30",
+          "amfi": "Cemil Topuzlu Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE +İNGİLİZCE  -ÖLÇME DEĞERLENDİRMETOPLANTISI-15.00"
+        },
+        {
+          "start": "14:50",
+          "end": "15:30",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        },
+        {
+          "start": "14:50",
+          "end": "15:30",
+          "amfi": "İngilizce Tıp Hall 1 Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
+          "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - MİKROBİYOLOJİ"
+        },
+        {
+          "start": "14:50",
+          "end": "15:30",
+          "amfi": "Sami Zan Amfisi",
+          "rawAmfi": "SAMİ ZAN AMFİSİ",
+          "text": "DÖNEM 5 - TIBBİ ETİK SINAVI  - BİTİRME SINAVI -15.00-16.00"
+        },
+        {
+          "start": "15:40",
+          "end": "16:20",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ -FİZYOLOJİ-"
+        },
+        {
+          "start": "15:40",
+          "end": "16:20",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 1-TÜRKÇE - TIBBA MERHABA DİLİMİ - TIP TARİHİ VE ETİK"
+        }
+      ],
+      "2026-09-26": [],
+      "2026-09-27": [
+        {
+          "start": "09:20",
+          "end": "10:00",
+          "amfi": "Aziz Sancar Amfisi",
+          "rawAmfi": "AZİZ SANCAR",
+          "text": "MEZUNLAR TOPLANTISI -09.00-16.00"
+        }
+      ]
+    }
   }
 }

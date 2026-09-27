@@ -450,11 +450,77 @@ def extract_pathology_microbiology():
     return lab_map
 
 # ═════════════════════════════════════════════════════════════════
-# 5. AMFİ PROGRAMI (DEFAULT GVIZ CSV)
+# 5. AMFİ PROGRAMI (DEFAULT GVIZ CSV VE HAFTALIK CANLI PORTAL)
 # ═════════════════════════════════════════════════════════════════
+def _normalize_time(t):
+    if not t:
+        return ''
+    m = re.search(r'(\d{1,2})[.:](\d{2})', t)
+    if not m:
+        return ''
+    return f"{int(m.group(1)):02d}:{m.group(2)}"
+
+def _normalize_amfi_name(raw):
+    if not raw:
+        return 'Resmi Amfi Portalı'
+    r = _normalize_turkish_lower(raw)
+    if 'kemal' in r and 'atay' in r:
+        return 'Kemal Atay Amfisi'
+    if 'aziz' in r and 'sancar' in r:
+        return 'Aziz Sancar Amfisi'
+    if 'tevfik' in r and 'sağlam' in r:
+        return 'Tevfik Sağlam Amfisi'
+    if 'sami' in r and 'zan' in r:
+        return 'Sami Zan Amfisi'
+    if 'cemil' in r and 'topuzlu' in r:
+        return 'Cemil Topuzlu Amfisi'
+    if 'muzaffer' in r and 'aksoy' in r:
+        return 'Muzaffer Aksoy Amfisi'
+    if 'temel' in r and 'bilim' in r:
+        return 'Temel Bilimler Amfi III'
+    if 'hall' in r and '1' in r:
+        return 'İngilizce Tıp Hall 1 Amfisi'
+    if 'eski fizik' in r and 'a' in r:
+        return 'Eski Fizik Tedavi A Dersliği'
+    if 'eski fizik' in r and 'b' in r:
+        return 'Eski Fizik Tedavi B Dersliği'
+    if 'farmakoloji' in r:
+        return 'Farmakoloji Dersliği'
+    if 'room iv' in r:
+        return 'Room IV'
+    if 'room iii' in r:
+        return 'Room III'
+    if 'room ii' in r:
+        return 'Room II'
+    if 'room i' in r:
+        return 'Room I'
+    return raw.strip()
+
+
+def _parse_amfi_date_header(s):
+    if not s:
+        return None
+    clean = re.sub(r'[-/]', ' ', s)
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    parts = clean.split(' ')
+    day = None
+    mon = None
+    yr = None
+    for p in parts:
+        if re.match(r'^\d{1,2}$', p) and not day:
+            day = int(p)
+        elif _normalize_turkish_lower(p) in TR_MONTHS:
+            mon = TR_MONTHS[_normalize_turkish_lower(p)]
+        elif re.match(r'^20\d{2}$', p):
+            yr = int(p)
+    if day and mon and yr:
+        return f"{yr:04d}-{mon:02d}-{day:02d}"
+    return None
+
 def extract_amfi_schedule():
     cfg = CONFIGS['amfi']
-    url = f"https://docs.google.com/spreadsheets/d/{cfg['id']}/gviz/tq?tqx=out:csv&gid={cfg['gid']}"
+    # headers=0 ile tüm birleşik satırlar dahil 93 satırın tamamı alınır
+    url = f"https://docs.google.com/spreadsheets/d/{cfg['id']}/gviz/tq?tqx=out:csv&headers=0&gid={cfg['gid']}"
     print("Amfi programi Google Sheet'ten cekiliyor...")
     try:
         rows = fetch_csv(url)
@@ -462,7 +528,7 @@ def extract_amfi_schedule():
         print(f"Amfi programi cekilirken hata: {e}")
         rows = []
 
-    # Fakülte resmi amfi tablosundan doğrulanmış gün bazlı amfi dağılımı
+    # Fakülte resmi amfi tablosundan doğrulanmış gün bazlı taslak amfi dağılımı
     amfi_data = {
         'portal_url': 'https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi',
         'weekly_mapping': {
@@ -488,8 +554,72 @@ def extract_amfi_schedule():
         ]
     }
 
-    print(f"[Amfi] Doğrulanmış amfi eşleme tablosu hazırlandı (3A ve 3B).")
-    return amfi_data
+    # Haftalık canlı amfi takvimini ayrıştır
+    published_week = {
+        'publishedDates': [],
+        'weekStart': None,
+        'weekEnd': None,
+        'byDate': {}
+    }
+
+    current_iso = None
+    headers = []
+    for row in rows:
+        if not row:
+            continue
+        first_cell = row[0].strip() if len(row) > 0 else ''
+        full_line = ' '.join(row).strip()
+
+        parsed_iso = _parse_amfi_date_header(first_cell) or _parse_amfi_date_header(full_line)
+        if parsed_iso and 'SAAT' not in first_cell.upper():
+            current_iso = parsed_iso
+            headers = []
+            if current_iso not in published_week['publishedDates']:
+                published_week['publishedDates'].append(current_iso)
+            if current_iso not in published_week['byDate']:
+                published_week['byDate'][current_iso] = []
+            continue
+
+        if 'SAAT' in first_cell.upper():
+            headers = [h.strip() for h in row]
+            continue
+
+        if current_iso and headers and re.search(r'\d{1,2}[.:]\d{2}', first_cell):
+            times = re.split(r'[-–]', first_cell)
+            start_time = _normalize_time(times[0])
+            end_time = _normalize_time(times[1]) if len(times) > 1 else ''
+
+            for c in range(1, min(len(row), len(headers))):
+                text = row[c].strip()
+                amfi = headers[c]
+                if text and amfi:
+                    published_week['byDate'][current_iso].append({
+                        'start': start_time,
+                        'end': end_time,
+                        'amfi': _normalize_amfi_name(amfi),
+                        'rawAmfi': amfi,
+                        'text': text
+                    })
+
+    published_week['publishedDates'].sort()
+    if published_week['publishedDates']:
+        published_week['weekStart'] = published_week['publishedDates'][0]
+        published_week['weekEnd'] = published_week['publishedDates'][-1]
+
+    # Eğer canlı çekim boş geldiyse mevcut schedule dosyasından yedekle
+    existing_file = os.path.join(DATA_DIR, 'schedule_2026_2027.json')
+    if (not published_week['publishedDates']) and os.path.exists(existing_file):
+        try:
+            with open(existing_file, 'r', encoding='utf-8') as ef:
+                existing_db = json.load(ef)
+                if 'amfi_published_week' in existing_db:
+                    published_week = existing_db['amfi_published_week']
+                    print("[Amfi] Canli cekim alinamadigi icin mevcut json amfi_published_week korundu.")
+        except Exception:
+            pass
+
+    print(f"[Amfi] Doğrulanmış amfi eşleme tablosu ve haftalık canlı takvim hazırlandı ({len(published_week['publishedDates'])} gün).")
+    return amfi_data, published_week
 
 # ═════════════════════════════════════════════════════════════════
 # 6. HEPSİNİ BİRLEŞTİR VE DATA DOSYASINA KAYDET
@@ -502,7 +632,7 @@ def main():
     lectures_3b = process_theoretical('3B', labs)
     rotations_3a = extract_rotations_3a()
     rotations_3b = extract_rotations_3b()
-    amfi = extract_amfi_schedule()
+    amfi_default, amfi_published_week = extract_amfi_schedule()
 
     bundle = {
         'version': '2026-2027-v1',
@@ -514,7 +644,8 @@ def main():
         'rotations_3A': rotations_3a,
         'rotations_3B': rotations_3b,
         'laboratories': labs,
-        'amfi_default': amfi
+        'amfi_default': amfi_default,
+        'amfi_published_week': amfi_published_week
     }
 
     out_file = os.path.join(DATA_DIR, 'schedule_2026_2027.json')
@@ -523,6 +654,7 @@ def main():
 
     file_size_kb = os.path.getsize(out_file) / 1024
     print(f"\n[OK] Basariyla derlendi!")
+
     print(f"Cikti Dosyasi: {out_file} ({file_size_kb:.1f} KB)")
     print("===========================================")
 
