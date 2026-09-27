@@ -535,63 +535,16 @@ function resolveLectureAmfi(lec, gunStr, groupName) {
     return liveResult;
   }
 
-  // 4. Ortak / Özel ders konu kontrolleri (Canlı tabloda özel amfi belirtilmemişse genel amfiler)
-  if (/b[iİı]yo[iİı]stat[iİı]st[iİı]k/i.test(s) || /ortak\s*ders|tüm\s*dönem\s*3/i.test(s)) {
-    return { name: 'Kemal Atay Amfisi (Ortak Ders)', isKnown: true };
-  }
-  if (/ingilizce\s*tıp|i̇ngilizce\s*tıp/i.test(s)) {
-    return { name: 'Cemil Topuzlu Amfisi (Ortak)', isKnown: true };
-  }
-
-  // 5. Çarşamba Günü Amfi Değişimi (Öğleden Önce / Sonra Ayrımı - Genel Kural)
-  if (/çarşamba|carsamba/i.test(g)) {
-    if (groupName === '3A') {
-      const name = isAfternoon ? 'Kemal Atay Amfisi' : 'Aziz Sancar Amfisi';
-      return { name, isKnown: true };
-    } else if (groupName === '3B') {
-      const name = isAfternoon ? 'Sami Zan Amfisi' : 'Kemal Atay Amfisi';
-      return { name, isKnown: true };
-    }
-  }
-
-  // 6. Fakülte resmi amfi tablosundan taslak gün bazlı amfi dağılımı (Canlı portal henüz bu haftayı yayınlamamışsa)
-  const weeklyMap = (state.db && state.db.amfi_default && state.db.amfi_default.weekly_mapping)
-    ? state.db.amfi_default.weekly_mapping[groupName]
-    : {
-        '3A': {
-          'pazartesi': 'Kemal Atay Amfisi',
-          'salı': 'Aziz Sancar Amfisi',
-          'perşembe': 'Tevfik Sağlam Amfisi',
-          'cuma': 'Tevfik Sağlam Amfisi'
-        },
-        '3B': {
-          'pazartesi': 'Aziz Sancar Amfisi',
-          'salı': 'Kemal Atay Amfisi',
-          'perşembe': 'Sami Zan Amfisi',
-          'cuma': 'Aziz Sancar Amfisi'
-        }
-      }[groupName];
-
-  if (weeklyMap) {
-    for (const [dayKey, amfiName] of Object.entries(weeklyMap)) {
-      if (dayKey === 'cuma' && gLower.includes('cumartesi')) continue;
-      if (dayKey === 'salı' && (gLower.includes('salı') || gLower.includes('sali'))) {
-        return { name: amfiName, isKnown: true, isDraftPlan: true };
-      }
-      if (gLower.includes(dayKey) || dayKey.includes(gLower)) {
-        return { name: amfiName, isKnown: true, isDraftPlan: true };
-      }
-    }
-  }
-
-  // 7. Kesin bilinmeyen durumlarda asla yanlış tahmin yapma; doğrudan resmi portala yönlendir
+  // 4. Henüz resmi amfi portalından yayınlanmamış haftalar:
+  // Öğrencileri yanıltmamak için tahminde bulunulmaz, doğrudan Resmi Portal yönlendirmesi yapılır.
   return {
-    name: 'Resmi Amfi Portalı (Haftalık Açıklanır)',
+    name: 'Resmi Portalda Henüz Yayınlanmadı',
     url: 'https://ogrenci-istanbultip.istanbul.edu.tr/tr/content/amfi-programi/amfi-programi',
     isPortal: true,
     isPendingPublication: true
   };
 }
+
 
 /**
  * Hasta Başı Uygulama dersinin konu başlığındaki klinik kısaltmasını (İç H. / ÇSvH)
@@ -825,12 +778,6 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
   let note = '';
   if (amfiInfo.isSecmeli) {
     note = 'Farklı amfilerde seçtiğiniz derse göre dağılım yapılır';
-  } else if (isLiveAmfi) {
-    note = '✓ Resmi portaldan teyit edilen haftalık güncel amfi';
-  } else if (amfiInfo.isDraftPlan) {
-    note = 'Resmi amfi portalında haftalık yayınlanmaktadır (Teyit ediniz)';
-  } else if (amfiInfo.isPendingPublication) {
-    note = 'Fakülte amfi listesini haftalık güncellemektedir';
   }
 
   return {
@@ -838,8 +785,9 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
     badge,
     resolvedLocation,
     note,
-    isLiveAmfi,
-    isDraftPlan: !!amfiInfo.isDraftPlan
+    isLiveAmfi: false,
+    isDraftPlan: false
   };
 }
+
 

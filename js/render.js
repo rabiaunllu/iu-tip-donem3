@@ -376,15 +376,6 @@ function getLectureCardHTML(lec) {
           ${lec.start} - ${lec.end}
         </span>
         <div class="flex items-center gap-1">
-          ${lec.isLiveAmfi ? `
-            <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold flex items-center gap-0.5 border border-emerald-200" title="Resmi portaldan teyit edilen haftalık güncel amfi">
-              <i data-lucide="zap" class="w-2.5 h-2.5 text-emerald-600"></i> Canlı Amfi
-            </span>
-          ` : (lec.isDraftPlan ? `
-            <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 font-semibold flex items-center gap-0.5 border border-slate-200/90" title="Resmi amfi portalında haftalık yayınlanmaktadır (Teyit ediniz)">
-              <i data-lucide="clock" class="w-2.5 h-2.5 text-slate-400"></i> Taslak Plan
-            </span>
-          ` : '')}
           ${lec.hasConflict ? `
             <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-200 text-amber-900 font-extrabold flex items-center gap-0.5" title="Resmi programda saat çakışması">
               <i data-lucide="alert-triangle" class="w-2.5 h-2.5"></i> Çakışma
@@ -395,6 +386,7 @@ function getLectureCardHTML(lec) {
           </span>
         </div>
       </div>
+
 
       <h5 class="text-[11px] font-bold leading-tight mt-1 text-slate-900">${escapeHTML(lec.subject)}</h5>
 
@@ -477,15 +469,10 @@ function updateLiveUpcoming(weekDays) {
     if (typeof currentOrNext.yer === 'string' && currentOrNext.yer.includes('<a ')) {
       locElem.innerHTML = currentOrNext.yer;
     } else {
-      let locHtml = escapeHTML(currentOrNext.yer || 'Dönem Amfisi');
-      if (currentOrNext.isLiveAmfi) {
-        locHtml += ` <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 font-bold ml-1.5 inline-flex items-center gap-1">⚡ Canlı</span>`;
-      } else if (currentOrNext.isDraftPlan) {
-        locHtml += ` <span class="text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-indigo-200 border border-white/20 font-medium ml-1.5 inline-flex items-center gap-1">🕒 Taslak</span>`;
-      }
-      locElem.innerHTML = locHtml;
+      locElem.innerHTML = escapeHTML(currentOrNext.yer || 'Dönem Amfisi');
     }
   }
+
 
   
   if (window.lucide) lucide.createIcons();

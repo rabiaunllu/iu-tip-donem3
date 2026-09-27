@@ -142,94 +142,69 @@ if (vagueCount > 0) {
 // 3. Wednesday Morning vs Afternoon Split Verification (Tüm Yıl ve Örnek Günler)
 console.log('--- Verifying Wednesday Amfi Split Across Whole Year ---');
 
-// Specific check on 2026-09-23
-const lecs3A_0923 = db.lectures_3A.filter(l => l.date === '2026-09-23');
-const lecs3B_0923 = db.lectures_3B.filter(l => l.date === '2026-09-23');
+// 1. Yayınlanmış aktif haftadaki Çarşamba (2026-09-30) canlı amfi denetimi
+const lecs3A_0930 = db.lectures_3A.filter(l => l.date === '2026-09-30');
+const lecs3B_0930 = db.lectures_3B.filter(l => l.date === '2026-09-30');
 
-const l3A_am = lecs3A_0923.find(l => normalizeTime(l.start) === '09:20');
-const l3A_pm = lecs3A_0923.find(l => normalizeTime(l.start) === '13:30');
-const l3B_am = lecs3B_0923.find(l => normalizeTime(l.start) === '08:30');
-const l3B_pm = lecs3B_0923.find(l => normalizeTime(l.start) === '13:30');
+const l3A_wed = lecs3A_0930.find(l => normalizeTime(l.start) === '08:30');
+const l3B_wed = lecs3B_0930.find(l => normalizeTime(l.start) === '08:30');
 
-if (l3A_am) {
-  const res3A_am = resolveLectureDetails(l3A_am, 'çarşamba', '3A', 'all', {});
-  if (!res3A_am.resolvedLocation.includes('Aziz Sancar')) {
-    console.error('FAIL: 3A Wednesday morning should be Aziz Sancar Amfisi, got:', res3A_am.resolvedLocation);
+if (l3A_wed) {
+  const res3A_wed = resolveLectureDetails(l3A_wed, 'çarşamba', '3A', 'all', {});
+  if (!res3A_wed.resolvedLocation.includes('Tevfik Sağlam')) {
+    console.error('FAIL: 3A 30 Eylül Çarşamba canlı amfisi Tevfik Sağlam olmalı, alınan:', res3A_wed.resolvedLocation);
     process.exit(1);
   }
 }
-if (l3A_pm) {
-  const res3A_pm = resolveLectureDetails(l3A_pm, 'çarşamba', '3A', 'all', {});
-  if (!res3A_pm.resolvedLocation.includes('Kemal Atay')) {
-    console.error('FAIL: 3A Wednesday afternoon should be Kemal Atay Amfisi, got:', res3A_pm.resolvedLocation);
+if (l3B_wed) {
+  const res3B_wed = resolveLectureDetails(l3B_wed, 'çarşamba', '3B', 'all', {});
+  if (!res3B_wed.resolvedLocation.includes('Sami Zan')) {
+    console.error('FAIL: 3B 30 Eylül Çarşamba canlı amfisi Sami Zan olmalı, alınan:', res3B_wed.resolvedLocation);
     process.exit(1);
   }
 }
-if (l3B_am) {
-  const res3B_am = resolveLectureDetails(l3B_am, 'çarşamba', '3B', 'all', {});
-  if (!res3B_am.resolvedLocation.includes('Kemal Atay')) {
-    console.error('FAIL: 3B Wednesday morning should be Kemal Atay Amfisi, got:', res3B_am.resolvedLocation);
-    process.exit(1);
-  }
-}
-if (l3B_pm) {
-  const res3B_pm = resolveLectureDetails(l3B_pm, 'çarşamba', '3B', 'all', {});
-  if (!res3B_pm.resolvedLocation.includes('Sami Zan')) {
-    console.error('FAIL: 3B Wednesday afternoon should be Sami Zan Amfisi, got:', res3B_pm.resolvedLocation);
-    process.exit(1);
-  }
-}
-console.log('SUCCESS: 23 Eylül 2026 Çarşamba sabah/öğleden sonra amfi dağılımı doğrulandı.');
+console.log('SUCCESS: Yayınlanmış aktif haftadaki Çarşamba günü canlı amfi dağılımı doğrulandı.');
 
-// Check Elective Course on 2026-10-14
+// 2. Seçmeli Ders Kontrolü (2026-10-14)
 const l_sec = db.lectures_3A.find(l => l.date === '2026-10-14' && normalizeTime(l.start) === '13:30');
 if (l_sec) {
   const res_sec = resolveLectureDetails(l_sec, 'çarşamba', '3A', 'all', {});
   if (!res_sec.resolvedLocation.includes('Seçmeli Derslikleri') || res_sec.badge !== 'Seçmeli') {
-    console.error('FAIL: Seçmeli Ders should route to Seçmeli Derslikleri with Seçmeli badge, got:', res_sec);
+    console.error('FAIL: Seçmeli Ders Seçmeli Derslikleri olarak yönlendirilmeli, alınan:', res_sec);
     process.exit(1);
   }
   console.log('SUCCESS: Seçmeli dersler ve dekanlık portal yönlendirmesi doğrulandı.');
 }
 
-// Full-year Wednesday audit: verify no Wednesday afternoon regular lecture stays in morning amfi
-// FIX-2 uyumu: normalizeTime ile sabah/öğleden sonra ayrımı doğru yapılır
-let wednesdayErrors = 0;
+// 3. Henüz yayınlanmamış haftalarda asla tahmin yapılmaması ve portal yönlendirmesi denetimi
+let unreleasedWednesdayErrors = 0;
 for (const g of ['3A', '3B']) {
   const lecs = db['lectures_' + g];
   for (const l of lecs) {
     const gun = l.date_str ? l.date_str.split(/\s+/).pop() : '';
-    if (gun.toLowerCase().includes('çarşamba')) {
+    if (gun.toLowerCase().includes('çarşamba') && l.date !== '2026-09-30') {
       const s = (l.subject || '').toUpperCase();
       if (!s || s.includes('SERBEST') || s.includes('UYGULAMA') || s.includes('HASTA BAŞI')) continue;
       const res = resolveLectureDetails(l, gun, g, 'all', {});
       if (res.cardType === 'holiday' || res.cardType === 'free') continue;
-      if (res.isLiveAmfi) continue; // Canlı teyitli amfi ataması statik şablonun üzerindedir
-      const isAfternoon = normalizeTime(l.start) >= '13:00';
-      if (isAfternoon) {
-        if (/(seçmeli|secmeli)\s*ders/i.test(l.subject)) {
-          if (!res.resolvedLocation.includes('Seçmeli Derslikleri')) wednesdayErrors++;
-        } else if (g === '3A') {
-          if (!res.resolvedLocation.includes('Kemal Atay')) wednesdayErrors++;
-        } else if (g === '3B') {
-          if (!res.resolvedLocation.includes('Sami Zan')) wednesdayErrors++;
-        }
+      if (/(seçmeli|secmeli)\s*ders/i.test(l.subject)) {
+        if (!res.resolvedLocation.includes('Seçmeli Derslikleri')) unreleasedWednesdayErrors++;
       } else {
-        if (g === '3A') {
-          if (!res.resolvedLocation.includes('Aziz Sancar') && !res.resolvedLocation.includes('Kemal Atay (Ortak Ders)')) wednesdayErrors++;
-        } else if (g === '3B') {
-          if (!res.resolvedLocation.includes('Kemal Atay')) wednesdayErrors++;
+        if (!res.resolvedLocation.includes('Resmi Portalda Henüz Yayınlanmadı')) {
+          console.error(`FAIL: Yayınlanmamış haftada yanlış amfi atandı: [${g}] ${l.date} ${res.resolvedLocation}`);
+          unreleasedWednesdayErrors++;
         }
       }
     }
   }
 }
 
-if (wednesdayErrors > 0) {
-  console.error(`FAIL: Found ${wednesdayErrors} Wednesday amfi assignment violations across full year!`);
+if (unreleasedWednesdayErrors > 0) {
+  console.error(`FAIL: Yayınlanmamış Çarşamba günlerinde ${unreleasedWednesdayErrors} adet hatalı amfi tahmini bulundu!`);
   process.exit(1);
 }
-console.log('SUCCESS: Tüm akademik yıl boyunca (45 Çarşamba) amfi değişimi 0 hata ile doğrulandı!');
+console.log('SUCCESS: Tüm akademik yıl boyunca henüz yayınlanmamış Çarşambalarda portal izolasyonu 0 hata ile doğrulandı!');
+
 
 // ═══════════════════════════════════════════════════════════════
 // FIX-13: AMFİ TAMLIK KONTROLÜ — Tüm teorik derslerin amfi ataması var mı?
@@ -570,8 +545,8 @@ for (const tc of liveVerificationCases) {
   vm.runInContext(`state.group = '${tc.group}';`, sandbox);
   const lec = { date: tc.date, start: tc.start, subject: tc.subject, department: '' };
   const res = resolveLectureDetails(lec, 'pazartesi', tc.group, 'all', {});
-  if (!res.resolvedLocation.includes(tc.expectedAmfi) || !res.isLiveAmfi) {
-    console.error(`FAIL: Canlı amfi eşleşmedi [${tc.group}] ${tc.date} ${tc.start}: beklenen ${tc.expectedAmfi}, alınan: ${res.resolvedLocation} (isLiveAmfi: ${res.isLiveAmfi})`);
+  if (!res.resolvedLocation.includes(tc.expectedAmfi)) {
+    console.error(`FAIL: Canlı amfi eşleşmedi [${tc.group}] ${tc.date} ${tc.start}: beklenen ${tc.expectedAmfi}, alınan: ${res.resolvedLocation}`);
     liveMatchErrors++;
   }
 }
@@ -581,18 +556,15 @@ if (liveMatchErrors > 0) {
 }
 console.log(`SUCCESS: ${liveVerificationCases.length} adet canlı amfi ataması 0 hata ile doğrulandı!`);
 
-// 3. Hafta İzolasyon Denetimi (Başka haftalara canlı Eylül amfisi sızmamalı)
+// 3. Hafta İzolasyon Denetimi (Yayınlanmamış haftalarda Resmi Portalda Henüz Yayınlanmadı dönmeli)
 vm.runInContext("state.group = '3A';", sandbox);
 const futureLec = { date: '2026-11-16', start: '09:20', subject: 'Genel Dahiliye Dersi', department: 'İç Hastalıkları' };
 const futureRes = resolveLectureDetails(futureLec, 'pazartesi', '3A', 'all', {});
-if (futureRes.isLiveAmfi || futureRes.resolvedLocation.includes('Canlı Amfi')) {
-  console.error('FAIL: Henüz yayınlanmamış haftaya canlı amfi ataması sızdı!');
+if (!futureRes.resolvedLocation.includes('Resmi Portalda Henüz Yayınlanmadı')) {
+  console.error('FAIL: Yayınlanmamış haftada "Resmi Portalda Henüz Yayınlanmadı" dönmedi:', futureRes);
   process.exit(1);
 }
-if (!futureRes.isDraftPlan && !futureRes.resolvedLocation.includes('Taslak') && !futureRes.resolvedLocation.includes('Portal')) {
-  console.error('FAIL: Yayınlanmamış haftada taslak plan veya portal uyarısı bulunamadı:', futureRes);
-  process.exit(1);
-}
-console.log('SUCCESS: Hafta izolasyonu doğrulandı (Eylül amfileri gelecekteki haftalara asla sızmıyor)!');
+console.log('SUCCESS: Hafta izolasyonu doğrulandı (Gelecek haftalarda amfi tahmin edilmiyor, "Resmi Portalda Henüz Yayınlanmadı" yazılıyor)!');
+
 
 console.log('\n=== TÜM DOĞRULAMA KONTROLLERI TAMAMLANDI (SIFIR HATA) ===');
