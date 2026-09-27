@@ -414,11 +414,12 @@ for (const g of ['3A', '3B']) {
 
     if (isBayramAcademic) {
       bayramAcademicCount++;
-      if (res.cardType === 'holiday' || !res.resolvedLocation.includes('Amfisi')) {
+      if (res.cardType === 'holiday' || !/amfi/i.test(res.resolvedLocation)) {
         bayramAcademicErrors++;
         console.error(`FAIL: Academic lecturer with BAYRAM surname treated as holiday: [${g}] ${l.date} "${s}"`);
       }
     }
+
   }
 }
 

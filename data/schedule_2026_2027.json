@@ -1,6 +1,6 @@
 {
   "version": "2026-2027-v1",
-  "generated_at": "2026-09-24T00:22:16.226577",
+  "generated_at": "2026-09-28T00:47:00.035297",
   "semester_start": "2026-09-01",
   "semester_end": "2027-07-09",
   "lectures_3A": [
@@ -12053,9 +12053,9 @@
       "date_str": "24 Eylül 2026 Perşembe",
       "start": "09:20",
       "end": "10:00",
-      "subject": "1-İş ve çevre maruziyetleri ile ilişkili kan lenfoid sistem maligniteleri / Prof.Dr. Halim İŞSEVER (Prof.Dr. Ayşe Emel ÖNAL)",
-      "department": "KAN-LENFOİD II DİLİMİ / HALK SAĞLIĞI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-24",
@@ -12206,9 +12206,9 @@
       "date_str": "28 Eylül 2026 Pazartesi",
       "start": "13:30",
       "end": "14:20",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-İş ve çevre maruziyetleri ile ilişkili kan lenfoid sistem maligniteleri / Prof.Dr. Halim İŞSEVER (Prof.Dr. Ayşe Emel ÖNAL)",
+      "department": "KAN-LENFOİD II DİLİMİ / HALK SAĞLIĞI AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-28",
@@ -12242,18 +12242,18 @@
       "date_str": "29 Eylül 2026 Salı",
       "start": "09:20",
       "end": "10:00",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "Temel kavramlar ve kısa tarihçe / Prof.Dr. Ahmet GÜL (Prof.Dr. Murat İNANÇ)",
+      "department": "KAN-LENFOİD II DİLİMİ / İÇ HASTALIKLARI AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-09-29",
       "date_str": "29 Eylül 2026 Salı",
       "start": "10:10",
       "end": "10:50",
-      "subject": "Temel kavramlar ve kısa tarihçe / Prof.Dr. Ahmet GÜL (Prof.Dr. Murat İNANÇ)",
-      "department": "KAN-LENFOİD II DİLİMİ / İÇ HASTALIKLARI AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-09-29",
@@ -13367,9 +13367,9 @@
       "date_str": "23 Ekim 2026 Cuma",
       "start": "11:00",
       "end": "11:40",
-      "subject": "1-Cilt ve yumuşak doku enfeksiyonu etkeni bakteriler/ Prof.Dr. Lütfiye ÖKSÜZ (Prof.Dr. Zerrin AKTAŞ)",
-      "department": "HAREKET II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
-      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
+      "subject": "",
+      "department": "",
+      "location_raw": ""
     },
     {
       "date": "2026-10-23",
@@ -13984,6 +13984,15 @@
       "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
+      "date": "2026-12-23",
+      "date_str": "23 Aralık 2026 Çarşamba",
+      "start": "08:30",
+      "end": "09:10",
+      "subject": "SERBEST ÇALIŞMA",
+      "department": "",
+      "location_raw": ""
+    },
+    {
       "date": "2026-11-10",
       "date_str": "10 Kasım 2026 Salı",
       "start": "08:30",
@@ -14060,9 +14069,9 @@
       "date_str": "11 Kasım 2026 Çarşamba",
       "start": "10:10",
       "end": "10:50",
-      "subject": "SERBEST ÇALIŞMA",
-      "department": "",
-      "location_raw": ""
+      "subject": "1-Cilt ve yumuşak doku enfeksiyonu etkeni bakteriler/ Prof.Dr. Lütfiye ÖKSÜZ (Prof.Dr. Zerrin AKTAŞ)",
+      "department": "HAREKET II DİLİMİ / TIBBİ MİKROBİYOLOJİ AD.",
+      "location_raw": "FAKÜLTEMİZ WEB SİTESİ ÖĞRENCİ AĞI AMFİ PROGRAMINA BAKINIZ"
     },
     {
       "date": "2026-11-11",
@@ -24421,21 +24430,21 @@
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HAST. GERİATRİ. -B 5-11.10-12.10"
         },
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR.ORHAN ZİYLAN- DR.İRFAN DÖNMEZ-SEMİNER -11.00-11.40"
         },
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "DÖNEM 3-TÜRKÇE - A GRUBU -ÇOCUK SAĞLIĞI VE HASTALIKLARI- HAREKET DİLİMİ -A 3 - UYGULAMA -11.10-12.10"
         },
@@ -24505,7 +24514,7 @@
         {
           "start": "13:30",
           "end": "14:10",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "ÇOCUK SAĞ. VE HAST. UYGULAMA - DR. BAĞDAGÜL AKSU 13.30-14.30"
         },
@@ -24598,14 +24607,14 @@
         {
           "start": "09:20",
           "end": "10:00",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "KALP DAMAR CER. DÖNEM 4- UYGULAMA -09.3-10.30"
         },
         {
           "start": "09:20",
           "end": "10:00",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "DÖNEM 1 SINAV TOPL.-09.00-12.00"
         },
@@ -24619,7 +24628,7 @@
         {
           "start": "10:10",
           "end": "10:50",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "ÇOCUK SAĞLIĞI  ENSTİTÜSÜ SINAV -10.00-12.00"
         },
@@ -24675,7 +24684,7 @@
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR. MAZHAR ORTAÇ-11.00-11.40"
         },
@@ -24731,7 +24740,7 @@
         {
           "start": "13:30",
           "end": "14:10",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "AİLE HEKİMLİĞİ ANABİLİM DALI SEMİNER - DR. AYŞE PALANDUZ -13.00-16.00"
         },
@@ -24768,7 +24777,7 @@
         {
           "start": "07:30",
           "end": "08:30",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "DÖNEM 5 G GRUBU GÖĞÜS CERRAHİSİ- UYGULAMA - 08.30-09.30"
         },
@@ -24803,14 +24812,14 @@
         {
           "start": "08:30",
           "end": "09:10",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "İÇ HASTALIKLARI DÖNEM 4 -UYGULAMA -09.00-11.00"
         },
         {
           "start": "08:30",
           "end": "09:10",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 09.30-10.30"
         },
@@ -24910,7 +24919,7 @@
           "end": "11:40",
           "amfi": "Cemil Topuzlu Amfisi",
           "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
-          "text": "D��NEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HAST. -B1- B2 -11.10-12.10"
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -ÇOCUK SAĞLIĞI VE HAST. -B1- B2 -11.10-12.10"
         },
         {
           "start": "11:00",
@@ -24936,21 +24945,21 @@
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HAST. GERİATRİ. -B 6 -11.10-12.10"
         },
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR.TAYFUN OKTAR -11.00-11.40"
         },
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "DÖNEM 3-TÜRKÇE - A GRUBU -ÇOCUK SAĞLIĞI VE HASTALIKLARI- HAREKET DİLİMİ -A 6 - UYGULAMA -11.10-12.10"
         },
@@ -25027,7 +25036,7 @@
         {
           "start": "13:30",
           "end": "14:10",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "SEÇMELİ DERS- ENGELLİ PSİKOLOJİSİ"
         },
@@ -25083,7 +25092,7 @@
         {
           "start": "14:20",
           "end": "15:00",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "SEÇMELİ DERS- SAĞLIK PSİKOLOJİSİ"
         },
@@ -25139,7 +25148,7 @@
         {
           "start": "15:10",
           "end": "15:50",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "SEÇMELİ DERS-OMURGA SAĞLIĞI VE ERGONOMİ"
         }
@@ -25267,21 +25276,21 @@
         {
           "start": "10:10",
           "end": "10:50",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "ÇOCUK SAĞLIĞI  ENSTİTÜSÜ SINAV -10.00-12.00"
         },
         {
           "start": "10:10",
           "end": "10:50",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "ÜROLOJİ-DÖNEM 5 D3 GRUBU -DR. MURAT DURSUN -10.20-11.40"
         },
         {
           "start": "10:10",
           "end": "10:50",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -10.00-11.30"
         },
@@ -25428,7 +25437,7 @@
         {
           "start": "13:30",
           "end": "14:10",
-          "amfi": "Eski Fizik Tedavi B Dersliği",
+          "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "DÖNEM 6 -B2-2 HALK SAĞLIĞI -13.30-15.00"
         },
@@ -25570,14 +25579,14 @@
         {
           "start": "09:20",
           "end": "10:00",
-          "amfi": "Room III",
+          "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
           "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 09.30-10.30"
         },
         {
           "start": "09:20",
           "end": "10:00",
-          "amfi": "Room IV",
+          "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "ÇOCUK SAĞ. VE HAST. NEFROLOJİ SEMİNER -09.00-10.00"
         },
