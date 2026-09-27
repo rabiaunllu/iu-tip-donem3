@@ -40,12 +40,22 @@ const pad = (n) => String(n).padStart(2, '0');
 
 const formatDate = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
+/**
+ * Türkçe duyarlı küçük harf dönüşümü ve NFC normalizasyonu.
+ * Standart toLowerCase(), "İ" harfini "i\u0307" (combining dot) yapar ve "EKİM", "NİSAN", "HAZİRAN"
+ * gibi aylarda veya "İÇ HASTALIKLARI" aramasında eşleşme bozulur.
+ */
+function normalizeTurkishLower(s) {
+  if (!s) return '';
+  return s.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase().normalize('NFC');
+}
+
 function toISOFromStr(str) {
   if (!str) return null;
   const parts = str.trim().split(/\s+/);
   if (parts.length < 3) return null;
   const g = parseInt(parts[0], 10);
-  const monStr = parts[1].toLowerCase();
+  const monStr = normalizeTurkishLower(parts[1]);
   const a = TR_AYLAR[monStr];
   const y = parseInt(parts[2], 10);
   if (isNaN(g) || !a || isNaN(y)) return null;

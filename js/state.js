@@ -2,10 +2,20 @@
  * İÜ Tıp Fakültesi Dönem 3 — Uygulama Durumu (State) ve Profil Yönetimi
  */
 
+function getInitialMonday() {
+  const now = new Date();
+  const semStart = new Date(2026, 8, 1);   // 1 Eylül 2026
+  const semEnd = new Date(2027, 6, 15);    // 15 Temmuz 2027
+  if (now >= semStart && now <= semEnd) {
+    return getMondayOfDate(now);
+  }
+  return getMondayOfDate(new Date(2026, 8, 21)); // Dönem dışındaysa varsayılan hafta
+}
+
 let state = {
   group: '3A',
   subgroup: 'all', // 'all', 'A1'..'A8', 'B1'..'B8'
-  currentMonday: getMondayOfDate(new Date(2026, 8, 21)), // 21 Eylül 2026 haftası varsayılan
+  currentMonday: getInitialMonday(),
   showFreeStudy: false,
   searchQuery: '',
   selectedMobileDay: 'auto', // 'auto', 0..4 (Pzt..Cum), or 'all'
