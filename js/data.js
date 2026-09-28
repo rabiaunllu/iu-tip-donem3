@@ -420,7 +420,7 @@ function matchLiveAmfi(lec, daySlots, groupName) {
 
     const isMyGroup = groupPattern.test(sText);
     const isOtherGroup = otherGroupPattern.test(sText) && !isMyGroup;
-    const isAllD3 = /DÖNEM\s*3\s*-\s*TÜRKÇE\s*-\s*A\+B|A\s*\+\s*B|TÜM\s*DÖNEM\s*3|DÖNEM\s*3\s*TÜRKÇE\s*\+\s*İNGİLİZCE|DÖNEM\s*3/i.test(sText);
+    const isAllD3 = /DÖNEM\s*3\s*-\s*TÜRKÇE\s*-\s*A\s*\+\s*B|A\s*\+\s*B|TÜM\s*DÖNEM\s*3|DÖNEM\s*3\s*TÜRKÇE\s*\+\s*İNGİLİZCE/i.test(sText) && !otherGroupPattern.test(sText);
 
     if (isOtherGroup && !isAllD3) continue;
 
@@ -768,9 +768,10 @@ function resolveLectureDetails(lec, gun, group, subgroup, rotations) {
   // 10. Teorik Ders — Gün ve ders amfisi eşleme
   const amfiInfo = resolveLectureAmfi(lec, gun, group);
   const isLiveAmfi = !!(amfiInfo.isLiveOverride || amfiInfo.isLiveSchedule);
-  let resolvedLocation = `🏛️ ${amfiInfo.name}`;
+  const escapedAmfiName = typeof escapeHTML === 'function' ? escapeHTML(amfiInfo.name) : amfiInfo.name;
+  let resolvedLocation = `🏛️ ${escapedAmfiName}`;
   if (amfiInfo.isPortal) {
-    resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${amfiInfo.name} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
+    resolvedLocation = `<a href="${amfiInfo.url}" target="_blank" rel="noopener" class="text-indigo-600 hover:text-indigo-800 underline inline-flex items-center gap-1 font-semibold">🏛️ ${escapedAmfiName} <i data-lucide="external-link" class="w-3 h-3 shrink-0"></i></a>`;
   }
 
 
