@@ -601,6 +601,7 @@ def extract_amfi_schedule():
                         'text': text
                     })
 
+    published_week['publishedDates'] = [d for d in published_week['publishedDates'] if len(published_week['byDate'].get(d, [])) > 0]
     published_week['publishedDates'].sort()
     if published_week['publishedDates']:
         published_week['weekStart'] = published_week['publishedDates'][0]

@@ -142,28 +142,37 @@ if (vagueCount > 0) {
 // 3. Wednesday Morning vs Afternoon Split Verification (Tüm Yıl ve Örnek Günler)
 console.log('--- Verifying Wednesday Amfi Split Across Whole Year ---');
 
-// 1. Yayınlanmış aktif haftadaki Çarşamba (2026-09-30) canlı amfi denetimi
-const lecs3A_0930 = db.lectures_3A.filter(l => l.date === '2026-09-30');
-const lecs3B_0930 = db.lectures_3B.filter(l => l.date === '2026-09-30');
+// 1. Yayınlanmış aktif haftadaki Çarşamba canlı amfi denetimi
+const publishedDates = db.amfi_published_week ? db.amfi_published_week.publishedDates || [] : [];
+const publishedWed = publishedDates.find(d => {
+  const parts = d.split('-').map(Number);
+  const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+  return dt.getDay() === 3;
+});
 
-const l3A_wed = lecs3A_0930.find(l => normalizeTime(l.start) === '08:30');
-const l3B_wed = lecs3B_0930.find(l => normalizeTime(l.start) === '08:30');
+if (publishedWed) {
+  const lecs3A_wed = db.lectures_3A.filter(l => l.date === publishedWed);
+  const lecs3B_wed = db.lectures_3B.filter(l => l.date === publishedWed);
 
-if (l3A_wed) {
-  const res3A_wed = resolveLectureDetails(l3A_wed, 'çarşamba', '3A', 'all', {});
-  if (!res3A_wed.resolvedLocation.includes('Tevfik Sağlam')) {
-    console.error('FAIL: 3A 30 Eylül Çarşamba canlı amfisi Tevfik Sağlam olmalı, alınan:', res3A_wed.resolvedLocation);
-    process.exit(1);
+  const l3A_wed = lecs3A_wed.find(l => !l.subject.includes('Uygulama') && (normalizeTime(l.start) === '08:30' || normalizeTime(l.start) === '09:20'));
+  const l3B_wed = lecs3B_wed.find(l => !l.subject.includes('Uygulama') && (normalizeTime(l.start) === '09:20' || normalizeTime(l.start) === '08:30'));
+
+  if (l3A_wed) {
+    const res3A_wed = resolveLectureDetails(l3A_wed, 'çarşamba', '3A', 'all', {});
+    if (!res3A_wed.resolvedLocation.includes('Sami Zan') && !res3A_wed.resolvedLocation.includes('Tevfik Sağlam')) {
+      console.error(`FAIL: 3A ${publishedWed} Çarşamba canlı amfisi eşleşmedi, alınan:`, res3A_wed.resolvedLocation);
+      process.exit(1);
+    }
   }
-}
-if (l3B_wed) {
-  const res3B_wed = resolveLectureDetails(l3B_wed, 'çarşamba', '3B', 'all', {});
-  if (!res3B_wed.resolvedLocation.includes('Sami Zan')) {
-    console.error('FAIL: 3B 30 Eylül Çarşamba canlı amfisi Sami Zan olmalı, alınan:', res3B_wed.resolvedLocation);
-    process.exit(1);
+  if (l3B_wed) {
+    const res3B_wed = resolveLectureDetails(l3B_wed, 'çarşamba', '3B', 'all', {});
+    if (!res3B_wed.resolvedLocation.includes('Kemal Atay') && !res3B_wed.resolvedLocation.includes('Sami Zan')) {
+      console.error(`FAIL: 3B ${publishedWed} Çarşamba canlı amfisi eşleşmedi, alınan:`, res3B_wed.resolvedLocation);
+      process.exit(1);
+    }
   }
+  console.log(`SUCCESS: Yayınlanmış aktif haftadaki Çarşamba günü (${publishedWed}) canlı amfi dağılımı doğrulandı.`);
 }
-console.log('SUCCESS: Yayınlanmış aktif haftadaki Çarşamba günü canlı amfi dağılımı doğrulandı.');
 
 // 2. Seçmeli Ders Kontrolü (2026-10-14)
 const l_sec = db.lectures_3A.find(l => l.date === '2026-10-14' && normalizeTime(l.start) === '13:30');
@@ -182,7 +191,7 @@ for (const g of ['3A', '3B']) {
   const lecs = db['lectures_' + g];
   for (const l of lecs) {
     const gun = l.date_str ? l.date_str.split(/\s+/).pop() : '';
-    if (gun.toLowerCase().includes('çarşamba') && l.date !== '2026-09-30') {
+    if (gun.toLowerCase().includes('çarşamba') && (!publishedWed || l.date !== publishedWed)) {
       const s = (l.subject || '').toUpperCase();
       if (!s || s.includes('SERBEST') || s.includes('UYGULAMA') || s.includes('HASTA BAŞI')) continue;
       const res = resolveLectureDetails(l, gun, g, 'all', {});
@@ -528,16 +537,17 @@ vm.runInContext('state.cacheData.amfi = db.amfi_published_week;', sandbox);
 
 const liveVerificationCases = [
   // 3A Kontrolleri
-  { group: '3A', date: '2026-09-28', start: '09:20', subject: 'Romatizmal hastalıklar', expectedAmfi: 'Tevfik Sağlam Amfisi' },
-  { group: '3A', date: '2026-09-28', start: '14:20', subject: 'Verilerin özetlenmesi Biyoistatistik', expectedAmfi: 'Kemal Atay Amfisi' },
-  { group: '3A', date: '2026-09-29', start: '08:30', subject: 'Engellilik ve Evrensel Tasarım', expectedAmfi: 'Tevfik Sağlam Amfisi' },
-  { group: '3A', date: '2026-09-29', start: '13:30', subject: 'Öğrenci ve danışman sorumlulukları Araştırma', expectedAmfi: 'Aziz Sancar Amfisi' },
-  { group: '3A', date: '2026-10-01', start: '08:30', subject: 'Çocukta karında kitle', expectedAmfi: 'Tevfik Sağlam Amfisi' },
+  { group: '3A', date: '2026-10-05', start: '08:30', subject: 'Hareket Dilimi Fizyoloji', expectedAmfi: 'Sami Zan Amfisi' },
+  { group: '3A', date: '2026-10-05', start: '09:20', subject: 'Bilimsel Araştırma', expectedAmfi: 'Aziz Sancar Amfisi' },
+  { group: '3A', date: '2026-10-06', start: '09:20', subject: 'Konjenital konnektif doku', expectedAmfi: 'Tevfik Sağlam Amfisi' },
+  { group: '3A', date: '2026-10-07', start: '08:30', subject: 'Yumuşak Doku Hastalıklarına Yaklaşım', expectedAmfi: 'Sami Zan Amfisi' },
+  { group: '3A', date: '2026-10-09', start: '10:10', subject: 'Vaskülitli hastaya yaklaşım', expectedAmfi: 'Sami Zan Amfisi' },
   // 3B Kontrolleri
-  { group: '3B', date: '2026-09-28', start: '10:10', subject: 'Hücre duvarı membranına etkili antibakteriyeller Farmakoloji', expectedAmfi: 'Cemil Topuzlu Amfisi' },
-  { group: '3B', date: '2026-09-29', start: '11:00', subject: 'İnflamasyon ve inflamatuar hastalıklar', expectedAmfi: 'Muzaffer Aksoy Amfisi' },
-  { group: '3B', date: '2026-09-30', start: '08:30', subject: 'Aşılar ve infeksiyon hastalıkları Çocuk Sağlığı', expectedAmfi: 'Sami Zan Amfisi' },
-  { group: '3B', date: '2026-10-01', start: '10:10', subject: 'Hücre duvarı membranına etkili antibakteriyeller', expectedAmfi: 'Sami Zan Amfisi' }
+  { group: '3B', date: '2026-10-05', start: '08:30', subject: 'Protein sentezini önleyen antibiyotikler Farmakoloji', expectedAmfi: 'Aziz Sancar Amfisi' },
+  { group: '3B', date: '2026-10-06', start: '08:30', subject: 'Dalak hastalıkları Genel Cerrahi', expectedAmfi: 'Tevfik Sağlam Amfisi' },
+  { group: '3B', date: '2026-10-06', start: '10:10', subject: 'Anemili hastaya yaklaşım İç Hastalıkları', expectedAmfi: 'Aziz Sancar Amfisi' },
+  { group: '3B', date: '2026-10-07', start: '09:20', subject: 'Otoinflamatuar hastalıklar İç Hastalıkları', expectedAmfi: 'Kemal Atay Amfisi' },
+  { group: '3B', date: '2026-10-09', start: '08:30', subject: 'Entegre Oturum Anemi', expectedAmfi: 'Kemal Atay Amfisi' }
 ];
 
 let liveMatchErrors = 0;

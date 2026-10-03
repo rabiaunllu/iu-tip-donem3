@@ -356,6 +356,7 @@ function parseAmfiSchedule(rows) {
     }
   }
 
+  result.publishedDates = result.publishedDates.filter(d => (result.byDate[d] || []).length > 0);
   result.publishedDates.sort();
   if (result.publishedDates.length > 0) {
     result.weekStart = result.publishedDates[0];
