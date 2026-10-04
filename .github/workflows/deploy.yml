@@ -46,9 +46,11 @@ jobs:
       - name: Canlı E-Tablo ve Rotasyon Veritabanını Derle
         run: python scripts/build_data.py
 
-      # FIX-12: Doğrulama scripti artık CI/CD'de çalışıyor
-      - name: Veri Bütünlüğünü Doğrula
-        run: node scripts/verify_integrity.js
+      # FIX-12: Doğrulama ve haftalık amfi denetim scriptleri CI/CD'de çalışıyor
+      - name: Veri Bütünlüğünü ve Haftalık Amfileri Doğrula
+        run: |
+          node scripts/verify_integrity.js
+          node scripts/audit_weekly_amfi.js
 
       - name: Web Sitesi Yayın Paketini Hazırla (_site)
         run: |

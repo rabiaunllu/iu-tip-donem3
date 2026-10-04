@@ -15,6 +15,7 @@ import io
 import zipfile
 import xml.etree.ElementTree as ET
 import unicodedata
+import subprocess
 import time as _time
 
 try:
@@ -655,9 +656,19 @@ def main():
 
     file_size_kb = os.path.getsize(out_file) / 1024
     print(f"\n[OK] Basariyla derlendi!")
-
     print(f"Cikti Dosyasi: {out_file} ({file_size_kb:.1f} KB)")
     print("===========================================")
+
+    # Haftalık Amfi ve Ders Güvenlik Denetimini Çalıştır
+    audit_script = os.path.join(BASE_DIR, 'scripts', 'audit_weekly_amfi.js')
+    if os.path.exists(audit_script):
+        try:
+            print("\nHaftalık Resmi Amfi Güvenlik Denetimi Başlatılıyor...\n")
+            res = subprocess.run(['node', audit_script], check=False)
+            if res.returncode != 0:
+                print("\n[UYARI] Amfi denetiminde açıkta kalan dersler tespit edildi!")
+        except Exception as e:
+            print(f"Amfi denetim scripti calistirilamadi: {e}")
 
 if __name__ == '__main__':
     main()
