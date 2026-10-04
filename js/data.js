@@ -413,11 +413,30 @@ function matchLiveAmfi(lec, daySlots, groupName) {
   for (const slot of daySlots) {
     const sText = slot.text;
     const sTextNorm = typeof normalizeTurkishLower === 'function' ? normalizeTurkishLower(sText) : sText.toLowerCase();
-    const sStartMin = timeToMinutes(slot.start);
-    const diff = Math.abs(lStartMin - sStartMin);
 
-    // 50 dakikadan uzak saatleri ele
-    if (diff > 50) continue;
+    // 1. Başka bir döneme aitse (Dönem 1, 2, 4, 5, 6) ve Dönem 3 içermiyorsa doğrudan atla!
+    const isOtherYear = /DÖNEM\s*[12456]\b/i.test(sText) && !/DÖNEM\s*3\b/i.test(sText);
+    if (isOtherYear) continue;
+
+    const sStartMin = timeToMinutes(slot.start);
+    let sEffectiveStartMin = sStartMin;
+    let isCoveredByInlineRange = false;
+
+    // 2. Metin içerisinde özel bir saat aralığı belirtilmiş mi? (Örn: "14.30-16.00", "11.10-12.10")
+    const inlineTimeMatch = sText.match(/(\d{1,2})[.:](\d{2})\s*[-–]\s*(\d{1,2})[.:](\d{2})/);
+    if (inlineTimeMatch) {
+      const inStart = parseInt(inlineTimeMatch[1], 10) * 60 + parseInt(inlineTimeMatch[2], 10);
+      const inEnd = parseInt(inlineTimeMatch[3], 10) * 60 + parseInt(inlineTimeMatch[4], 10);
+      sEffectiveStartMin = inStart;
+      if (lStartMin >= inStart && lStartMin < inEnd) {
+        isCoveredByInlineRange = true;
+      }
+    }
+
+    const diff = isCoveredByInlineRange ? 0 : Math.abs(lStartMin - sEffectiveStartMin);
+
+    // 50 dakikadan uzak saatleri ele (eğer inline saat aralığıyla kapsanmıyorsa)
+    if (diff > 50 && !isCoveredByInlineRange) continue;
 
     const isMyGroup = groupPattern.test(sText);
     const isOtherGroup = otherGroupPattern.test(sText) && !isMyGroup;
@@ -426,7 +445,7 @@ function matchLiveAmfi(lec, daySlots, groupName) {
     if (isOtherGroup && !isAllD3) continue;
 
     let score = 0;
-    if (diff === 0) score += 30;
+    if (isCoveredByInlineRange || diff === 0) score += 30;
     else if (diff <= 15) score += 20;
     else if (diff <= 30) score += 10;
 
