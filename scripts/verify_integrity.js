@@ -536,7 +536,7 @@ console.log('SUCCESS: Tüm haftalık amfi takvim başlıkları hatasız ayrışt
 vm.runInContext('state.cacheData.amfi = db.amfi_published_week;', sandbox);
 
 const liveVerificationCases = [
-  { group: '3A', date: '2026-10-05', start: '08:30', subject: 'Hareket Dilimi Fizyoloji', expectedAmfi: 'Sami Zan Amfisi' },
+  { group: '3A', date: '2026-10-05', start: '08:30', subject: 'Hareket Dilimi Fizyoloji', expectedAmfi: 'Aziz Sancar Amfisi' },
   { group: '3A', date: '2026-10-05', start: '09:20', subject: 'Bilimsel Araştırma', expectedAmfi: 'Aziz Sancar Amfisi' },
   { group: '3A', date: '2026-10-05', start: '14:30', subject: '5-Değişkenlik kavramı ve standart sapma Biyoistatistik', expectedAmfi: 'Muzaffer Aksoy Amfisi' },
   { group: '3A', date: '2026-10-05', start: '15:20', subject: '6-Olasılık ve dağılımlar Biyoistatistik', expectedAmfi: 'Muzaffer Aksoy Amfisi' },
@@ -544,7 +544,7 @@ const liveVerificationCases = [
   { group: '3A', date: '2026-10-07', start: '08:30', subject: 'Yumuşak Doku Hastalıklarına Yaklaşım', expectedAmfi: 'Sami Zan Amfisi' },
   { group: '3A', date: '2026-10-09', start: '10:10', subject: 'Vaskülitli hastaya yaklaşım', expectedAmfi: 'Sami Zan Amfisi' },
   // 3B Kontrolleri
-  { group: '3B', date: '2026-10-05', start: '08:30', subject: 'Protein sentezini önleyen antibiyotikler Farmakoloji', expectedAmfi: 'Aziz Sancar Amfisi' },
+  { group: '3B', date: '2026-10-05', start: '08:30', subject: 'Protein sentezini önleyen antibiyotikler Farmakoloji', expectedAmfi: 'Sami Zan Amfisi' },
   { group: '3B', date: '2026-10-05', start: '14:30', subject: '5-Değişkenlik kavramı ve standart sapma Biyoistatistik', expectedAmfi: 'Muzaffer Aksoy Amfisi' },
   { group: '3B', date: '2026-10-05', start: '15:20', subject: '6-Olasılık ve dağılımlar Biyoistatistik', expectedAmfi: 'Muzaffer Aksoy Amfisi' },
   { group: '3B', date: '2026-10-06', start: '08:30', subject: 'Dalak hastalıkları Genel Cerrahi', expectedAmfi: 'Tevfik Sağlam Amfisi' },

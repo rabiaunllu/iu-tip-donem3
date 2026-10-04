@@ -1,6 +1,6 @@
 {
   "version": "2026-2027-v1",
-  "generated_at": "2026-10-03T20:19:06.726324",
+  "generated_at": "2026-10-05T02:37:51.521965",
   "semester_start": "2026-09-01",
   "semester_end": "2027-07-09",
   "lectures_3A": [
@@ -24295,7 +24295,7 @@
           "end": "09:10",
           "amfi": "Aziz Sancar Amfisi",
           "rawAmfi": "AZİZ SANCAR",
-          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - FARMAKOLOJİ"
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZYOLOJİ"
         },
         {
           "start": "08:30",
@@ -24316,7 +24316,7 @@
           "end": "09:10",
           "amfi": "Sami Zan Amfisi",
           "rawAmfi": "SAMİ ZAN AMFİSİ",
-          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZYOLOJİ"
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - FARMAKOLOJİ"
         },
         {
           "start": "09:20",
@@ -24342,6 +24342,13 @@
         {
           "start": "09:20",
           "end": "10:00",
+          "amfi": "Muzaffer Aksoy Amfisi",
+          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - FİZYOLOJİ"
+        },
+        {
+          "start": "09:20",
+          "end": "10:00",
           "amfi": "İngilizce Tıp Hall 1 Amfisi",
           "rawAmfi": "İNGİLİZCE TIP HALL 1 AMFİSİ",
           "text": "DÖNEM 1İNGİLİZCE   - TIBBA MERHABA DİLİMİ - TIP EĞİTİMİ-PSİKİYATRİ"
@@ -24358,7 +24365,7 @@
           "end": "10:50",
           "amfi": "Aziz Sancar Amfisi",
           "rawAmfi": "AZİZ SANCAR",
-          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - İÇ HASTALIKLARI"
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
         },
         {
           "start": "10:10",
@@ -24393,7 +24400,7 @@
           "end": "10:50",
           "amfi": "Sami Zan Amfisi",
           "rawAmfi": "SAMİ ZAN AMFİSİ",
-          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - FİZİKSEL TIP VE REHABİLİTASYON"
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - İÇ HASTALIKLARI"
         },
         {
           "start": "10:10",
@@ -24422,13 +24429,6 @@
           "amfi": "Cemil Topuzlu Amfisi",
           "rawAmfi": "İNGİLİZCE TIP CEMİL TOPUZLU AMFİSİ",
           "text": "DÖNEM 4-TÜRKÇE -ÇOCUK SAĞLIĞI VE HASTALIKLARI-11.00-12.30"
-        },
-        {
-          "start": "11:00",
-          "end": "11:40",
-          "amfi": "Muzaffer Aksoy Amfisi",
-          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
-          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - KARDİYOLOJİ"
         },
         {
           "start": "11:00",
@@ -24492,13 +24492,6 @@
           "amfi": "Kemal Atay Amfisi",
           "rawAmfi": "KEMAL ATAY AMFİSİ",
           "text": "DÖNEM 3-A GRUBU HAREKET   DİLİMİ - A1- A2 -FİZİKSEL TIP VE REHABİLİTASYON -11.20-12.20"
-        },
-        {
-          "start": "11:50",
-          "end": "12:30",
-          "amfi": "Muzaffer Aksoy Amfisi",
-          "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
-          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - ANATOMİ"
         },
         {
           "start": "11:50",
@@ -24794,7 +24787,7 @@
           "end": "11:40",
           "amfi": "Muzaffer Aksoy Amfisi",
           "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
-          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -İÇ HASTALIKLARI"
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - FİZYOLOJİ"
         },
         {
           "start": "11:00",
@@ -24857,7 +24850,7 @@
           "end": "12:30",
           "amfi": "Muzaffer Aksoy Amfisi",
           "rawAmfi": "İNGİLİZCE TIP MUZAFFER AKSOY AMFİSİ",
-          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -HİSTOLOJİ VE EMBRİYOLOJİ"
+          "text": "DÖNEM 2-İNGİLİZCE -DOLAŞIM DİLİMİ - ANATOMİ"
         },
         {
           "start": "11:50",
@@ -24921,13 +24914,6 @@
           "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI A DERSLİĞİ",
           "text": "AİLE HEKİMLİĞİ ANABİLİM DALI SEMİNER - DR. AYŞE PALANDUZ -13.00-16.00"
-        },
-        {
-          "start": "13:30",
-          "end": "14:10",
-          "amfi": "ROOM III",
-          "rawAmfi": "ROOM III",
-          "text": "DÖNEM 1 SINAV HAZIRLAMATOPLANTISI -13.00-15.00"
         },
         {
           "start": "14:20",
@@ -25006,6 +24992,13 @@
           "end": "08:30",
           "amfi": "ROOM III",
           "rawAmfi": "ROOM III",
+          "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 08.30-10.30"
+        },
+        {
+          "start": "07:30",
+          "end": "08:30",
+          "amfi": "ROOM IV",
+          "rawAmfi": "ROOM IV",
           "text": "DÖNEM 5 G GRUBU GÖĞÜS CERRAHİSİ- UYGULAMA - 08.30-09.30"
         },
         {
@@ -25063,13 +25056,6 @@
           "amfi": "Eski Fizik Tedavi A Dersliği",
           "rawAmfi": "ESKİ FİZİK TEDAVİ  ANABİLİM DALI B DERSLİĞİ",
           "text": "İÇ HASTALIKLARI DÖNEM 4 -UYGULAMA -09.00-11.00"
-        },
-        {
-          "start": "08:30",
-          "end": "09:10",
-          "amfi": "ROOM IV",
-          "rawAmfi": "ROOM IV",
-          "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 09.30-10.30"
         },
         {
           "start": "09:20",
@@ -25505,6 +25491,13 @@
           "end": "10:50",
           "amfi": "Kemal Atay Amfisi",
           "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+        },
+        {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
           "text": "DÖNEM 2-TÜRKÇE - DOLAŞIM DİLİMİ - HİSTOLOJİ VE EMBRİYOLOJİ-10.30"
         },
         {
@@ -25545,16 +25538,9 @@
         {
           "start": "11:00",
           "end": "11:40",
-          "amfi": "Kemal Atay Amfisi",
-          "rawAmfi": "KEMAL ATAY AMFİSİ",
-          "text": "DÖNEM 2-TÜRKÇE + İNGİLİZCE - ÖLÇME DEĞERLENİRME TOPL.11.20.12.20"
-        },
-        {
-          "start": "11:00",
-          "end": "11:40",
           "amfi": "Tevfik Sağlam Amfisi",
           "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
-          "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ - ÇOCUK SAĞLIĞI VE HASTALIKLARI"
+          "text": "DÖNEM 2-TÜRKÇE + İNGİLİZCE - ÖLÇME DEĞERLENİRME TOPL.11.20.12.20"
         },
         {
           "start": "11:00",
@@ -25771,13 +25757,6 @@
         {
           "start": "09:20",
           "end": "10:00",
-          "amfi": "ROOM III",
-          "rawAmfi": "ROOM III",
-          "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 09.30-10.30"
-        },
-        {
-          "start": "09:20",
-          "end": "10:00",
           "amfi": "ROOM IV",
           "rawAmfi": "ROOM IV",
           "text": "ÇOCUK SAĞ. VE HAST. NEFROLOJİ SEMİNER -09.00-10.00"
@@ -25792,8 +25771,8 @@
         {
           "start": "10:10",
           "end": "10:50",
-          "amfi": "Tevfik Sağlam Amfisi",
-          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
+          "amfi": "Kemal Atay Amfisi",
+          "rawAmfi": "KEMAL ATAY AMFİSİ",
           "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ -FARMAKOLOJİ"
         },
         {
@@ -25825,6 +25804,13 @@
           "text": "DÖNEM 3-TÜRKÇE - A GRUBU HAREKET DİLİMİ -PATOLOJİ"
         },
         {
+          "start": "10:10",
+          "end": "10:50",
+          "amfi": "ROOM III",
+          "rawAmfi": "ROOM III",
+          "text": "DÖNEM 4- B GRUBU-KALP DAMAR CERRAHİSİ- UYGULAMA - 10.00-10.45"
+        },
+        {
           "start": "11:00",
           "end": "11:40",
           "amfi": "Aziz Sancar Amfisi",
@@ -25836,14 +25822,14 @@
           "end": "11:40",
           "amfi": "Kemal Atay Amfisi",
           "rawAmfi": "KEMAL ATAY AMFİSİ",
-          "text": "DÖNEM 2-TÜRKÇE -KAN LENFOİD DİLİMİ -SUALTI HEKİMLİĞİ"
+          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - İÇ HASTALIKLARI"
         },
         {
           "start": "11:00",
           "end": "11:40",
           "amfi": "Tevfik Sağlam Amfisi",
           "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
-          "text": "DÖNEM 3-TÜRKÇE - B GRUBU KAN LENFOİD  DİLİMİ - İÇ HASTALIKLARI"
+          "text": "DÖNEM 2-TÜRKÇE -KAN LENFOİD DİLİMİ -SUALTI HEKİMLİĞİ"
         },
         {
           "start": "11:00",
@@ -25883,8 +25869,8 @@
         {
           "start": "11:50",
           "end": "12:30",
-          "amfi": "Kemal Atay Amfisi",
-          "rawAmfi": "KEMAL ATAY AMFİSİ",
+          "amfi": "Tevfik Sağlam Amfisi",
+          "rawAmfi": "TEVFİK SAĞLAM AMFİSİ",
           "text": "DÖNEM 2-TÜRKÇE -KAN LENFOİD DİLİMİ -FİZYOLOJİ"
         },
         {
